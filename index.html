@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dolomites Campervan Itinerary - April 30 to May 4</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZlYKqkJvJzpJ0Zl_0-0-0-0-0-0-0-0"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: white;
+            padding: 40px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .advisory {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            color: #856404;
+        }
+
+        .advisory h3 {
+            margin-bottom: 10px;
+            color: #d39e00;
+        }
+
+        .day-section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .day-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        .day-content {
+            padding: 30px;
+        }
+
+        .section-title {
+            color: #667eea;
+            font-size: 1.4em;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .campsite-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .campsite-info h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .activity-option {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .activity-option strong {
+            color: #764ba2;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 500px;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .route-info {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #2196F3;
+        }
+
+        .route-info strong {
+            color: #1565c0;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #764ba2;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #653a8a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(118, 75, 162, 0.4);
+        }
+
+        .btn-map {
+            background: #2196F3;
+            color: white;
+            padding: 8px 16px;
+            font-size: 0.9em;
+        }
+
+        .btn-map:hover {
+            background: #1976D2;
+        }
+
+        .location-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .location-link:hover {
+            text-decoration: underline;
+        }
+
+        .driving-time {
+            font-weight: bold;
+            color: #d39e00;
+        }
+
+        footer {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .day-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .day-nav-btn {
+            padding: 10px 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .day-nav-btn:hover {
+            background: #5568d3;
+            transform: scale(1.05);
+        }
+
+        .day-nav-btn.active {
+            background: #764ba2;
+            box-shadow: 0 4px 8px rgba(118, 75, 162, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .day-content {
+                padding: 15px;
+            }
+
+            .map-container {
+                height: 350px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏔️ Your Dolomites Campervan Adventure</h1>
+            <p>April 30 - May 4 | Milan to the Mountains & Back</p>
+        </header>
+
+        <div class="advisory">
+            <h3>⚠️ Important Spring Travel Advisory</h3>
+            <p>Your trip is during the <strong>off-season (late April/early May)</strong>. Cable cars will be <strong>CLOSED</strong>, high-altitude roads may be closed, and many trails will have snow. This itinerary focuses on what is realistically accessible: scenic drives, lake circuits, and lower-elevation walks. Always check local conditions before starting activities.</p>
+        </div>
+
+        <div class="day-navigation">
+            <button class="day-nav-btn active" onclick="scrollToDay('day1')">Day 1 (Apr 30)</button>
+            <button class="day-nav-btn" onclick="scrollToDay('day2')">Day 2 (May 1)</button>
+            <button class="day-nav-btn" onclick="scrollToDay('day3')">Day 3 (May 2)</button>
+            <button class="day-nav-btn" onclick="scrollToDay('day4')">Day 4 (May 3)</button>
+            <button class="day-nav-btn" onclick="scrollToDay('day5')">Day 5 (May 4)</button>
+        </div>
+
+        <!-- DAY 1 -->
+        <div class="day-section" id="day1">
+            <div class="day-header">📅 Day 1: Milan to Val Gardena (Tuesday, April 30th)</div>
+            <div class="day-content">
+                <p>Your first day involves picking up your campervan and driving into the heart of the Dolomites. You'll position yourself in Val Gardena, one of the most beautiful valleys in the Alps.</p>
+
+                <div class="section-title">🚗 Pick-up & Drive</div>
+                <div class="route-info">
+                    <strong>12:00 PM (Noon):</strong> Pick up at Roadsurfer Milan Office<br>
+                    <strong>1:30 PM:</strong> Begin drive to Val Gardena<br>
+                    <strong>Driving Time:</strong> <span class="driving-time">3 hours 45 minutes (320 km)</span>
+                </div>
+
+                <div id="map-day1" class="map-container"></div>
+                <button class="btn btn-map" onclick="showMap('day1', 'Roadsurfer Milan, Castellanza', 'Camping Alpe di Siusi, Siusi')">View Full Route</button>
+
+                <div class="section-title">🏕️ Your Campsite Base Tonight</div>
+                <div class="campsite-info">
+                    <h4>Camping Alpe di Siusi, Siusi allo Sciliar</h4>
+                    <p><strong>Arrival:</strong> Around 5:15 PM</p>
+                    <p><strong>Why here?</strong> Perfect base for exploring Alpe di Siusi, Seceda, and Giesler Alm (Val di Funes).</p>
+                    <p><strong>Amenities:</strong> Modern facilities, restaurant, mountain views</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Alpe+di+Siusi%2C+Siusi+allo+Sciliar" class="btn btn-primary" target="_blank">View on Google Maps</a>
+                </div>
+
+                <div class="section-title">🌄 Evening Activity</div>
+                <div class="activity-option">
+                    <strong>Option:</strong> Take a relaxing walk through the charming town of <a href="https://www.google.com/maps/search/?api=1&query=Ortisei%2C+Val+Gardena" class="location-link" target="_blank">Ortisei</a> for dinner and to stretch your legs after the long drive.
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 2 -->
+        <div class="day-section" id="day2">
+            <div class="day-header">📅 Day 2: Val Gardena Exploration & Drive to Dobbiaco (Wednesday, May 1st)</div>
+            <div class="day-content">
+                <p>Explore the iconic locations around Val Gardena before driving to your next base near Lago di Braies. Choose one of the amazing options below based on weather and energy.</p>
+
+                <div class="section-title">🏞️ Morning Activities (Choose One)</div>
+
+                <div class="activity-option">
+                    <strong>Option A - Alpe di Siusi:</strong> Drive to <a href="https://www.google.com/maps/search/?api=1&query=Compaccio%2C+Alpe+di+Siusi" class="location-link" target="_blank">Compaccio</a> on the vast Alpe di Siusi plateau. Walk the lower roads for immense views of the meadows with the Sassolungo peaks beyond.
+                </div>
+
+                <div class="activity-option">
+                    <strong>Option B - Seceda Viewpoint:</strong> Drive to <a href="https://www.google.com/maps/search/?api=1&query=Santa+Cristina%2C+Val+Gardena" class="location-link" target="_blank">Santa Cristina</a> and view the Seceda peaks from the valley floor.
+                </div>
+
+                <div class="activity-option">
+                    <strong>Option C - Giesler Alm / Val di Funes:</strong> Drive to <a href="https://www.google.com/maps/search/?api=1&query=Santa+Maddalena%2C+Val+di+Funes" class="location-link" target="_blank">Val di Funes</a> and walk the Santa Maddalena Panorama Trail for the iconic postcard view of the church backed by the Giesler Alm peaks.
+                </div>
+
+                <div class="section-title">🚗 Drive to Next Campsite</div>
+                <div class="route-info">
+                    <strong>Departure:</strong> Around 2:30 PM<br>
+                    <strong>Route:</strong> Val Gardena → Bressanone → Val Pusteria → Dobbiaco<br>
+                    <strong>Driving Time:</strong> <span class="driving-time">1 hour 30 minutes (75 km)</span>
+                </div>
+
+                <div id="map-day2" class="map-container"></div>
+                <button class="btn btn-map" onclick="showMap('day2', 'Ortisei, Val Gardena', 'Camping Toblacher See, Dobbiaco')">View Full Route</button>
+
+                <div class="section-title">🏕️ Your Campsite Base Tonight</div>
+                <div class="campsite-info">
+                    <h4>Camping Toblacher See (Lago di Dobbiaco)</h4>
+                    <p><strong>Arrival:</strong> Around 4:00 PM</p>
+                    <p><strong>Why here?</strong> Closest to Lago di Braies for an early morning sunrise mission tomorrow. Spectacular lakeside location.</p>
+                    <p><strong>Amenities:</strong> Direct lake access, restaurant Seeschupfe, wine cellar, modern facilities</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Toblacher+See%2C+Lago+di+Dobbiaco" class="btn btn-primary" target="_blank">View on Google Maps</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 3 -->
+        <div class="day-section" id="day3">
+            <div class="day-header">📅 Day 3: Sunrise & Cortina Superstars (Thursday, May 2nd)</div>
+            <div class="day-content">
+                <p>An early start to catch the magical sunrise at Lago di Braies, followed by exploring the legendary peaks and passes around Cortina d'Ampezzo.</p>
+
+                <div class="section-title">🌅 Early Morning - Lago di Braies Sunrise</div>
+                <div class="activity-option">
+                    <strong>5:00 AM Start:</strong> Drive to <a href="https://www.google.com/maps/search/?api=1&query=Lago+di+Braies" class="location-link" target="_blank">Lago di Braies</a> (20-minute drive from your campsite). Arrive before sunrise to find a spot along the shore. Walk the easy circuit around the lake as the first light hits the peaks. This will be a trip highlight!
+                </div>
+
+                <div id="map-day3a" class="map-container"></div>
+                <button class="btn btn-map" onclick="showMap('day3a', 'Camping Toblacher See, Dobbiaco', 'Lago di Braies')">View Route to Lago di Braies</button>
+
+                <div class="section-title">🏞️ Late Morning Activities (Choose One)</div>
+
+                <div class="activity-option">
+                    <strong>Option A - Tre Cime & Cadini di Misurina:</strong> Drive to <a href="https://www.google.com/maps/search/?api=1&query=Lago+di+Misurina" class="location-link" target="_blank">Lago di Misurina</a>. From here, you get a fantastic view of the south face of Tre Cime di Lavaredo and the jagged Cadini di Misurina peaks.
+                </div>
+
+                <div class="activity-option">
+                    <strong>Option B - Cortina d'Ampezzo:</strong> Explore the chic town of <a href="https://www.google.com/maps/search/?api=1&query=Cortina+d%27Ampezzo" class="location-link" target="_blank">Cortina d'Ampezzo</a>. Walk the pedestrianized Corso Italia and soak in the atmosphere of this world-famous resort.
+                </div>
+
+                <div class="section-title">🚗 Drive to Next Campsite</div>
+                <div class="route-info">
+                    <strong>Departure:</strong> Around 3:00 PM<br>
+                    <strong>Route:</strong> Cortina → <strong>Passo Giau</strong> → Selva di Cadore → Val di Fassa<br>
+                    <strong>Driving Time:</strong> <span class="driving-time">2 hours (70 km)</span><br>
+                    <strong>Highlight:</strong> Drive over the magnificent Passo Giau, one of the most beautiful passes in the Dolomites. Stop at the top for photos!
+                </div>
+
+                <div id="map-day3b" class="map-container"></div>
+                <button class="btn btn-map" onclick="showMap('day3b', 'Cortina d\'Ampezzo', 'Camping Vidor, Pozza di Fassa')">View Route via Passo Giau</button>
+
+                <div class="section-title">🏕️ Your Campsite Base Tonight</div>
+                <div class="campsite-info">
+                    <h4>Camping Vidor, Pozza di Fassa</h4>
+                    <p><strong>Arrival:</strong> Around 5:00 PM</p>
+                    <p><strong>Why here?</strong> Perfectly positioned for your final leg. Excellent facilities including an aquatic park.</p>
+                    <p><strong>Amenities:</strong> Aquatic park, restaurant, modern facilities</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Vidor%2C+Pozza+di+Fassa" class="btn btn-primary" target="_blank">View on Google Maps</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 4 -->
+        <div class="day-section" id="day4">
+            <div class="day-header">📅 Day 4: Final Lakes & Return to Milan (Friday, May 3rd)</div>
+            <div class="day-content">
+                <p>One last iconic lake and a look at the famous "coffin cable car" before you begin your journey back to Milan.</p>
+
+                <div class="section-title">🏞️ Morning Activities (Choose One)</div>
+
+                <div class="activity-option">
+                    <strong>Option A - Lago di Carezza:</strong> Drive to <a href="https://www.google.com/maps/search/?api=1&query=Lago+di+Carezza+Parking" class="location-link" target="_blank">Lago di Carezza</a> (30-minute drive). Do the easy, 25-minute walk around this stunning, multi-colored lake with the Latemar peaks as backdrop.
+                </div>
+
+                <div class="activity-option">
+                    <strong>Option B - "Coffin Cable Car" at Passo Pordoi:</strong> Drive up to <a href="https://www.google.com/maps/search/?api=1&query=Passo+Pordoi" class="location-link" target="_blank">Passo Pordoi</a> (30-minute drive). The cable car will be closed, but you can see the famous single-pylon lift and appreciate the engineering from the pass.
+                </div>
+
+                <div id="map-day4a" class="map-container"></div>
+                <button class="btn btn-map" onclick="showMap('day4a', 'Camping Vidor, Pozza di Fassa', 'Lago di Carezza')">View Route to Lago di Carezza</button>
+
+                <div class="section-title">🚗 Drive Back to Milan</div>
+                <div class="route-info">
+                    <strong>Departure:</strong> Around 12:30 PM<br>
+                    <strong>Route:</strong> Val di Fassa → Bolzano → Milan<br>
+                    <strong>Driving Time:</strong> <span class="driving-time">3 hours 45 minutes (300 km)</span><br>
+                    <strong>Lunch Stop:</strong> Consider stopping in Bolzano for lunch before the motorway.
+                </div>
+
+                <div id="map-day4b" class="map-container"></div>
+                <button class="btn btn-map" onclick="showMap('day4b', 'Camping Vidor, Pozza di Fassa', 'Roadsurfer Milan, Castellanza')">View Route Back to Milan</button>
+
+                <div class="section-title">🏕️ Campsite for Tonight</div>
+                <div class="campsite-info">
+                    <h4>Near Roadsurfer Milan Office</h4>
+                    <p><strong>Arrival:</strong> Around 5:30 PM</p>
+                    <p><strong>Why here?</strong> For convenience - makes your morning drop-off stress-free.</p>
+                    <p><strong>Suggestion:</strong> <a href="https://www.google.com/maps/search/?api=1&query=Camping+Citt%C3%A0+di+Milano" class="location-link" target="_blank">Camping Città di Milano</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 5 -->
+        <div class="day-section" id="day5">
+            <div class="day-header">📅 Day 5: Campervan Drop-off (Saturday, May 4th)</div>
+            <div class="day-content">
+                <div class="section-title">✅ Final Steps</div>
+                <div class="route-info">
+                    <strong>9:00 AM:</strong> Tidy the campervan, refuel, and pack your belongings.<br>
+                    <strong>10:00 AM:</strong> Return your campervan at the <a href="https://www.google.com/maps/search/?api=1&query=Roadsurfer+Milan%2C+Via+Salvo+D%27Acquisto%2C+28%2C+21053+Castellanza+VA%2C+Italy" class="location-link" target="_blank">Roadsurfer Milan Office</a>
+                </div>
+                <p style="margin-top: 20px; font-size: 1.2em; color: #667eea;"><strong>🎉 Congratulations! You've completed your incredible Dolomites adventure!</strong></p>
+            </div>
+        </div>
+
+        <footer>
+            <h3>📍 All Your Must-See Locations</h3>
+            <p style="margin: 15px 0;">✓ Tre Cime di Lavaredo | ✓ Cadini Di Misurina | ✓ Alpe di Siusi | ✓ Passo Giau | ✓ Lago di Braies (Sunrise) | ✓ Seceda | ✓ Lago di Carezza | ✓ Giesler Alm | ✓ Coffin Cable Car (Passo Pordoi) | ✓ Cortina d'Ampezzo</p>
+            <p style="color: #666; margin-top: 20px;">Created with ❤️ for your Dolomites adventure | April 30 - May 4, 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        function scrollToDay(dayId) {
+            const element = document.getElementById(dayId);
+            element.scrollIntoView({ behavior: 'smooth' });
+            
+            // Update active button
+            document.querySelectorAll('.day-nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function showMap(mapId, origin, destination) {
+            const mapElement = document.getElementById('map-' + mapId);
+            if (!mapElement) return;
+
+            const map = new google.maps.Map(mapElement, {
+                zoom: 10,
+                center: { lat: 46.5, lng: 11.5 }
+            });
+
+            const directionsService = new google.maps.DirectionsService();
+            const directionsRenderer = new google.maps.DirectionsRenderer({
+                map: map,
+                polylineOptions: {
+                    strokeColor: '#667eea',
+                    strokeWeight: 4
+                }
+            });
+
+            directionsService.route({
+                origin: origin,
+                destination: destination,
+                travelMode: 'DRIVING'
+            }, function(response, status) {
+                if (status === 'OK') {
+                    directionsRenderer.setDirections(response);
+                } else {
+                    console.log('Directions request failed due to ' + status);
+                }
+            });
+        }
+
+        // Initialize maps on page load
+        window.addEventListener('load', function() {
+            // You can initialize specific maps here if needed
+        });
+    </script>
+</body>
+</html>
