@@ -3,742 +3,901 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dolomites Campervan Itinerary - April 30 to May 4</title>
-    
+    <title>🏔️ Dolomites Campervan Adventure — April 30 to May 4</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            line-height: 1.6;
+            background: #f0f2f5;
+            color: #2c3e50;
+            line-height: 1.7;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            background: white;
-            padding: 40px 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
+        /* ── HEADER ── */
+        .site-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            padding: 40px 20px 30px;
             text-align: center;
             position: relative;
         }
-
-        header h1 {
-            color: #667eea;
-            font-size: 2.5em;
-            margin-bottom: 10px;
+        .site-header h1 { font-size: 2.4em; margin-bottom: 8px; letter-spacing: -0.5px; }
+        .site-header .subtitle { font-size: 1.1em; opacity: 0.8; margin-bottom: 20px; }
+        .trip-badges {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px;
         }
-
-        header p {
-            color: #666;
-            font-size: 1.1em;
-        }
-
-        .lang-switcher {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 5px;
-            background: #f0f0f0;
+        .badge {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
             border-radius: 20px;
-            padding: 5px;
+            padding: 5px 14px;
+            font-size: 0.85em;
+            backdrop-filter: blur(4px);
         }
 
+        /* ── LANGUAGE SWITCHER ── */
+        .lang-switcher {
+            position: absolute; top: 20px; right: 20px;
+            display: flex; gap: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px; padding: 4px;
+        }
         .lang-btn {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            background: transparent;
-            color: #666;
+            padding: 6px 14px; border: none; border-radius: 16px;
+            cursor: pointer; font-weight: 600; font-size: 0.85em;
+            transition: all 0.2s; background: transparent; color: rgba(255,255,255,0.7);
         }
+        .lang-btn.active { background: white; color: #1a1a2e; }
+        .lang-btn:hover:not(.active) { background: rgba(255,255,255,0.2); color: white; }
 
-        .lang-btn.active {
-            background: #667eea;
-            color: white;
-        }
-
-        .lang-btn:hover:not(.active) {
-            background: #e0e0e0;
-        }
-
-        .advisory {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 20px;
-            margin-bottom: 30px;
-            border-radius: 5px;
-            color: #856404;
-        }
-
-        .advisory h3 {
-            margin-bottom: 10px;
-            color: #d39e00;
-        }
-
-        .day-section {
+        /* ── DAY NAVIGATION ── */
+        .day-nav {
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-            overflow: hidden;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 12px 20px;
+            display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .day-nav-btn {
+            padding: 8px 18px; border: 2px solid #e0e0e0; border-radius: 20px;
+            cursor: pointer; font-weight: 600; font-size: 0.85em;
+            background: white; color: #666; transition: all 0.2s;
+        }
+        .day-nav-btn:hover { border-color: #667eea; color: #667eea; }
+        .day-nav-btn.active { background: #667eea; border-color: #667eea; color: white; }
+
+        /* ── ADVISORY ── */
+        .advisory {
+            background: #fff8e1; border-left: 5px solid #f59e0b;
+            padding: 16px 20px; margin: 20px auto; max-width: 1200px;
+            border-radius: 0 8px 8px 0; font-size: 0.92em; color: #92400e;
+        }
+        .advisory strong { display: block; margin-bottom: 4px; font-size: 1em; }
+
+        /* ── MAIN CONTAINER ── */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+        /* ── DAY CARD ── */
+        .day-card {
+            background: white; border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px; overflow: hidden;
         }
 
+        /* ── DAY HEADER STRIP ── */
         .day-header {
+            display: flex; align-items: center; gap: 16px;
+            padding: 20px 28px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 20px;
-            font-size: 1.8em;
-            font-weight: bold;
+        }
+        .day-number {
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px; padding: 8px 16px;
+            font-size: 0.8em; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase; white-space: nowrap;
+        }
+        .day-title { font-size: 1.5em; font-weight: 700; }
+        .day-date { font-size: 0.9em; opacity: 0.85; margin-top: 2px; }
+
+        /* ── DAY BODY ── */
+        .day-body { padding: 0; }
+
+        /* ── SECTION BLOCK ── */
+        .section-block {
+            padding: 24px 28px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .section-block:last-child { border-bottom: none; }
+
+        /* ── SECTION LABEL ── */
+        .section-label {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 0.75em; font-weight: 700; letter-spacing: 1.5px;
+            text-transform: uppercase; color: #999; margin-bottom: 16px;
+        }
+        .section-label::after {
+            content: ''; flex: 1; height: 1px; background: #e8e8e8;
         }
 
-        .day-content {
-            padding: 30px;
+        /* ── CAMPSITE CARDS ── */
+        .campsite-grid { display: grid; gap: 14px; }
+        .campsite-card {
+            border-radius: 12px; padding: 18px;
+            border: 2px solid #e8e8e8; position: relative;
+            transition: border-color 0.2s;
         }
-
-        .section-title {
-            color: #667eea;
-            font-size: 1.4em;
-            margin-top: 20px;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 10px;
+        .campsite-card:hover { border-color: #667eea; }
+        .campsite-card.top-pick { border-color: #10b981; }
+        .campsite-rank {
+            position: absolute; top: -1px; left: 16px;
+            font-size: 0.72em; font-weight: 700; letter-spacing: 0.5px;
+            padding: 3px 10px; border-radius: 0 0 8px 8px;
+            text-transform: uppercase;
         }
-
-        .campsite-info {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 15px 0;
-            border-left: 4px solid #667eea;
+        .rank-gold { background: #10b981; color: white; }
+        .rank-silver { background: #3b82f6; color: white; }
+        .rank-bronze { background: #f59e0b; color: white; }
+        .rank-only { background: #667eea; color: white; }
+        .campsite-name { font-size: 1.05em; font-weight: 700; color: #1a1a2e; margin: 8px 0 6px; }
+        .campsite-meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+        .meta-tag {
+            font-size: 0.78em; padding: 3px 10px; border-radius: 12px;
+            font-weight: 600;
         }
+        .tag-open { background: #d1fae5; color: #065f46; }
+        .tag-warning { background: #fef3c7; color: #92400e; }
+        .tag-info { background: #dbeafe; color: #1e40af; }
+        .tag-free { background: #f3e8ff; color: #6b21a8; }
+        .campsite-desc { font-size: 0.9em; color: #555; margin: 8px 0; }
+        .campsite-links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
 
-        .campsite-info h4 {
-            color: #667eea;
-            margin-bottom: 10px;
+        /* ── WARNING BOX ── */
+        .warning-box {
+            background: #fff7ed; border: 1px solid #fed7aa;
+            border-radius: 10px; padding: 12px 16px;
+            font-size: 0.88em; color: #9a3412; margin-bottom: 14px;
         }
+        .warning-box strong { display: block; margin-bottom: 3px; }
 
-        .activity-option {
-            background: #f8f9fa;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border-left: 4px solid #764ba2;
+        /* ── ACTIVITY OPTIONS ── */
+        .activity-list { display: grid; gap: 10px; }
+        .activity-item {
+            background: #f8f7ff; border-radius: 10px;
+            padding: 14px 16px; border-left: 4px solid #764ba2;
         }
-
-        .activity-option strong {
-            color: #764ba2;
+        .activity-item .act-label {
+            font-size: 0.75em; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; color: #764ba2; margin-bottom: 4px;
         }
+        .activity-item .act-title { font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+        .activity-item .act-desc { font-size: 0.9em; color: #555; }
+        .activity-item.weather-alt { border-left-color: #3b82f6; background: #f0f7ff; }
+        .activity-item.weather-alt .act-label { color: #3b82f6; }
 
-        .restaurant-section {
-            background: #fff8e1;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border-left: 4px solid #ff9800;
-        }
-
+        /* ── RESTAURANT LIST ── */
+        .restaurant-list { display: grid; gap: 10px; }
         .restaurant-item {
-            margin: 10px 0;
-            padding: 10px;
-            background: white;
-            border-radius: 5px;
+            background: #fffbf0; border-radius: 10px;
+            padding: 14px 16px; border-left: 4px solid #f59e0b;
+            display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
         }
+        .restaurant-info { flex: 1; }
+        .restaurant-name { font-weight: 700; color: #1a1a2e; }
+        .restaurant-rating { font-size: 0.8em; color: #f59e0b; font-weight: 600; }
+        .restaurant-desc { font-size: 0.88em; color: #666; margin-top: 3px; }
 
-        .restaurant-item strong {
-            color: #ff9800;
+        /* ── MAP SECTION ── */
+        .map-section { background: #f8f9fa; }
+        .map-route-info {
+            background: #e8f4fd; border-radius: 10px;
+            padding: 14px 18px; margin-bottom: 16px;
+            border-left: 4px solid #2196F3; font-size: 0.9em;
         }
-
-        .restaurant-item .rating {
-            color: #f57c00;
-            font-size: 0.9em;
+        .map-route-info .route-line { margin: 4px 0; }
+        .route-time { font-weight: 700; color: #1565c0; }
+        .map-frame {
+            width: 100%; height: 420px; border-radius: 10px;
+            overflow: hidden; border: 2px solid #e0e0e0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
+        .map-frame iframe { width: 100%; height: 100%; border: none; }
+        .map-dual { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .map-dual-label { font-weight: 700; font-size: 0.88em; color: #444; margin-bottom: 8px; }
 
-        .map-container {
-            width: 100%;
-            height: 450px;
-            margin: 20px 0;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border: 2px solid #e0e0e0;
-        }
-
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .route-info {
-            background: #e7f3ff;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 15px 0;
-            border-left: 4px solid #2196F3;
-        }
-
-        .route-info strong {
-            color: #1565c0;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 10px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-
+        /* ── BUTTONS ── */
         .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.95em;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 8px 16px; border-radius: 8px; font-size: 0.85em;
+            font-weight: 600; text-decoration: none; cursor: pointer;
+            border: none; transition: all 0.2s;
         }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-primary:hover { background: #5568d3; }
+        .btn-secondary { background: #f0f0f0; color: #444; }
+        .btn-secondary:hover { background: #e0e0e0; }
+        .btn-map { background: #1a73e8; color: white; margin-top: 12px; }
+        .btn-map:hover { background: #1557b0; }
+        .btn-green { background: #10b981; color: white; }
+        .btn-green:hover { background: #059669; }
 
-        .btn-primary {
-            background: #667eea;
-            color: white;
-        }
+        /* ── LOCATION LINK ── */
+        a.loc { color: #667eea; font-weight: 600; text-decoration: none; }
+        a.loc:hover { text-decoration: underline; }
 
-        .btn-primary:hover {
-            background: #5568d3;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-secondary {
-            background: #764ba2;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #653a8a;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(118, 75, 162, 0.4);
-        }
-
-        .btn-map {
-            background: #2196F3;
-            color: white;
-            padding: 8px 16px;
-            font-size: 0.9em;
-        }
-
-        .btn-map:hover {
-            background: #1976D2;
-        }
-
-        .location-link {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .location-link:hover {
-            text-decoration: underline;
-        }
-
-        .driving-time {
-            font-weight: bold;
-            color: #d39e00;
-        }
-
+        /* ── FOOTER ── */
         footer {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            margin-top: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: #1a1a2e; color: white;
+            text-align: center; padding: 30px 20px; margin-top: 10px;
         }
-
-        .day-navigation {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
-            flex-wrap: wrap;
+        footer h3 { margin-bottom: 12px; font-size: 1.1em; opacity: 0.9; }
+        .must-see-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 12px 0; }
+        .must-see-tag {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 16px; padding: 4px 12px; font-size: 0.82em;
         }
+        footer p { font-size: 0.85em; opacity: 0.5; margin-top: 16px; }
 
-        .day-nav-btn {
-            padding: 10px 15px;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .day-nav-btn:hover {
-            background: #5568d3;
-            transform: scale(1.05);
-        }
-
-        .day-nav-btn.active {
-            background: #764ba2;
-            box-shadow: 0 4px 8px rgba(118, 75, 162, 0.4);
-        }
-
+        /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.8em;
-            }
-
-            .lang-switcher {
-                position: static;
-                justify-content: center;
-                margin-bottom: 15px;
-            }
-
-            .day-content {
-                padding: 15px;
-            }
-
-            .map-container {
-                height: 350px;
-            }
-
-            .button-group {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
+            .site-header h1 { font-size: 1.7em; }
+            .lang-switcher { position: static; justify-content: center; margin-bottom: 16px; }
+            .day-title { font-size: 1.2em; }
+            .section-block { padding: 18px; }
+            .map-dual { grid-template-columns: 1fr; }
+            .map-frame { height: 320px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="lang-switcher">
-                <button class="lang-btn active" onclick="switchLanguage('en')">English</button>
-                <button class="lang-btn" onclick="switchLanguage('ru')">Русский</button>
-            </div>
-            <h1 data-en="🏔️ Your Dolomites Campervan Adventure" data-ru="🏔️ Ваше путешествие на кемпервэне по Доломитам">🏔️ Your Dolomites Campervan Adventure</h1>
-            <p data-en="April 30 - May 4 | Milan to the Mountains & Back" data-ru="30 апреля - 4 мая | Милан - Горы - Милан">April 30 - May 4 | Milan to the Mountains & Back</p>
-        </header>
 
-        <div class="advisory">
-            <h3 data-en="⚠️ Important Spring Travel Advisory" data-ru="⚠️ Важная информация о весеннем путешествии">⚠️ Important Spring Travel Advisory</h3>
-            <p data-en="Your trip is during the off-season (late April/early May). Cable cars will be CLOSED, high-altitude roads may be closed, and many trails will have snow. This itinerary focuses on what is realistically accessible: scenic drives, lake circuits, and lower-elevation walks. Always check local conditions before starting activities." data-ru="Ваша поездка приходится на низкий сезон (конец апреля/начало мая). Канатные дороги будут ЗАКРЫТЫ, высокогорные дороги могут быть закрыты, а на многих тропах будет снег. Этот маршрут сосредоточен на реально доступных местах: живописных поездках, озёрных маршрутах и прогулках на низких высотах. Всегда проверяйте местные условия перед началом активностей.">Your trip is during the off-season (late April/early May). Cable cars will be CLOSED, high-altitude roads may be closed, and many trails will have snow. This itinerary focuses on what is realistically accessible: scenic drives, lake circuits, and lower-elevation walks. Always check local conditions before starting activities.</p>
-        </div>
+<!-- ═══════════════════════════════════════════════════════════
+     HEADER
+═══════════════════════════════════════════════════════════ -->
+<header class="site-header">
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('ru')">RU</button>
+    </div>
+    <h1 data-en="🏔️ Dolomites Campervan Adventure" data-ru="🏔️ Путешествие на кемпервэне по Доломитам">🏔️ Dolomites Campervan Adventure</h1>
+    <p class="subtitle" data-en="April 30 – May 4, 2026 · Milan → Dolomites → Milan" data-ru="30 апреля – 4 мая 2026 · Милан → Доломиты → Милан">April 30 – May 4, 2026 · Milan → Dolomites → Milan</p>
+    <div class="trip-badges">
+        <span class="badge" data-en="🚐 Roadsurfer Campervan" data-ru="🚐 Кемпервэн Roadsurfer">🚐 Roadsurfer Campervan</span>
+        <span class="badge" data-en="📅 4 Full Days" data-ru="📅 4 полных дня">📅 4 Full Days</span>
+        <span class="badge" data-en="🏕️ New Campsite Every Night" data-ru="🏕️ Новый кемпинг каждую ночь">🏕️ New Campsite Every Night</span>
+        <span class="badge" data-en="🇮🇹 South Tyrol & Dolomites" data-ru="🇮🇹 Южный Тироль и Доломиты">🇮🇹 South Tyrol & Dolomites</span>
+    </div>
+</header>
 
-        <div class="day-navigation">
-            <button class="day-nav-btn active" onclick="scrollToDay('day1')" data-en="Day 1 (Apr 30)" data-ru="День 1 (30 апр)">Day 1 (Apr 30)</button>
-            <button class="day-nav-btn" onclick="scrollToDay('day2')" data-en="Day 2 (May 1)" data-ru="День 2 (1 мая)">Day 2 (May 1)</button>
-            <button class="day-nav-btn" onclick="scrollToDay('day3')" data-en="Day 3 (May 2)" data-ru="День 3 (2 мая)">Day 3 (May 2)</button>
-            <button class="day-nav-btn" onclick="scrollToDay('day4')" data-en="Day 4 (May 3)" data-ru="День 4 (3 мая)">Day 4 (May 3)</button>
-            <button class="day-nav-btn" onclick="scrollToDay('day5')" data-en="Day 5 (May 4)" data-ru="День 5 (4 мая)">Day 5 (May 4)</button>
-        </div>
+<!-- ═══════════════════════════════════════════════════════════
+     STICKY DAY NAVIGATION
+═══════════════════════════════════════════════════════════ -->
+<nav class="day-nav">
+    <button class="day-nav-btn active" onclick="goTo('day1',this)" data-en="Day 1 · Apr 30" data-ru="День 1 · 30 апр">Day 1 · Apr 30</button>
+    <button class="day-nav-btn" onclick="goTo('day2',this)" data-en="Day 2 · May 1" data-ru="День 2 · 1 мая">Day 2 · May 1</button>
+    <button class="day-nav-btn" onclick="goTo('day3',this)" data-en="Day 3 · May 2" data-ru="День 3 · 2 мая">Day 3 · May 2</button>
+    <button class="day-nav-btn" onclick="goTo('day4',this)" data-en="Day 4 · May 3" data-ru="День 4 · 3 мая">Day 4 · May 3</button>
+    <button class="day-nav-btn" onclick="goTo('day5',this)" data-en="Day 5 · May 4" data-ru="День 5 · 4 мая">Day 5 · 4 мая</button>
+</nav>
 
-        <!-- DAY 1 -->
-        <div class="day-section" id="day1">
-            <div class="day-header" data-en="📅 Day 1: Milan → Ansitz Gamp, Klausen (Tuesday, April 30th)" data-ru="📅 День 1: Милан → Анзиц Гамп, Клаузен (вторник, 30 апреля)">📅 Day 1: Milan → Ansitz Gamp, Klausen (Tuesday, April 30th)</div>
-            <div class="day-content">
-                <p data-en="A direct drive into the heart of South Tyrol to one of the most atmospheric campsites in the Dolomites. Ansitz Gamp sits in the picturesque Isarco Valley at Klausen — a medieval hilltop town with a dramatic castle perched above. Open year-round, only 2h 45min from Milan, and the perfect first taste of authentic South Tyrol." data-ru="Прямой маршрут в сердце Южного Тироля в один из самых атмосферных кемпингов Доломитов. Анзиц Гамп расположен в живописной долине Изарко в Клаузене — средневековом горном городе с драматическим замком над головой. Открыт весь год, всего 2ч 45мин от Милана — идеальное первое знакомство с настоящим Южным Тиролем.">A direct drive into the heart of South Tyrol to one of the most atmospheric campsites in the Dolomites. Ansitz Gamp sits in the picturesque Isarco Valley at Klausen — a medieval hilltop town with a dramatic castle perched above. Open year-round, only 2h 45min from Milan, and the perfect first taste of authentic South Tyrol.</p>
+<div class="container">
 
-                <div class="section-title" data-en="🚗 Pick-up & Drive" data-ru="🚗 Получение авто и дорога">🚗 Pick-up & Drive</div>
-                <div class="route-info">
-                    <span data-en="<strong>12:00 PM (Noon):</strong> Pick up at Roadsurfer Milan Office<br><strong>12:30 PM:</strong> Begin drive to Klausen<br><strong>Route:</strong> Milan → A4 → Brescia → A22 (Brenner motorway) → Klausen exit<br><strong>Driving Time:</strong> <span class='driving-time'>2 hours 45 minutes (240 km)</span><br><strong>3:15 PM:</strong> Arrive at Ansitz Gamp — check in and explore Klausen!" data-ru="<strong>12:00 (полдень):</strong> Получение в офисе Roadsurfer в Милане<br><strong>12:30:</strong> Начало поездки в Клаузен<br><strong>Маршрут:</strong> Милан → A4 → Брешиа → A22 (автострада Бреннер) → съезд Клаузен<br><strong>Время в пути:</strong> <span class='driving-time'>2 часа 45 минут (240 км)</span><br><strong>15:15:</strong> Прибытие в Ansitz Gamp — заселитесь и исследуйте Клаузен!"><strong>12:00 PM (Noon):</strong> Pick up at Roadsurfer Milan Office<br><strong>12:30 PM:</strong> Begin drive to Klausen<br><strong>Route:</strong> Milan → A4 → Brescia → A22 (Brenner motorway) → Klausen exit<br><strong>Driving Time:</strong> <span class="driving-time">2 hours 45 minutes (240 km)</span><br><strong>3:15 PM:</strong> Arrive at Ansitz Gamp — check in and explore Klausen!</span>
-                </div>
-
-                <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Via+Salvo+D%27Acquisto+28+Castellanza+Italy&destination=Ansitz+Gamp+Klausen+South+Tyrol+Italy&mode=driving" allowfullscreen loading="lazy"></iframe>
-                </div>
-
-                <a href="https://www.google.com/maps/dir/Via+Salvo+D%27Acquisto+28+Castellanza+Italy/Ansitz+Gamp+Klausen+South+Tyrol+Italy" class="btn btn-map" target="_blank" data-en="Open in Google Maps" data-ru="Открыть в Google Maps">Open in Google Maps</a>
-
-                <div class="section-title" data-en="🏕️ Your Campsite Base Tonight" data-ru="🏕️ Ваш кемпинг на сегодня">🏕️ Your Campsite Base Tonight</div>
-                <div class="campsite-info">
-                    <h4>✅ Ansitz Gamp Camper Stop, Klausen (Chiusa) — South Tyrol</h4>
-                    <p><strong data-en="Open:" data-ru="Открыт:">Open:</strong> <span data-en="Year-round ✅ — accessible in all weather conditions" data-ru="Круглогодично ✅ — доступно в любых погодных условиях">Year-round ✅ — accessible in all weather conditions</span></p>
-                    <p><strong data-en="Arrival:" data-ru="Прибытие:">Arrival:</strong> <span data-en="Around 3:15 PM" data-ru="Около 15:15">Around 3:15 PM</span></p>
-                    <p><strong data-en="Why here?" data-ru="Почему здесь?">Why here?</strong> <span data-en="Dramatic South Tyrolean scenery — a medieval castle looms directly above the campsite on a rocky cliff. Set in the Isarco Valley surrounded by mountains. Klausen is one of Italy's most beautiful historic towns, just a short walk away. Perfect first night with real Dolomite atmosphere." data-ru="Драматичные пейзажи Южного Тироля — средневековый замок возвышается прямо над кемпингом на скальном утёсе. Расположен в долине Изарко в окружении гор. Клаузен — один из самых красивых исторических городов Италии, в нескольких шагах ходьбы. Идеальная первая ночь с настоящей атмосферой Доломитов.">Dramatic South Tyrolean scenery — a medieval castle looms directly above the campsite on a rocky cliff. Set in the Isarco Valley surrounded by mountains. Klausen is one of Italy's most beautiful historic towns, just a short walk away. Perfect first night with real Dolomite atmosphere.</span></p>
-                    <p><strong data-en="Campervan Facilities:" data-ru="Удобства для кемпервана:">Campervan Facilities:</strong> <span data-en="Electricity (6A), fresh water &amp; sewage, SAT-TV, free WiFi, disposal station. Motorhomes up to 10m. Year-round access." data-ru="Электричество (6A), пресная вода и канализация, SAT-TV, бесплатный WiFi, сливная станция. Кемперваны до 10м. Круглогодичный доступ.">Electricity (6A), fresh water &amp; sewage, SAT-TV, free WiFi, disposal station. Motorhomes up to 10m. Year-round access.</span></p>
-                    <p><strong data-en="Note:" data-ru="Примечание:">Note:</strong> <span data-en="The Camper Stop has no sanitary block. If you need showers/toilets, book a comfort pitch at the main campground instead (same location)." data-ru="На стоянке для кемперванов нет санузла. Если вам нужны души/туалеты, забронируйте место на основном кемпинге (то же место).">The Camper Stop has no sanitary block. If you need showers/toilets, book a comfort pitch at the main campground instead (same location).</span></p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Ansitz+Gamp+Klausen+South+Tyrol" class="btn btn-primary" target="_blank" data-en="View on Google Maps" data-ru="Посмотреть на Google Maps">View on Google Maps</a>
-                    <a href="https://ansitzgamp.com/en/camperstop/" class="btn btn-secondary" target="_blank" style="margin-left:10px;" data-en="Official Website" data-ru="Официальный сайт">Official Website</a>
-                </div>
-
-                <div class="section-title" data-en="🏙️ Afternoon in Klausen" data-ru="🏙️ Послеполудень в Клаузене">🏙️ Afternoon in Klausen</div>
-                <div class="activity-option">
-                    <strong data-en="Option A — Explore Klausen old town:" data-ru="Вариант А — Исследовать старый город Клаузен:">Option A — Explore Klausen old town:</strong> <span data-en="Walk into the medieval centre of <a href='https://www.google.com/maps/search/?api=1&query=Klausen+Chiusa+South+Tyrol' class='location-link' target='_blank'>Klausen (Chiusa)</a> — one of Italy's most beautiful historic towns. Narrow lanes, frescoed facades, and the dramatic Sabiona Monastery perched on the cliff above. Stretch your legs after the drive." data-ru="Прогуляйтесь по средневековому центру <a href='https://www.google.com/maps/search/?api=1&query=Klausen+Chiusa+South+Tyrol' class='location-link' target='_blank'>Клаузена (Chiusa)</a> — одного из самых красивых исторических городов Италии. Узкие улочки, фасады с фресками и драматичный монастырь Сабиона на скале над головой.">Walk into the medieval centre of <a href="https://www.google.com/maps/search/?api=1&query=Klausen+Chiusa+South+Tyrol" class="location-link" target="_blank">Klausen (Chiusa)</a> — one of Italy's most beautiful historic towns. Narrow lanes, frescoed facades, and the dramatic Sabiona Monastery perched on the cliff above.</span>
-                </div>
-                <div class="activity-option">
-                    <strong data-en="Option B — Hike to Sabiona Monastery:" data-ru="Вариант Б — Поход к монастырю Сабиона:">Option B — Hike to Sabiona Monastery:</strong> <span data-en="An easy 45-minute walk up from Klausen to the <a href='https://www.google.com/maps/search/?api=1&query=Sabiona+Monastery+Klausen' class='location-link' target='_blank'>Sabiona Monastery</a> on the cliff. Breathtaking views over the Isarco Valley and surrounding mountains. Easy trail, suitable for all fitness levels." data-ru="Лёгкая прогулка 45 минут из Клаузена к <a href='https://www.google.com/maps/search/?api=1&query=Sabiona+Monastery+Klausen' class='location-link' target='_blank'>монастырю Сабиона</a> на скале. Дыхательные виды на долину Изарко и окружающие горы.">An easy 45-minute walk up from Klausen to the <a href="https://www.google.com/maps/search/?api=1&query=Sabiona+Monastery+Klausen" class="location-link" target="_blank">Sabiona Monastery</a> on the cliff. Breathtaking views over the Isarco Valley and surrounding mountains. Easy trail, suitable for all fitness levels.</span>
-                </div>
-                <div class="activity-option">
-                    <strong data-en="Option C — Just settle in:" data-ru="Вариант В — Просто устройтесь:">Option C — Just settle in:</strong> <span data-en="It's the first day! Park up, enjoy a coffee looking at the castle above, and take a short stroll. Save your energy for the big days ahead." data-ru="Это первый день! Паркуйтесь, насладитесь кофе с видом на замок над головой и немного погуляйте. Берегите силы для больших дней впереди.">It's the first day! Park up, enjoy a coffee looking at the castle above, and take a short stroll. Save your energy for the big days ahead.</span>
-                </div>
-
-                <div class="section-title" data-en="🍽️ Where to Eat Tonight" data-ru="🍽️ Где поужинать сегодня">🍽️ Where to Eat Tonight</div>
-                <div class="restaurant-section">
-                    <div class="restaurant-item">
-                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Restaurant+Ansitz+Gamp+Klausen" class="location-link" target="_blank">Restaurant at Ansitz Gamp</a></strong> <span class="rating">⭐ On-site</span><br>
-                        <span data-en="The campsite's own restaurant serving South Tyrolean specialties. Convenient for a first evening after a long drive." data-ru="Собственный ресторан кемпинга с южнотирольскими специалитетами. Удобно для первого вечера после долгой поездки.">The campsite's own restaurant serving South Tyrolean specialties. Convenient for a first evening after a long drive.</span>
-                    </div>
-                    <div class="restaurant-item">
-                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Gasthof+Grauer+B%C3%A4r+Klausen+South+Tyrol" class="location-link" target="_blank">Gasthof Grauer Bär</a></strong> <span class="rating">⭐ 4.4/5 — Local favourite</span><br>
-                        <span data-en="Traditional South Tyrolean tavern in the heart of Klausen. Excellent Knödel, Speck platters, and local wine. 5-minute walk from campsite." data-ru="Традиционная южнотирольская таверна в сердце Клаузена. Отличные Кнёдель, тарелки Спекка и местное вино. 5 минут пешком от кемпинга.">Traditional South Tyrolean tavern in the heart of Klausen. Excellent Knödel, Speck platters, and local wine. 5-minute walk from campsite.</span>
-                    </div>
-                    <div class="restaurant-item">
-                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Pizzeria+Klausen+South+Tyrol" class="location-link" target="_blank">Pizzeria in Klausen</a></strong> <span class="rating">⭐ Casual & easy</span><br>
-                        <span data-en="A simple, relaxed pizza dinner in the old town. Perfect if you're tired from the drive and just want something easy and delicious." data-ru="Простой, непринуждённый ужин с пиццей в старом городе. Идеально, если вы устали от поездки и хотите чего-нибудь простого и вкусного.">A simple, relaxed pizza dinner in the old town. Perfect if you're tired from the drive and just want something easy and delicious.</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- DAY 2 -->
-        <div class="day-section" id="day2">
-            <div class="day-header" data-en="📅 Day 2: Klausen → Val Gardena / Alpe di Siusi (Wednesday, May 1st)" data-ru="📅 День 2: Клаузен → Валь Гардена / Альпе ди Сьюзи (среда, 1 мая)">📅 Day 2: Klausen → Val Gardena / Alpe di Siusi (Wednesday, May 1st)</div>
-            <div class="day-cont                <p data-en="Drive from Ansitz Gamp in Klausen directly into the heart of the Dolomites — Val Gardena. This is your first full day in the mountains. It's a short 1-hour drive, so you'll have the whole day to explore the iconic Dolomite landscapes around you." data-ru="Поезжайте из Анзиц Гамп в Клаузене прямо в сердце Доломитов — Валь Гардена. Это ваш первый полный день в горах. Поездка всего 1 час, так что у вас будет целый день для исследования культовых доломитовых пейзажей вокруг.">Drive from Ansitz Gamp in Klausen directly into the heart of the Dolomites — Val Gardena. This is your first full day in the mountains. It's a short 1-hour drive, so you'll have the whole day to explore the iconic Dolomite landscapes around you.</p>
-                <div class="section-title" data-en="🚗 Morning Drive to Val Gardena" data-ru="🚗 Утренняя поездка в Валь Гардена">🚗 Morning Drive to Val Gardena</div>
-                <div class="route-info">
-                    <span data-en="<strong>Departure:</strong> 9:00 AM from Ansitz Gamp, Klausen<br><strong>Route A (Campsite 1 or 3):</strong> Klausen → A22 → Bolzano → Ponte Gardena → Val Gardena (SS242) — <span class='driving-time'>1 hour (65 km)</span><br><strong>Route B (Campsite 2 — Colfosco):</strong> Klausen → A22 → Bolzano → Bressanone → Badia valley → Corvara — <span class='driving-time'>1h 20min (80 km)</span><br><strong>Arrival:</strong> ~10:00–10:20 AM — full day ahead!" data-ru="<strong>Отправление:</strong> 9:00 из Ansitz Gamp, Клаузен<br><strong>Маршрут A (Кемпинг 1 или 3):</strong> Клаузен → A22 → Больцано → Понте Гардена → Валь Гардена (SS242) — <span class='driving-time'>1 час (65 км)</span><br><strong>Маршрут B (Кемпинг 2 — Кольфоско):</strong> Клаузен → A22 → Больцано → Брессаноне → долина Бадия → Корвара — <span class='driving-time'>1ч 20мин (80 км)</span><br><strong>Прибытие:</strong> ~10:00–10:20 — весь день впереди!"><strong>Departure:</strong> 9:00 AM from Ansitz Gamp, Klausen<br><strong>Route A (Campsite 1 or 3):</strong> Klausen → A22 → Bolzano → Ponte Gardena → Val Gardena (SS242) — <span class="driving-time">1 hour (65 km)</span><br><strong>Route B (Campsite 2 — Colfosco):</strong> Klausen → A22 → Bolzano → Bressanone → Badia valley → Corvara — <span class="driving-time">1h 20min (80 km)</span><br><strong>Arrival:</strong> ~10:00–10:20 AM — full day ahead!</span>
-                </div>
-
-                <div style="display:flex;gap:12px;flex-wrap:wrap;margin:12px 0;">
-                    <div style="flex:1;min-width:280px;">
-                        <p style="font-weight:bold;margin-bottom:6px;" data-en="🗺️ Route A — Klausen to Val Gardena (Campsite 1 or 3):" data-ru="🗺️ Маршрут A — Клаузен → Валь Гардена (Кемпинг 1 или 3):">🗺️ Route A — Klausen to Val Gardena (Campsite 1 or 3):</p>
-                        <div class="map-container">
-                            <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Ansitz+Gamp+Klausen+South+Tyrol+Italy&destination=Ortisei+Val+Gardena+Italy&mode=driving" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                        <a href="https://www.google.com/maps/dir/Ansitz+Gamp+Klausen+South+Tyrol+Italy/Ortisei+Val+Gardena+Italy" class="btn btn-map" target="_blank" data-en="Open Route A in Google Maps" data-ru="Открыть маршрут A">Open Route A in Google Maps</a>
-                    </div>
-                    <div style="flex:1;min-width:280px;">
-                        <p style="font-weight:bold;margin-bottom:6px;" data-en="🗺️ Route B — Klausen to Colfosco (Campsite 2):" data-ru="🗺️ Маршрут B — Клаузен → Кольфоско (Кемпинг 2):">🗺️ Route B — Klausen to Colfosco (Campsite 2):</p>
-                        <div class="map-container">
-                            <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Ansitz+Gamp+Klausen+South+Tyrol+Italy&destination=Camping+Colfosco+Corvara+Alta+Badia+Italy&mode=driving" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                        <a href="https://www.google.com/maps/dir/Ansitz+Gamp+Klausen+South+Tyrol+Italy/Camping+Colfosco+Corvara+Alta+Badia+Italy" class="btn btn-map" target="_blank" data-en="Open Route B in Google Maps" data-ru="Открыть маршрут B">Open Route B in Google Maps</a>
-                    </div>
-                </div>
-
-                <div class="section-title" data-en="🏞️ Day Activities — Choose Based on Energy & Weather" data-ru="🏞️ Дневные активности — выберите по энергии и погоде">🏞️ Day Activities — Choose Based on Energy & Weather</div>
-
-                <div class="activity-option">
-                    <strong data-en="Option A - Alpe di Siusi:" data-ru="Вариант А - Альпе ди Сьюзи:">Option A - Alpe di Siusi:</strong> <span data-en="Drive to Compaccio on the vast Alpe di Siusi plateau. Walk the lower roads for immense views of the meadows with the Sassolungo peaks beyond." data-ru="Поезжайте в Компаччо на обширное плато Альпе ди Сьюзи. Прогуляйтесь по нижним дорогам с потрясающими видами на луга с пиками Сассолунго вдали.">Drive to <a href="https://www.google.com/maps/search/?api=1&query=Compaccio%2C+Alpe+di+Siusi" class="location-link" target="_blank">Compaccio</a> on the vast Alpe di Siusi plateau. Walk the lower roads for immense views of the meadows with the Sassolungo peaks beyond.</span>
-                </div>
-
-                <div class="activity-option">
-                    <strong data-en="Option B - Seceda Viewpoint:" data-ru="Вариант Б - Смотровая площадка Секеда:">Option B - Seceda Viewpoint:</strong> <span data-en="Drive to Santa Cristina and view the Seceda peaks from the valley floor." data-ru="Поезжайте в Санта-Кристина и полюбуйтесь пиками Секеда с дна долины.">Drive to <a href="https://www.google.com/maps/search/?api=1&query=Santa+Cristina%2C+Val+Gardena" class="location-link" target="_blank">Santa Cristina</a> and view the Seceda peaks from the valley floor.</span>
-                </div>
-
-                <div class="activity-option">
-                    <strong data-en="Option C - Giesler Alm / Val di Funes:" data-ru="Вариант В - Гизлер Альм / Валь ди Фунес:">Option C - Giesler Alm / Val di Funes:</strong> <span data-en="Drive to Val di Funes and walk the Santa Maddalena Panorama Trail for the iconic postcard view of the church backed by the Giesler Alm peaks." data-ru="Поезжайте в Валь ди Фунес и прогуляйтесь по панорамной тропе Санта-Маддалена для культового открыточного вида на церковь на фоне пиков Гизлер Альм.">Drive to <a href="https://www.google.com/maps/search/?api=1&query=Santa+Maddalena%2C+Val+di+Funes" class="location-link" target="_blank">Val di Funes</a> and walk the Santa Maddalena Panorama Trail for the iconic postcard view of the church backed by the Giesler Alm peaks.</span>
-                </div>
-
-                <div class="section-title" data-en="🍽️ Lunch Options" data-ru="🍽️ Варианты обеда">🍽️ Lunch Options</div>
-                <div class="restaurant-section">
-                    <div class="restaurant-item">
-                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Costamula+Restaurant+Val+Gardena" class="location-link" target="_blank">Costamula</a></strong> <span class="rating">⭐ 4.4/5 (681 reviews)</span><br>
-                        <span data-en="Refined South Tyrolean dishes in authentic 17th-century hut on La Longia piste." data-ru="Изысканные южнотирольские блюда в аутентичной хижине 17 века на трассе Ла Лонджа.">Refined South Tyrolean dishes in authentic 17th-century hut on La Longia piste.</span>
-                    </div>
-                    <div class="restaurant-item">
-                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Chalet+Gerard+Val+Gardena" class="location-link" target="_blank">Chalet Gerard</a></strong> <span class="rating">⭐ 4.5/5 (1,363 reviews)</span><br>
-                        <span data-en="Mountain lodge atmosphere with great food. Perfect mid-day stop." data-ru="Атмосфера горного домика с отличной едой. Идеальная остановка в середине дня.">Mountain lodge atmosphere with great food. Perfect mid-day stop.</span>
-                    </div>
-                </div>
-
-                <div class="section-title" data-en="🚗 Drive to Next Campsite (Evening)" data-ru="🚗 Дорога к следующему кемпингу (вечером)">🚗 Drive to Next Campsite (Evening)</div>
-                <div class="route-info">
-                    <span data-en="<strong>Departure:</strong> Around 3:30 PM<br><strong>Route:</strong> Val Gardena → Bressanone → Val Pusteria → Dobbiaco<br><strong>Driving Time:</strong> <span class='driving-time'>1 hour 30 minutes (75 km)</span><br><strong>Arrival:</strong> ~5:00 PM at Camping Toblacher See" data-ru="<strong>Отправление:</strong> Около 15:30<br><strong>Маршрут:</strong> Валь Гардена → Брессаноне → Валь Пустерия → Доббьяко<br><strong>Время в пути:</strong> <span class='driving-time'>1 час 30 минут (75 км)</span><br><strong>Прибытие:</strong> ~17:00 в Camping Toblacher See"><strong>Departure:</strong> Around 3:30 PM<br><strong>Route:</strong> Val Gardena → Bressanone → Val Pusteria → Dobbiaco<br><strong>Driving Time:</strong> <span class="driving-time">1 hour 30 minutes (75 km)</span><br><strong>Arrival:</strong> ~5:00 PM at Camping Toblacher See</span>
-                </div>
-
-                <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Ortisei+Val+Gardena+Italy&destination=Camping+Toblacher+See+Dobbiaco&mode=driving" allowfullscreen loading="lazy"></iframe>
-                </div>
-
-                <a href="https://www.google.com/maps/dir/Ortisei+Val+Gardena+Italy/Camping+Toblacher+See+Dobbiaco" class="btn btn-map" target="_blank" data-en="Open in Google Maps" data-ru="Открыть в Google Maps">Open in Google Maps</a>
-
-                <div class="section-title" data-en="🏕️ Your Campsite Base Tonight — 3 Options" data-ru="🏕️ Ваш кемпинг на сегодня — 3 варианта">🏕️ Your Campsite Base Tonight — 3 Options</div>
-
-                <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:12px 16px;margin-bottom:16px;">
-                    <strong>⚠️ <span data-en="May 1st is Italian Labour Day (Festa dei Lavoratori) — a national public holiday. Campsites in this area fill up fast. Book your preferred option well in advance!" data-ru="1 мая — Итальянский день труда (Festa dei Lavoratori) — национальный праздник. Кемпинги в этом районе быстро заполняются. Забронируйте предпочтительный вариант заранее!">May 1st is Italian Labour Day (Festa dei Lavoratori) — a national public holiday. Campsites in this area fill up fast. Book your preferred option well in advance!</span></strong>
-                </div>
-
-                <div class="campsite-info" style="border-left: 4px solid #27ae60;">
-                    <h4>🥇 Option 1 — Best Views: Camping Seiser Alm, Castelrotto</h4>
-                    <p><span style="background:#27ae60;color:white;padding:2px 8px;border-radius:4px;font-size:0.85em;" data-en="OPENS MAY 1ST ✅" data-ru="ОТКРЫВАЕТСЯ 1 МАЯ ✅">OPENS MAY 1ST ✅</span></p>
-                    <p><strong data-en="Why here?" data-ru="Почему здесь?">Why here?</strong> <span data-en="The most spectacular campsite in the area — set in the Schlern-Rosengarten Nature Park with breathtaking direct views of the Sciliar/Schlern massif. Every evening you get the famous Dolomite 'Enrosadira' red glow from your pitch. Saltwater pool, shop, and restaurant on site." data-ru="Самый впечатляющий кемпинг в районе — расположен в природном парке Шлерн-Розенгартен с захватывающими прямыми видами на массив Шлерн. Каждый вечер вы наблюдаете знаменитое доломитовое красное свечение 'Энрозадира' со своего места. Солёный бассейн, магазин и ресторан на территории.">The most spectacular campsite in the area — set in the Schlern-Rosengarten Nature Park with breathtaking direct views of the Sciliar/Schlern massif. Every evening you get the famous Dolomite 'Enrosadira' red glow from your pitch. Saltwater pool, shop, and restaurant on site.</span></p>
-                    <p><strong data-en="Campervan:" data-ru="Кемперван:">Campervan:</strong> <span data-en="Comfort pitches with electricity (16A), water/wastewater, TV, gas, free WiFi. Private bathrooms available as add-on." data-ru="Комфортные места с электричеством (16A), водой/канализацией, ТВ, газом, бесплатным WiFi. Доступны частные ванные комнаты.">Comfort pitches with electricity (16A), water/wastewater, TV, gas, free WiFi. Private bathrooms available as add-on.</span></p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Seiser+Alm+Castelrotto+South+Tyrol" class="btn btn-primary" target="_blank" data-en="View on Google Maps" data-ru="Посмотреть на Google Maps">View on Google Maps</a>
-                    <a href="https://www.camping-seiseralm.com/en/" class="btn btn-secondary" target="_blank" style="margin-left:10px;" data-en="Official Website" data-ru="Официальный сайт">Official Website</a>
-                </div>
-
-                <div class="campsite-info" style="border-left: 4px solid #2980b9; margin-top: 15px;">
-                    <h4>🥈 Option 2 — Wild & Remote: Camping Colfosco, Alta Badia</h4>
-                    <p><span style="background:#2980b9;color:white;padding:2px 8px;border-radius:4px;font-size:0.85em;" data-en="OPEN YEAR-ROUND ✅ — NO RESERVATION NEEDED" data-ru="ОТКРЫТ КРУГЛОГОДИЧНО ✅ — БРОНИРОВАНИЕ НЕ НУЖНО">OPEN YEAR-ROUND ✅ — NO RESERVATION NEEDED</span></p>
-                    <p><strong data-en="Why here?" data-ru="Почему здесь?">Why here?</strong> <span data-en="A wild, unspoiled campsite in the heart of Alta Badia at 1645m — surrounded by the most dramatic Dolomite rock walls on all sides. No advance booking needed, making it your perfect backup if Option 1 is full. The views of the Sella Group and Sassongher are extraordinary." data-ru="Дикий, нетронутый кемпинг в сердце Альта Бадиа на высоте 1645м — окружён самыми драматичными скальными стенами Доломитов со всех сторон. Предварительное бронирование не нужно, что делает его идеальным запасным вариантом, если вариант 1 занят. Виды на группу Селла и Сассонгер исключительны.">A wild, unspoiled campsite in the heart of Alta Badia at 1645m — surrounded by the most dramatic Dolomite rock walls on all sides. No advance booking needed, making it your perfect backup if Option 1 is full. The views of the Sella Group and Sassongher are extraordinary.</span></p>
-                    <p><strong data-en="Campervan:" data-ru="Кемперван:">Campervan:</strong> <span data-en="Pitches for motorhomes and caravans. Basic but functional facilities. Dogs welcome. First come, first served — arrive by early afternoon." data-ru="Места для кемперванов и караванов. Базовые, но функциональные удобства. Собаки приветствуются. Первый пришёл — первый обслужился. Приезжайте до раннего пополудня.">Pitches for motorhomes and caravans. Basic but functional facilities. Dogs welcome. First come, first served — arrive by early afternoon.</span></p>
-                    <p><strong data-en="Drive from Klausen:" data-ru="Поездка из Клаузена:">Drive from Klausen:</strong> <span data-en="~1h 20min via Bolzano and the Badia valley" data-ru="~1ч 20мин через Больцано и долину Бадиа">~1h 20min via Bolzano and the Badia valley</span></p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Colfosco+Corvara+Alta+Badia" class="btn btn-primary" target="_blank" data-en="View on Google Maps" data-ru="Посмотреть на Google Maps">View on Google Maps</a>
-                    <a href="https://campingcolfosco.org/en" class="btn btn-secondary" target="_blank" style="margin-left:10px;" data-en="Official Website" data-ru="Официальный сайт">Official Website</a>
-                </div>
-
-                <div class="campsite-info" style="border-left: 4px solid #e67e22; margin-top: 15px;">
-                    <h4>🥉 Option 3 — Well-Equipped: Camping Alpe di Siusi, Siusi allo Sciliar</h4>
-                    <p><span style="background:#e67e22;color:white;padding:2px 8px;border-radius:4px;font-size:0.85em;" data-en="OPENS MAY 1ST ✅" data-ru="ОТКРЫВАЕТСЯ 1 МАЯ ✅">OPENS MAY 1ST ✅</span></p>
-                    <p><strong data-en="Why here?" data-ru="Почему здесь?">Why here?</strong> <span data-en="Well-organised campsite with stunning views of the Sciliar massif. Perfect base for Alpe di Siusi, Seceda, and Val di Funes. Good facilities and restaurant on site." data-ru="Хорошо организованный кемпинг с потрясающими видами на массив Шлерн. Идеальная база для Альпе ди Сьюзи, Секеда и Валь ди Фунес. Хорошие удобства и ресторан на территории.">Well-organised campsite with stunning views of the Sciliar massif. Perfect base for Alpe di Siusi, Seceda, and Val di Funes. Good facilities and restaurant on site.</span></p>
-                    <p><strong data-en="Campervan:" data-ru="Кемперван:">Campervan:</strong> <span data-en="Modern facilities, restaurant, direct mountain views of the Dolomites." data-ru="Современные удобства, ресторан, прямые горные виды на Доломиты.">Modern facilities, restaurant, direct mountain views of the Dolomites.</span></p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Alpe+di+Siusi+Siusi+allo+Sciliar" class="btn btn-primary" target="_blank" data-en="View on Google Maps" data-ru="Посмотреть на Google Maps">View on Google Maps</a>
-                </div>
-
-                <!-- NIGHT 3 PREVIEW -->
-                <div class="campsite-info" style="margin-top:15px; opacity:0.8;">
-                    <h4>🔜 Night 3: Camping Toblacher See (Lago di Dobbiaco)</h4>
-                    <p><strong data-en="Arrival:" data-ru="Прибытие:">Arrival:</strong> <span data-en="Around 4:00 PM" data-ru="Около 16:00">Around 4:00 PM</span></p>
-                    <p><strong data-en="Why here?" data-ru="Почему здесь?">Why here?</strong> <span data-en="Closest to Lago di Braies for an early morning sunrise mission tomorrow. Spectacular lakeside location." data-ru="Ближайший к Лаго ди Брайес для завтрашнего раннего утреннего восхода. Впечатляющее расположение у озера.">Closest to Lago di Braies for an early morning sunrise mission tomorrow. Spectacular lakeside location.</span></p>
-                    <p><strong data-en="Amenities:" data-ru="Удобства:">Amenities:</strong> <span data-en="Direct lake access, restaurant Seeschupfe, wine cellar, modern facilities" data-ru="Прямой доступ к озеру, ресторан Seeschupfe, винный погреб, современные удобства">Direct lake access, restaurant Seeschupfe, wine cellar, modern facilities</span></p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Toblacher+See%2C+Lago+di+Dobbiaco" class="btn btn-primary" target="_blank" data-en="View on Google Maps" data-ru="Посмотреть на Google Maps">View on Google Maps</a>
-                </div>
-
-                <div class="section-title" data-en="🍽️ Dinner in Dobbiaco" data-ru="🍽️ Ужин в Доббьяко">🍽️ Dinner in Dobbiaco</div>
-                <div class="restaurant-section">
-                    <div class="restaurant-item">
-                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Kugler+Speckstube+Dobbiaco" class="location-link" target="_blank">Kugler's Speckstube</a></strong> <span class="rating">⭐ 4.5/5 (1,054 reviews)</span><br>
-                        <span data-en="Traditional Tyrolean specialties. Famous for Speck and local dishes." data-ru="Традиционные тирольские блюда. Знаменит спеком и местными блюдами.">Traditional Tyrolean specialties. Famous for Speck and local dishes.</span>
-                    </div>
-                    <div class="restaurant-item">
-                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Gasthaus+Weber+Dobbiaco" class="location-link" target="_blank">Gasthaus Weber</a></strong> <span class="rating">⭐ 4.2/5 (1,099 reviews)</span><br>
-                        <span data-en="Local favorite with hearty mountain food. Cozy atmosphere." data-ru="Местный фаворит с сытной горной едой. Уютная атмосфера.">Local favorite with hearty mountain food. Cozy atmosphere.</span>
-                    </div>
-                    <div class="restaurant-item">
-                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Restaurant+Pizzeria+Samyr+Dobbiaco" class="location-link" target="_blank">Restaurant Pizzeria Samyr</a></strong> <span class="rating">⭐ 4.6/5 (267 reviews)</span><br>
-                        <span data-en="Great pizza option if you want something lighter." data-ru="Отличный вариант пиццы, если хотите что-то полегче.">Great pizza option if you want something lighter.</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- DAY 3 -->
-        <div class="day-section" id="day3">
-            <div class="day-header" data-en="📅 Day 3: Sunrise & Cortina Superstars (Thursday, May 2nd)" data-ru="📅 День 3: Рассвет и звёзды Кортины (четверг, 2 мая)">📅 Day 3: Sunrise & Cortina Superstars (Thursday, May 2nd)</div>
-            <div class="day-content">
-                <p data-en="An early start to catch the magical sunrise at Lago di Braies, followed by exploring the legendary peaks and passes around Cortina d'Ampezzo." data-ru="Ранний старт, чтобы застать волшебный рассвет на Лаго ди Брайес, а затем исследование легендарных пиков и перевалов вокруг Кортина д'Ампеццо.">An early start to catch the magical sunrise at Lago di Braies, followed by exploring the legendary peaks and passes around Cortina d'Ampezzo.</p>
-
-                <div class="section-title" data-en="🌅 Early Morning - Lago di Braies Sunrise" data-ru="🌅 Раннее утро - Рассвет на Лаго ди Брайес">🌅 Early Morning - Lago di Braies Sunrise</div>
-                <div class="activity-option">
-                    <strong data-en="5:00 AM Start:" data-ru="Старт в 5:00:">5:00 AM Start:</strong> <span data-en="Drive to Lago di Braies (20-minute drive from your campsite). Arrive before sunrise to find a spot along the shore. Walk the easy circuit around the lake as the first light hits the peaks. This will be a trip highlight!" data-ru="Поезжайте к Лаго ди Брайес (20 минут езды от кемпинга). Приезжайте до восхода, чтобы найти место на берегу. Прогуляйтесь по лёгкому маршруту вокруг озера, когда первый свет коснётся пиков. Это будет изюминкой поездки!">Drive to <a href="https://www.google.com/maps/search/?api=1&query=Lago+di+Braies" class="location-link" target="_blank">Lago di Braies</a> (20-minute drive from your campsite). Arrive before sunrise to find a spot along the shore. Walk the easy circuit around the lake as the first light hits the peaks. This will be a trip highlight!</span>
-                </div>
-
-                <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Camping+Toblacher+See+Dobbiaco&destination=Lago+di+Braies+Italy&mode=driving" allowfullscreen loading="lazy"></iframe>
-                </div>
-
-                <a href="https://www.google.com/maps/dir/Camping+Toblacher+See+Dobbiaco/Lago+di+Braies+Italy" class="btn btn-map" target="_blank" data-en="Open in Google Maps" data-ru="Открыть в Google Maps">Open in Google Maps</a>
-
-                <div class="section-title" data-en="🍽️ Breakfast at the Lake" data-ru="🍽️ Завтрак у озера">🍽️ Breakfast at the Lake</div>
-                <div class="restaurant-section">
-                    <div class="restaurant-item">
-                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Restaurant+Pragser+Wildsee+Lago+di+Braies" class="location-link" target="_blank">Restaurant Pragser Wildsee</a></strong><br>
-                        <span data-en="Right at the lake. Perfect for breakfast after sunrise." data-ru="Прямо у озера. Идеально для завтрака после рассвета.">Right at the lake. Perfect for breakfast after sunrise.</span>
-                    </div>
-                    <div class="restaurant-item">
-                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Emmas+Bistro+Lago+di+Braies" class="location-link" target="_blank">Emmas Bistro</a></strong><br>
-                        <span data-en="Fine regional dishes. Great coffee and pastries." data-ru="Изысканные региональные блюда. Отличный кофе и выпечка.">Fine regional dishes. Great coffee and pastries.</span>
-                    </div>
-                </div>
-
-                <div class="section-title" data-en="🏞️ Late Morning Activities (Choose One)" data-ru="🏞️ Активности поздним утром (выберите одну)">🏞️ Late Morning Activities (Choose One)</div>
-
-                <div class="activity-option">
-                    <strong data-en="Option A - Tre Cime & Cadini di Misurina:" data-ru="Вариант А - Тре Чиме и Кадини ди Мизурина:">Option A - Tre Cime & Cadini di Misurina:</strong> <span data-en="Drive to Lago di Misurina. From here, you get a fantastic view of the south face of Tre Cime di Lavaredo and the jagged Cadini di Misurina peaks." data-ru="Поезжайте к Лаго ди Мизурина. Отсюда открывается фантастический вид на южную стену Тре Чиме ди Лаваредо и зубчатые пики Кадини ди Мизурина.">Drive to <a href="https://www.google.com/maps/search/?api=1&query=Lago+di+Misurina" class="location-link" target="_blank">Lago di Misurina</a>. From here, you get a fantastic view of the south face of Tre Cime di Lavaredo and the jagged Cadini di Misurina peaks.</span>
-                </div>
-
-                <div class="activity-option">
-                    <strong data-en="Option B - Cortina d'Ampezzo:" data-ru="Вариант Б - Кортина д'Ампеццо:">Option B - Cortina d'Ampezzo:</strong> <span data-en="Explore the chic town of Cortina d'Ampezzo. Walk the pedestrianized Corso Italia and soak in the atmosphere of this world-famous resort." data-ru="Исследуйте шикарный город Кортина д'Ампеццо. Прогуляйтесь по пешеходной улице Корсо Италия и насладитесь атмосферой этого всемирно известного курорта.">Explore the chic town of <a href="https://www.google.com/maps/search/?api=1&query=Cortina+d%27Ampezzo" class="location-link" target="_blank">Cortina d'Ampezzo</a>. Walk the pedestrianized Corso Italia and soak in the atmosphere of this world-famous resort.</span>
-                </div>
-
-                <div class="section-title" data-en="🍽️ Lunch in Cortina" data-ru="🍽️ Обед в Кортине">🍽️ Lunch in Cortina</div>
-                <div class="restaurant-section">
-                    <div class="restaurant-item">
-                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Tivoli+Restaurant+Cortina+d%27Ampezzo" class="location-link" target="_blank">Tivoli</a></strong> <span class="rating">⭐ Highly recommended</span><br>
-                        <span data-en="One of Cortina's best restaurants. Traditional Italian cuisine." data-ru="Один из лучших ресторанов Кортины. Традиционная итальянская кухня.">One of Cortina's best restaurants. Traditional Italian cuisine.</span>
-                    </div>
-                    <div class="restaurant-item">
-                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Ristorante+Al+Camin+Cortina+d%27Ampezzo" class="location-link" target="_blank">Ristorante Al Camin</a></strong><br>
-                        <span data-en="Cozy atmosphere with excellent local dishes." data-ru="Уютная атмосфера с отличными местными блюдами.">Cozy atmosphere with excellent local dishes.</span>
-                    </div>
-                    <div class="restaurant-item">
-                        <strong><a href="https://www.google.com/maps/search/?api=1&query=SanBrite+Cortina+d%27Ampezzo" class="location-link" target="_blank">SanBrite</a></strong> <span class="rating">⭐ Michelin-listed</span><br>
-                        <span data-en="Fine dining option for a special lunch." data-ru="Изысканная кухня для особенного обеда.">Fine dining option for a special lunch.</span>
-                    </div>
-                </div>
-
-                <div class="section-title" data-en="🚗 Drive to Next Campsite via Passo Giau" data-ru="🚗 Дорога к следующему кемпингу через Пассо Джау">🚗 Drive to Next Campsite via Passo Giau</div>
-                <div class="route-info">
-                    <span data-en="<strong>Departure:</strong> Around 3:00 PM<br><strong>Route:</strong> Cortina → <strong>Passo Giau</strong> → Selva di Cadore → Val di Fassa<br><strong>Driving Time:</strong> <span class='driving-time'>2 hours (70 km)</span><br><strong>Highlight:</strong> Drive over the magnificent Passo Giau, one of the most beautiful passes in the Dolomites. Stop at the top for photos!" data-ru="<strong>Отправление:</strong> Около 15:00<br><strong>Маршрут:</strong> Кортина → <strong>Пассо Джау</strong> → Сельва ди Кадоре → Валь ди Фасса<br><strong>Время в пути:</strong> <span class='driving-time'>2 часа (70 км)</span><br><strong>Изюминка:</strong> Проезд через великолепный Пассо Джау, один из самых красивых перевалов Доломитов. Остановитесь наверху для фото!"><strong>Departure:</strong> Around 3:00 PM<br><strong>Route:</strong> Cortina → <strong>Passo Giau</strong> → Selva di Cadore → Val di Fassa<br><strong>Driving Time:</strong> <span class="driving-time">2 hours (70 km)</span><br><strong>Highlight:</strong> Drive over the magnificent Passo Giau, one of the most beautiful passes in the Dolomites. Stop at the top for photos!</span>
-                </div>
-
-                <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Cortina+d%27Ampezzo+Italy&destination=Pozza+di+Fassa+Italy&waypoints=Passo+Giau+Italy&mode=driving" allowfullscreen loading="lazy"></iframe>
-                </div>
-
-                <a href="https://www.google.com/maps/dir/Cortina+d%27Ampezzo+Italy/Passo+Giau+Italy/Pozza+di+Fassa+Italy" class="btn btn-map" target="_blank" data-en="Open in Google Maps" data-ru="Открыть в Google Maps">Open in Google Maps</a>
-
-                <div class="section-title" data-en="🏕️ Your Campsite Base Tonight" data-ru="🏕️ Ваш кемпинг на сегодня">🏕️ Your Campsite Base Tonight</div>
-                <div class="campsite-info">
-                    <h4>Camping Vidor, Pozza di Fassa</h4>
-                    <p><strong data-en="Arrival:" data-ru="Прибытие:">Arrival:</strong> <span data-en="Around 5:00 PM" data-ru="Около 17:00">Around 5:00 PM</span></p>
-                    <p><strong data-en="Why here?" data-ru="Почему здесь?">Why here?</strong> <span data-en="Perfectly positioned for your final leg. Excellent facilities including an aquatic park." data-ru="Идеально расположен для вашего финального этапа. Отличные удобства, включая аквапарк.">Perfectly positioned for your final leg. Excellent facilities including an aquatic park.</span></p>
-                    <p><strong data-en="Amenities:" data-ru="Удобства:">Amenities:</strong> <span data-en="Aquatic park, restaurant, modern facilities" data-ru="Аквапарк, ресторан, современные удобства">Aquatic park, restaurant, modern facilities</span></p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Camping+Vidor%2C+Pozza+di+Fassa" class="btn btn-primary" target="_blank" data-en="View on Google Maps" data-ru="Посмотреть на Google Maps">View on Google Maps</a>
-                </div>
-
-                <div class="section-title" data-en="🍽️ Dinner in Val di Fassa" data-ru="🍽️ Ужин в Валь ди Фасса">🍽️ Dinner in Val di Fassa</div>
-                <div class="restaurant-section">
-                    <div class="restaurant-item">
-                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Malga+Aloch+Val+di+Fassa" class="location-link" target="_blank">Malga Aloch</a></strong> <span class="rating">⭐ 4.3/5 (1,161 reviews)</span><br>
-                        <span data-en="Mountain hut with stunning views. Traditional Ladin cuisine." data-ru="Горная хижина с потрясающими видами. Традиционная ладинская кухня.">Mountain hut with stunning views. Traditional Ladin cuisine.</span>
-                    </div>
-                    <div class="restaurant-item">
-                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Ristorante+La+Soldanella+Pozza+di+Fassa" class="location-link" target="_blank">Ristorante La Soldanella</a></strong> <span class="rating">⭐ 4.4/5 (1,149 reviews)</span><br>
-                        <span data-en="Excellent Ladin specialties. Cozy atmosphere." data-ru="Отличные ладинские блюда. Уютная атмосфера.">Excellent Ladin specialties. Cozy atmosphere.</span>
-                    </div>
-                    <div class="restaurant-item">
-                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Ramon+Pizzeria+Pozza+di+Fassa" class="location-link" target="_blank">Ramon</a></strong> <span class="rating">⭐ Local favorite</span><br>
-                        <span data-en="Famous for the best pizza in the valley!" data-ru="Знаменит лучшей пиццей в долине!">Famous for the best pizza in the valley!</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- DAY 4 -->
-        <div class="day-section" id="day4">
-            <div class="day-header" data-en="📅 Day 4: Final Lakes & Return to Milan (Friday, May 3rd)" data-ru="📅 День 4: Последние озёра и возвращение в Милан (пятница, 3 мая)">📅 Day 4: Final Lakes & Return to Milan (Friday, May 3rd)</div>
-            <div class="day-content">
-                <p data-en="One last iconic lake and a look at the famous 'coffin cable car' before you begin your journey back to Milan." data-ru="Последнее культовое озеро и взгляд на знаменитую 'канатную дорогу-гроб' перед началом вашего путешествия обратно в Милан.">One last iconic lake and a look at the famous "coffin cable car" before you begin your journey back to Milan.</p>
-
-                <div class="section-title" data-en="🏞️ Morning Activities (Choose One)" data-ru="🏞️ Утренние активности (выберите одну)">🏞️ Morning Activities (Choose One)</div>
-
-                <div class="activity-option">
-                    <strong data-en="Option A - Lago di Carezza:" data-ru="Вариант А - Лаго ди Кареца:">Option A - Lago di Carezza:</strong> <span data-en="Drive to Lago di Carezza (30-minute drive). Do the easy, 25-minute walk around this stunning, multi-colored lake with the Latemar peaks as backdrop." data-ru="Поезжайте к Лаго ди Кареца (30 минут езды). Совершите лёгкую 25-минутную прогулку вокруг этого потрясающего разноцветного озера с пиками Латемар на заднем плане.">Drive to <a href="https://www.google.com/maps/search/?api=1&query=Lago+di+Carezza+Parking" class="location-link" target="_blank">Lago di Carezza</a> (30-minute drive). Do the easy, 25-minute walk around this stunning, multi-colored lake with the Latemar peaks as backdrop.</span>
-                </div>
-
-                <div class="activity-option">
-                    <strong data-en="Option B - 'Coffin Cable Car' at Passo Pordoi:" data-ru="Вариант Б - 'Канатная дорога-гроб' на Пассо Пордои:">Option B - "Coffin Cable Car" at Passo Pordoi:</strong> <span data-en="Drive up to Passo Pordoi (30-minute drive). The cable car will be closed, but you can see the famous single-pylon lift and appreciate the engineering from the pass." data-ru="Поезжайте на Пассо Пордои (30 минут езды). Канатная дорога будет закрыта, но вы сможете увидеть знаменитый подъёмник с одной опорой и оценить инженерное решение с перевала.">Drive up to <a href="https://www.google.com/maps/search/?api=1&query=Passo+Pordoi" class="location-link" target="_blank">Passo Pordoi</a> (30-minute drive). The cable car will be closed, but you can see the famous single-pylon lift and appreciate the engineering from the pass.</span>
-                </div>
-
-                <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Pozza+di+Fassa+Italy&destination=Lago+di+Carezza+Italy&mode=driving" allowfullscreen loading="lazy"></iframe>
-                </div>
-
-                <a href="https://www.google.com/maps/dir/Pozza+di+Fassa+Italy/Lago+di+Carezza+Italy" class="btn btn-map" target="_blank" data-en="Open in Google Maps" data-ru="Открыть в Google Maps">Open in Google Maps</a>
-
-                <div class="section-title" data-en="🍽️ Breakfast/Brunch Options" data-ru="🍽️ Варианты завтрака/бранча">🍽️ Breakfast/Brunch Options</div>
-                <div class="restaurant-section">
-                    <div class="restaurant-item">
-                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Vecchio+Mulino+Pozza+di+Fassa" class="location-link" target="_blank">Vecchio Mulino</a></strong> <span class="rating">⭐ 4.2/5 (1,772 reviews)</span><br>
-                        <span data-en="Popular local restaurant. Great for a hearty breakfast before the drive." data-ru="Популярный местный ресторан. Отлично для сытного завтрака перед поездкой.">Popular local restaurant. Great for a hearty breakfast before the drive.</span>
-                    </div>
-                    <div class="restaurant-item">
-                        <strong><a href="https://www.google.com/maps/search/?api=1&query=Agritur+El+Mas+Val+di+Fassa" class="location-link" target="_blank">Agritur El Mas</a></strong> <span class="rating">⭐ 4.6/5 (1,548 reviews)</span><br>
-                        <span data-en="Farm-to-table experience. Fresh local products." data-ru="Опыт 'от фермы к столу'. Свежие местные продукты.">Farm-to-table experience. Fresh local products.</span>
-                    </div>
-                </div>
-
-                <div class="section-title" data-en="🚗 Drive Back to Milan" data-ru="🚗 Дорога обратно в Милан">🚗 Drive Back to Milan</div>
-                <div class="route-info">
-                    <span data-en="<strong>Departure:</strong> Around 12:30 PM<br><strong>Route:</strong> Val di Fassa → Bolzano → Milan<br><strong>Driving Time:</strong> <span class='driving-time'>3 hours 45 minutes (300 km)</span><br><strong>Lunch Stop:</strong> Consider stopping in Bolzano for lunch before the motorway." data-ru="<strong>Отправление:</strong> Около 12:30<br><strong>Маршрут:</strong> Валь ди Фасса → Больцано → Милан<br><strong>Время в пути:</strong> <span class='driving-time'>3 часа 45 минут (300 км)</span><br><strong>Остановка на обед:</strong> Рассмотрите остановку в Больцано на обед перед автострадой."><strong>Departure:</strong> Around 12:30 PM<br><strong>Route:</strong> Val di Fassa → Bolzano → Milan<br><strong>Driving Time:</strong> <span class="driving-time">3 hours 45 minutes (300 km)</span><br><strong>Lunch Stop:</strong> Consider stopping in Bolzano for lunch before the motorway.</span>
-                </div>
-
-                <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Pozza+di+Fassa+Italy&destination=Via+Salvo+D%27Acquisto+28+Castellanza+Italy&mode=driving" allowfullscreen loading="lazy"></iframe>
-                </div>
-
-                <a href="https://www.google.com/maps/dir/Pozza+di+Fassa+Italy/Via+Salvo+D%27Acquisto+28+Castellanza+Italy" class="btn btn-map" target="_blank" data-en="Open in Google Maps" data-ru="Открыть в Google Maps">Open in Google Maps</a>
-
-                <div class="section-title" data-en="🏕️ Campsite for Tonight" data-ru="🏕️ Кемпинг на сегодня">🏕️ Campsite for Tonight</div>
-                <div class="campsite-info">
-                    <h4 data-en="Near Roadsurfer Milan Office" data-ru="Рядом с офисом Roadsurfer в Милане">Near Roadsurfer Milan Office</h4>
-                    <p><strong data-en="Arrival:" data-ru="Прибытие:">Arrival:</strong> <span data-en="Around 5:30 PM" data-ru="Около 17:30">Around 5:30 PM</span></p>
-                    <p><strong data-en="Why here?" data-ru="Почему здесь?">Why here?</strong> <span data-en="For convenience - makes your morning drop-off stress-free." data-ru="Для удобства - делает утреннюю сдачу авто без стресса.">For convenience - makes your morning drop-off stress-free.</span></p>
-                    <p><strong data-en="Suggestion:" data-ru="Предложение:">Suggestion:</strong> <a href="https://www.google.com/maps/search/?api=1&query=Camping+Citt%C3%A0+di+Milano" class="location-link" target="_blank">Camping Città di Milano</a></p>
-                </div>
-            </div>
-        </div>
-
-        <!-- DAY 5 -->
-        <div class="day-section" id="day5">
-            <div class="day-header" data-en="📅 Day 5: Campervan Drop-off (Saturday, May 4th)" data-ru="📅 День 5: Сдача кемпервэна (суббота, 4 мая)">📅 Day 5: Campervan Drop-off (Saturday, May 4th)</div>
-            <div class="day-content">
-                <div class="section-title" data-en="✅ Final Steps" data-ru="✅ Финальные шаги">✅ Final Steps</div>
-                <div class="route-info">
-                    <span data-en="<strong>9:00 AM:</strong> Tidy the campervan, refuel, and pack your belongings.<br><strong>10:00 AM:</strong> Return your campervan at the Roadsurfer Milan Office" data-ru="<strong>9:00:</strong> Приведите кемпервэн в порядок, заправьтесь и упакуйте вещи.<br><strong>10:00:</strong> Верните кемпервэн в офис Roadsurfer в Милане"><strong>9:00 AM:</strong> Tidy the campervan, refuel, and pack your belongings.<br><strong>10:00 AM:</strong> Return your campervan at the <a href="https://www.google.com/maps/search/?api=1&query=Roadsurfer+Milan%2C+Via+Salvo+D%27Acquisto%2C+28%2C+21053+Castellanza+VA%2C+Italy" class="location-link" target="_blank">Roadsurfer Milan Office</a></span>
-                </div>
-                <p style="margin-top: 20px; font-size: 1.2em; color: #667eea;"><strong data-en="🎉 Congratulations! You've completed your incredible Dolomites adventure!" data-ru="🎉 Поздравляем! Вы завершили своё невероятное путешествие по Доломитам!">🎉 Congratulations! You've completed your incredible Dolomites adventure!</strong></p>
-            </div>
-        </div>
-
-        <footer>
-            <h3 data-en="📍 All Your Must-See Locations" data-ru="📍 Все обязательные к посещению места">📍 All Your Must-See Locations</h3>
-            <p style="margin: 15px 0;">✓ Tre Cime di Lavaredo | ✓ Cadini Di Misurina | ✓ Alpe di Siusi | ✓ Passo Giau | ✓ Lago di Braies (Sunrise) | ✓ Seceda | ✓ Lago di Carezza | ✓ Giesler Alm | ✓ Coffin Cable Car (Passo Pordoi) | ✓ Cortina d'Ampezzo</p>
-            <p style="color: #666; margin-top: 20px;" data-en="Created with ❤️ for your Dolomites adventure | April 30 - May 4, 2026" data-ru="Создано с ❤️ для вашего путешествия по Доломитам | 30 апреля - 4 мая 2026">Created with ❤️ for your Dolomites adventure | April 30 - May 4, 2026</p>
-        </footer>
+    <!-- ADVISORY -->
+    <div class="advisory">
+        <strong data-en="⚠️ Spring Travel Advisory (Late April / Early May)" data-ru="⚠️ Весенний совет путешественнику (конец апреля / начало мая)">⚠️ Spring Travel Advisory (Late April / Early May)</strong>
+        <span data-en="Cable cars are CLOSED. High-altitude roads (Tre Cime toll road, Passo Giau) may still have snow or be closed. Always check conditions locally before heading up. This itinerary focuses on what is realistically accessible — scenic drives, lake walks, and lower-elevation trails." data-ru="Канатные дороги ЗАКРЫТЫ. Высокогорные дороги (платная дорога к Тре Чиме, Пассо Джау) могут быть заснежены или закрыты. Всегда проверяйте условия на месте. Маршрут сосредоточен на реально доступных местах — живописных поездках, прогулках у озёр и тропах на низких высотах.">Cable cars are CLOSED. High-altitude roads (Tre Cime toll road, Passo Giau) may still have snow or be closed. Always check conditions locally before heading up. This itinerary focuses on what is realistically accessible — scenic drives, lake walks, and lower-elevation trails.</span>
     </div>
 
-    <script>
-        let currentLang = 'en';
+    <!-- ═══════════════════════════════════════════════════════
+         DAY 1 — April 30 · Milan → Klausen
+    ═══════════════════════════════════════════════════════ -->
+    <div class="day-card" id="day1">
+        <div class="day-header">
+            <div>
+                <div class="day-number" data-en="Day 1 · Tuesday" data-ru="День 1 · Вторник">Day 1 · Tuesday</div>
+                <div class="day-title" data-en="Milan → Klausen (Chiusa)" data-ru="Милан → Клаузен (Chiusa)">Milan → Klausen (Chiusa)</div>
+                <div class="day-date" data-en="April 30 · Pick-up at 12:00 PM · Drive 2h 45min" data-ru="30 апреля · Получение в 12:00 · Поездка 2ч 45мин">April 30 · Pick-up at 12:00 PM · Drive 2h 45min</div>
+            </div>
+        </div>
+        <div class="day-body">
 
-        function switchLanguage(lang) {
-            currentLang = lang;
-            
-            // Update button states
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Update all translatable elements
-            document.querySelectorAll('[data-en]').forEach(element => {
-                const translation = element.getAttribute('data-' + lang);
-                if (translation) {
-                    if (element.tagName === 'SPAN' && element.innerHTML.includes('<')) {
-                        // For spans with HTML content
-                        element.innerHTML = translation;
-                    } else {
-                        element.textContent = translation;
-                    }
-                }
-            });
-        }
+            <!-- CAMPSITE -->
+            <div class="section-block">
+                <div class="section-label" data-en="🏕️ Tonight's Campsite" data-ru="🏕️ Кемпинг на ночь">🏕️ Tonight's Campsite</div>
+                <div class="campsite-grid">
+                    <div class="campsite-card top-pick">
+                        <div class="campsite-rank rank-only" data-en="Your Base" data-ru="Ваша база">Your Base</div>
+                        <div class="campsite-name" style="margin-top:18px;">Ansitz Gamp Camper Stop — Klausen (Chiusa), South Tyrol</div>
+                        <div class="campsite-meta">
+                            <span class="meta-tag tag-open" data-en="✅ Open Year-Round" data-ru="✅ Открыт круглогодично">✅ Open Year-Round</span>
+                            <span class="meta-tag tag-info" data-en="⏱ Arrive ~3:15 PM" data-ru="⏱ Прибытие ~15:15">⏱ Arrive ~3:15 PM</span>
+                            <span class="meta-tag tag-info" data-en="📍 Isarco Valley" data-ru="📍 Долина Изарко">📍 Isarco Valley</span>
+                        </div>
+                        <p class="campsite-desc" data-en="A medieval castle looms dramatically on a rocky cliff directly above your campervan. Set in the beautiful Isarco Valley, Klausen is one of Italy's most charming historic towns — narrow frescoed lanes and the Sabiona Monastery perched high above. The perfect first taste of authentic South Tyrol." data-ru="Средневековый замок нависает над вашим кемпервэном на скальном утёсе. Клаузен — один из самых очаровательных исторических городов Италии с узкими расписными улочками и монастырём Сабиона высоко на скале. Идеальное первое знакомство с Южным Тиролем.">A medieval castle looms dramatically on a rocky cliff directly above your campervan. Set in the beautiful Isarco Valley, Klausen is one of Italy's most charming historic towns — narrow frescoed lanes and the Sabiona Monastery perched high above. The perfect first taste of authentic South Tyrol.</p>
+                        <p class="campsite-desc" style="font-size:0.82em; color:#888;" data-en="Facilities: Electricity (6A), fresh water & sewage, SAT-TV, free WiFi, disposal station. Up to 10m motorhomes. Note: no sanitary block — book a comfort pitch at the main campground if showers needed." data-ru="Удобства: Электричество (6A), вода и канализация, SAT-TV, бесплатный WiFi, сливная станция. До 10м. Примечание: нет санузла — бронируйте место на основном кемпинге, если нужны душ/туалет.">Facilities: Electricity (6A), fresh water & sewage, SAT-TV, free WiFi, disposal station. Up to 10m motorhomes. Note: no sanitary block — book a comfort pitch at the main campground if showers needed.</p>
+                        <div class="campsite-links">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Ansitz+Gamp+Klausen+South+Tyrol" class="btn btn-primary" target="_blank" data-en="📍 Google Maps" data-ru="📍 Google Maps">📍 Google Maps</a>
+                            <a href="https://ansitzgamp.com/en/camperstop/" class="btn btn-secondary" target="_blank" data-en="🌐 Official Website" data-ru="🌐 Официальный сайт">🌐 Official Website</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        function scrollToDay(dayId) {
-            const element = document.getElementById(dayId);
-            element.scrollIntoView({ behavior: 'smooth' });
-            
-            // Update active button
-            document.querySelectorAll('.day-nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-        }
-    </script>
+            <!-- ACTIVITIES -->
+            <div class="section-block">
+                <div class="section-label" data-en="🥾 Afternoon Activities in Klausen" data-ru="🥾 Послеполуденные активности в Клаузене">🥾 Afternoon Activities in Klausen</div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Option A · Easy Walk" data-ru="Вариант А · Лёгкая прогулка">Option A · Easy Walk</div>
+                        <div class="act-title" data-en="Explore Klausen Old Town" data-ru="Исследовать старый город Клаузен">Explore Klausen Old Town</div>
+                        <div class="act-desc" data-en="Stroll through the medieval centre of <a href='https://www.google.com/maps/search/?api=1&query=Klausen+Chiusa+South+Tyrol' class='loc' target='_blank'>Klausen</a>. Narrow lanes, frescoed facades, artisan shops and the dramatic Sabiona Monastery silhouette above. Perfect leg-stretch after the drive." data-ru="Прогуляйтесь по средневековому центру <a href='https://www.google.com/maps/search/?api=1&query=Klausen+Chiusa+South+Tyrol' class='loc' target='_blank'>Клаузена</a>. Узкие улочки, фасады с фресками, ремесленные магазины и силуэт монастыря Сабиона над головой.">Stroll through the medieval centre of <a href="https://www.google.com/maps/search/?api=1&query=Klausen+Chiusa+South+Tyrol" class="loc" target="_blank">Klausen</a>. Narrow lanes, frescoed facades, artisan shops and the dramatic Sabiona Monastery silhouette above. Perfect leg-stretch after the drive.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Option B · Hike 45 min" data-ru="Вариант Б · Поход 45 мин">Option B · Hike 45 min</div>
+                        <div class="act-title" data-en="Sabiona Monastery Trail" data-ru="Тропа к монастырю Сабиона">Sabiona Monastery Trail</div>
+                        <div class="act-desc" data-en="Easy uphill walk from town to the <a href='https://www.google.com/maps/search/?api=1&query=Sabiona+Monastery+Klausen' class='loc' target='_blank'>Sabiona Monastery</a> perched on the cliff. Breathtaking panoramic views over the Isarco Valley. Suitable for all fitness levels." data-ru="Лёгкий подъём из города к <a href='https://www.google.com/maps/search/?api=1&query=Sabiona+Monastery+Klausen' class='loc' target='_blank'>монастырю Сабиона</a> на скале. Захватывающие панорамные виды на долину Изарко. Подходит для любого уровня физической подготовки.">Easy uphill walk from town to the <a href="https://www.google.com/maps/search/?api=1&query=Sabiona+Monastery+Klausen" class="loc" target="_blank">Sabiona Monastery</a> perched on the cliff. Breathtaking panoramic views over the Isarco Valley. Suitable for all fitness levels.</div>
+                    </div>
+                    <div class="activity-item weather-alt">
+                        <div class="act-label" data-en="Option C · Relax" data-ru="Вариант В · Отдых">Option C · Relax</div>
+                        <div class="act-title" data-en="Settle In & Enjoy the View" data-ru="Устроиться и насладиться видом">Settle In & Enjoy the View</div>
+                        <div class="act-desc" data-en="It's Day 1 — park up, have a coffee looking at the castle above, and take a short stroll. Save energy for the big days ahead." data-ru="Это День 1 — паркуйтесь, выпейте кофе с видом на замок и немного прогуляйтесь. Берегите силы для больших дней впереди.">It's Day 1 — park up, have a coffee looking at the castle above, and take a short stroll. Save energy for the big days ahead.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DINNER -->
+            <div class="section-block">
+                <div class="section-label" data-en="🍽️ Dinner in Klausen" data-ru="🍽️ Ужин в Клаузене">🍽️ Dinner in Klausen</div>
+                <div class="restaurant-list">
+                    <div class="restaurant-item">
+                        <div class="restaurant-info">
+                            <div class="restaurant-name"><a href="https://www.google.com/maps/search/?api=1&query=Restaurant+Ansitz+Gamp+Klausen" class="loc" target="_blank">Restaurant at Ansitz Gamp</a></div>
+                            <div class="restaurant-rating" data-en="⭐ On-site · South Tyrolean cuisine" data-ru="⭐ На территории · Южнотирольская кухня">⭐ On-site · South Tyrolean cuisine</div>
+                            <div class="restaurant-desc" data-en="The campsite's own restaurant. Traditional Tyrolean dishes, local wines. Easiest option after a long drive day." data-ru="Ресторан кемпинга. Традиционные тирольские блюда, местные вина. Самый удобный вариант после долгого дня езды.">The campsite's own restaurant. Traditional Tyrolean dishes, local wines. Easiest option after a long drive day.</div>
+                        </div>
+                    </div>
+                    <div class="restaurant-item">
+                        <div class="restaurant-info">
+                            <div class="restaurant-name"><a href="https://www.google.com/maps/search/?api=1&query=Ristorante+Turm+Klausen" class="loc" target="_blank">Ristorante Turm</a></div>
+                            <div class="restaurant-rating" data-en="⭐ 4.4/5 · Historic town centre" data-ru="⭐ 4.4/5 · Исторический центр">⭐ 4.4/5 · Historic town centre</div>
+                            <div class="restaurant-desc" data-en="Charming restaurant in the heart of the old town. South Tyrolean classics: Knödel, Speck, Schlutzkrapfen." data-ru="Очаровательный ресторан в сердце старого города. Классика Южного Тироля: Кнёдель, Шпек, Шлутцкрапфен.">Charming restaurant in the heart of the old town. South Tyrolean classics: Knödel, Speck, Schlutzkrapfen.</div>
+                        </div>
+                    </div>
+                    <div class="restaurant-item">
+                        <div class="restaurant-info">
+                            <div class="restaurant-name"><a href="https://www.google.com/maps/search/?api=1&query=Pizzeria+Klausen+Chiusa" class="loc" target="_blank">Local Pizzeria, Klausen</a></div>
+                            <div class="restaurant-rating" data-en="🍕 Casual option" data-ru="🍕 Неформальный вариант">🍕 Casual option</div>
+                            <div class="restaurant-desc" data-en="If you just want something simple and relaxed after the drive — Klausen has a couple of good pizzerias in the old town." data-ru="Если хочется чего-то простого после поездки — в старом городе Клаузена есть несколько хороших пиццерий.">If you just want something simple and relaxed after the drive — Klausen has a couple of good pizzerias in the old town.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAP -->
+            <div class="section-block map-section">
+                <div class="section-label" data-en="🗺️ Today's Drive: Milan → Klausen" data-ru="🗺️ Сегодняшняя поездка: Милан → Клаузен">🗺️ Today's Drive: Milan → Klausen</div>
+                <div class="map-route-info">
+                    <div class="route-line"><strong data-en="Departure:" data-ru="Отправление:">Departure:</strong> <span data-en="12:00 PM from Roadsurfer Milan Office" data-ru="12:00 из офиса Roadsurfer в Милане">12:00 PM from Roadsurfer Milan Office</span></div>
+                    <div class="route-line"><strong data-en="Route:" data-ru="Маршрут:">Route:</strong> <span data-en="Milan → A4 → Brescia → A22 Brenner motorway → Klausen exit" data-ru="Милан → A4 → Брешиа → A22 автострада Бреннер → съезд Клаузен">Milan → A4 → Brescia → A22 Brenner motorway → Klausen exit</span></div>
+                    <div class="route-line"><strong data-en="Drive Time:" data-ru="Время в пути:">Drive Time:</strong> <span class="route-time" data-en="2h 45min · 240 km" data-ru="2ч 45мин · 240 км">2h 45min · 240 km</span></div>
+                    <div class="route-line"><strong data-en="Arrival:" data-ru="Прибытие:">Arrival:</strong> <span data-en="~3:15 PM at Ansitz Gamp" data-ru="~15:15 в Ansitz Gamp">~3:15 PM at Ansitz Gamp</span></div>
+                </div>
+                <div class="map-frame">
+                    <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Via+Salvo+D%27Acquisto+28+Castellanza+Italy&destination=Ansitz+Gamp+Klausen+South+Tyrol+Italy&mode=driving" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <a href="https://www.google.com/maps/dir/Via+Salvo+D%27Acquisto+28+Castellanza+Italy/Ansitz+Gamp+Klausen+South+Tyrol+Italy" class="btn btn-map" target="_blank" data-en="🗺️ Open Full Route in Google Maps" data-ru="🗺️ Открыть маршрут в Google Maps">🗺️ Open Full Route in Google Maps</a>
+            </div>
+
+        </div>
+    </div><!-- /day1 -->
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         DAY 2 — May 1 · Klausen → Val Gardena / Alpe di Siusi
+    ═══════════════════════════════════════════════════════ -->
+    <div class="day-card" id="day2">
+        <div class="day-header">
+            <div>
+                <div class="day-number" data-en="Day 2 · Wednesday" data-ru="День 2 · Среда">Day 2 · Wednesday</div>
+                <div class="day-title" data-en="Klausen → Val Gardena & Alpe di Siusi" data-ru="Клаузен → Валь Гардена и Альпе ди Сьюзи">Klausen → Val Gardena & Alpe di Siusi</div>
+                <div class="day-date" data-en="May 1 (Labour Day) · Drive 1h · Full day in the mountains" data-ru="1 мая (День труда) · Поездка 1ч · Полный день в горах">May 1 (Labour Day) · Drive 1h · Full day in the mountains</div>
+            </div>
+        </div>
+        <div class="day-body">
+
+            <!-- CAMPSITE -->
+            <div class="section-block">
+                <div class="section-label" data-en="🏕️ Tonight's Campsite — 3 Options" data-ru="🏕️ Кемпинг на ночь — 3 варианта">🏕️ Tonight's Campsite — 3 Options</div>
+
+                <div class="warning-box">
+                    <strong data-en="⚠️ May 1st is Italian Labour Day — a national public holiday!" data-ru="⚠️ 1 мая — итальянский День труда — национальный праздник!">⚠️ May 1st is Italian Labour Day — a national public holiday!</strong>
+                    <span data-en="Campsites in this area fill up very fast. Book Option 1 or 3 well in advance, or plan to arrive early for Option 2 (no reservation needed)." data-ru="Кемпинги в этом районе заполняются очень быстро. Забронируйте вариант 1 или 3 заранее, или планируйте приехать рано для варианта 2 (бронирование не нужно).">Campsites in this area fill up very fast. Book Option 1 or 3 well in advance, or plan to arrive early for Option 2 (no reservation needed).</span>
+                </div>
+
+                <div class="campsite-grid">
+                    <!-- Option 1 -->
+                    <div class="campsite-card top-pick">
+                        <div class="campsite-rank rank-gold" data-en="🥇 Best Views" data-ru="🥇 Лучшие виды">🥇 Best Views</div>
+                        <div class="campsite-name" style="margin-top:18px;">Camping Seiser Alm — Castelrotto, South Tyrol</div>
+                        <div class="campsite-meta">
+                            <span class="meta-tag tag-open" data-en="✅ Opens May 1st" data-ru="✅ Открывается 1 мая">✅ Opens May 1st</span>
+                            <span class="meta-tag tag-info" data-en="📍 Schlern-Rosengarten Nature Park" data-ru="📍 Природный парк Шлерн-Розенгартен">📍 Schlern-Rosengarten Nature Park</span>
+                        </div>
+                        <p class="campsite-desc" data-en="The most spectacular campsite in the area — set inside the Schlern-Rosengarten Nature Park with breathtaking direct views of the iconic Sciliar/Schlern massif. Every evening you see the famous Dolomite 'Enrosadira' red glow from your pitch. Saltwater pool, shop, and restaurant on site." data-ru="Самый впечатляющий кемпинг в районе — расположен в природном парке Шлерн-Розенгартен с захватывающими прямыми видами на массив Шлерн. Каждый вечер — знаменитое доломитовое красное свечение 'Энрозадира'. Солёный бассейн, магазин и ресторан на территории.">The most spectacular campsite in the area — set inside the Schlern-Rosengarten Nature Park with breathtaking direct views of the iconic Sciliar/Schlern massif. Every evening you see the famous Dolomite 'Enrosadira' red glow from your pitch. Saltwater pool, shop, and restaurant on site.</p>
+                        <p class="campsite-desc" style="font-size:0.82em;color:#888;" data-en="Facilities: Comfort pitches with electricity (16A), water/wastewater, TV, gas, free WiFi. Private bathrooms available as add-on." data-ru="Удобства: Комфортные места с электричеством (16A), водой/канализацией, ТВ, газом, бесплатным WiFi. Частные ванные комнаты как дополнение.">Facilities: Comfort pitches with electricity (16A), water/wastewater, TV, gas, free WiFi. Private bathrooms available as add-on.</p>
+                        <div class="campsite-links">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Camping+Seiser+Alm+Castelrotto+South+Tyrol" class="btn btn-primary" target="_blank" data-en="📍 Google Maps" data-ru="📍 Google Maps">📍 Google Maps</a>
+                            <a href="https://www.camping-seiseralm.com/en/" class="btn btn-secondary" target="_blank" data-en="🌐 Official Website" data-ru="🌐 Официальный сайт">🌐 Official Website</a>
+                        </div>
+                    </div>
+                    <!-- Option 2 -->
+                    <div class="campsite-card">
+                        <div class="campsite-rank rank-silver" data-en="🥈 No Booking Needed" data-ru="🥈 Без бронирования">🥈 No Booking Needed</div>
+                        <div class="campsite-name" style="margin-top:18px;">Camping Colfosco — Corvara, Alta Badia (1645m)</div>
+                        <div class="campsite-meta">
+                            <span class="meta-tag tag-open" data-en="✅ Open Year-Round" data-ru="✅ Открыт круглогодично">✅ Open Year-Round</span>
+                            <span class="meta-tag tag-free" data-en="🎲 First Come, First Served" data-ru="🎲 Первый пришёл — первый обслужился">🎲 First Come, First Served</span>
+                        </div>
+                        <p class="campsite-desc" data-en="A wild, unspoiled campsite at 1645m in the heart of Alta Badia — surrounded by the most dramatic Dolomite rock walls on all sides. The views of the Sella Group and Sassongher are extraordinary. Perfect backup if Option 1 is full. Arrive before early afternoon to secure a spot." data-ru="Дикий, нетронутый кемпинг на высоте 1645м в сердце Альта Бадиа — окружён самыми драматичными скальными стенами Доломитов. Виды на группу Селла и Сассонгер исключительны. Идеальный запасной вариант, если вариант 1 занят. Приезжайте до раннего пополудня.">A wild, unspoiled campsite at 1645m in the heart of Alta Badia — surrounded by the most dramatic Dolomite rock walls on all sides. The views of the Sella Group and Sassongher are extraordinary. Perfect backup if Option 1 is full. Arrive before early afternoon to secure a spot.</p>
+                        <p class="campsite-desc" style="font-size:0.82em;color:#888;" data-en="Note: If choosing Colfosco, your morning drive from Klausen goes via Bolzano → Bressanone → Badia Valley → Corvara (1h 20min, 80 km). Different direction from Val Gardena." data-ru="Примечание: При выборе Кольфоско утренняя поездка из Клаузена идёт через Больцано → Брессаноне → долина Бадиа → Корвара (1ч 20мин, 80 км). Другое направление от Валь Гардена.">Note: If choosing Colfosco, your morning drive from Klausen goes via Bolzano → Bressanone → Badia Valley → Corvara (1h 20min, 80 km). Different direction from Val Gardena.</p>
+                        <div class="campsite-links">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Camping+Colfosco+Corvara+Alta+Badia" class="btn btn-primary" target="_blank" data-en="📍 Google Maps" data-ru="📍 Google Maps">📍 Google Maps</a>
+                            <a href="https://campingcolfosco.org/en" class="btn btn-secondary" target="_blank" data-en="🌐 Official Website" data-ru="🌐 Официальный сайт">🌐 Official Website</a>
+                        </div>
+                    </div>
+                    <!-- Option 3 -->
+                    <div class="campsite-card">
+                        <div class="campsite-rank rank-bronze" data-en="🥉 Well-Equipped" data-ru="🥉 Хорошо оснащён">🥉 Well-Equipped</div>
+                        <div class="campsite-name" style="margin-top:18px;">Camping Alpe di Siusi — Siusi allo Sciliar</div>
+                        <div class="campsite-meta">
+                            <span class="meta-tag tag-open" data-en="✅ Opens May 1st" data-ru="✅ Открывается 1 мая">✅ Opens May 1st</span>
+                            <span class="meta-tag tag-info" data-en="📍 Val Gardena area" data-ru="📍 Район Валь Гардена">📍 Val Gardena area</span>
+                        </div>
+                        <p class="campsite-desc" data-en="Well-organised campsite with stunning views of the Sciliar massif. Perfect base for Alpe di Siusi, Seceda, and Val di Funes. Good facilities and restaurant on site." data-ru="Хорошо организованный кемпинг с потрясающими видами на массив Шлерн. Идеальная база для Альпе ди Сьюзи, Секеда и Валь ди Фунес. Хорошие удобства и ресторан.">Well-organised campsite with stunning views of the Sciliar massif. Perfect base for Alpe di Siusi, Seceda, and Val di Funes. Good facilities and restaurant on site.</p>
+                        <div class="campsite-links">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Camping+Alpe+di+Siusi+Siusi+allo+Sciliar" class="btn btn-primary" target="_blank" data-en="📍 Google Maps" data-ru="📍 Google Maps">📍 Google Maps</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACTIVITIES -->
+            <div class="section-block">
+                <div class="section-label" data-en="🥾 Day Activities — Val Gardena & Alpe di Siusi" data-ru="🥾 Дневные активности — Валь Гардена и Альпе ди Сьюзи">🥾 Day Activities — Val Gardena & Alpe di Siusi</div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Option A · Scenic Walk" data-ru="Вариант А · Живописная прогулка">Option A · Scenic Walk</div>
+                        <div class="act-title" data-en="Alpe di Siusi Plateau — Compaccio" data-ru="Плато Альпе ди Сьюзи — Компаччо">Alpe di Siusi Plateau — Compaccio</div>
+                        <div class="act-desc" data-en="Drive to <a href='https://www.google.com/maps/search/?api=1&query=Compaccio+Alpe+di+Siusi' class='loc' target='_blank'>Compaccio</a> on Europe's largest alpine pasture. Walk the easy lower plateau paths for immense views of the meadows with the Sassolungo and Sciliar peaks towering above. Wildflowers in bloom in early May." data-ru="Поезжайте в <a href='https://www.google.com/maps/search/?api=1&query=Compaccio+Alpe+di+Siusi' class='loc' target='_blank'>Компаччо</a> на крупнейшее альпийское пастбище Европы. Прогуляйтесь по лёгким нижним тропам с видами на луга и пики Сассолунго и Шлерн. В начале мая цветут полевые цветы.">Drive to <a href="https://www.google.com/maps/search/?api=1&query=Compaccio+Alpe+di+Siusi" class="loc" target="_blank">Compaccio</a> on Europe's largest alpine pasture. Walk the easy lower plateau paths for immense views of the meadows with the Sassolungo and Sciliar peaks towering above. Wildflowers in bloom in early May.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Option B · Valley Walk" data-ru="Вариант Б · Прогулка по долине">Option B · Valley Walk</div>
+                        <div class="act-title" data-en="Val di Funes — Giesler Alm & Santa Maddalena" data-ru="Валь ди Фунес — Гизлер Альм и Санта-Маддалена">Val di Funes — Giesler Alm & Santa Maddalena</div>
+                        <div class="act-desc" data-en="Drive to <a href='https://www.google.com/maps/search/?api=1&query=Santa+Maddalena+Val+di+Funes' class='loc' target='_blank'>Val di Funes</a> and walk the Santa Maddalena Panorama Trail for the iconic postcard view — the little church with the jagged <a href='https://www.google.com/maps/search/?api=1&query=Giesler+Alm+Val+di+Funes' class='loc' target='_blank'>Giesler Alm</a> peaks behind. One of the most photographed views in the Dolomites." data-ru="Поезжайте в <a href='https://www.google.com/maps/search/?api=1&query=Santa+Maddalena+Val+di+Funes' class='loc' target='_blank'>Валь ди Фунес</a> и прогуляйтесь по панорамной тропе Санта-Маддалена — культовый открыточный вид: маленькая церковь на фоне зубчатых пиков <a href='https://www.google.com/maps/search/?api=1&query=Giesler+Alm+Val+di+Funes' class='loc' target='_blank'>Гизлер Альм</a>. Один из самых фотографируемых видов Доломитов.">Drive to <a href="https://www.google.com/maps/search/?api=1&query=Santa+Maddalena+Val+di+Funes" class="loc" target="_blank">Val di Funes</a> and walk the Santa Maddalena Panorama Trail for the iconic postcard view — the little church with the jagged <a href="https://www.google.com/maps/search/?api=1&query=Giesler+Alm+Val+di+Funes" class="loc" target="_blank">Giesler Alm</a> peaks behind. One of the most photographed views in the Dolomites.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Option C · Village Stroll" data-ru="Вариант В · Прогулка по деревне">Option C · Village Stroll</div>
+                        <div class="act-title" data-en="Ortisei & Seceda Valley View" data-ru="Ортизей и вид на Секеда из долины">Ortisei & Seceda Valley View</div>
+                        <div class="act-desc" data-en="Explore the charming Ladin village of <a href='https://www.google.com/maps/search/?api=1&query=Ortisei+Val+Gardena' class='loc' target='_blank'>Ortisei</a>. Walk the valley floor for stunning views up to the <a href='https://www.google.com/maps/search/?api=1&query=Seceda+Val+Gardena' class='loc' target='_blank'>Seceda</a> ridgeline above. Note: cable car is closed in May." data-ru="Исследуйте очаровательную ладинскую деревню <a href='https://www.google.com/maps/search/?api=1&query=Ortisei+Val+Gardena' class='loc' target='_blank'>Ортизей</a>. Прогуляйтесь по дну долины с потрясающими видами на гребень <a href='https://www.google.com/maps/search/?api=1&query=Seceda+Val+Gardena' class='loc' target='_blank'>Секеда</a> над головой. Примечание: канатная дорога в мае закрыта.">Explore the charming Ladin village of <a href="https://www.google.com/maps/search/?api=1&query=Ortisei+Val+Gardena" class="loc" target="_blank">Ortisei</a>. Walk the valley floor for stunning views up to the <a href="https://www.google.com/maps/search/?api=1&query=Seceda+Val+Gardena" class="loc" target="_blank">Seceda</a> ridgeline above. Note: cable car is closed in May.</div>
+                    </div>
+                    <div class="activity-item weather-alt">
+                        <div class="act-label" data-en="Bad Weather · Indoor" data-ru="Плохая погода · В помещении">Bad Weather · Indoor</div>
+                        <div class="act-title" data-en="Museum Gherdëina, Ortisei" data-ru="Музей Гердëйна, Ортизей">Museum Gherdëina, Ortisei</div>
+                        <div class="act-desc" data-en="Excellent local museum in Ortisei covering the history, art, and culture of the Ladin people of Val Gardena. Perfect rainy day option." data-ru="Отличный местный музей в Ортизее, посвящённый истории, искусству и культуре ладинского народа Валь Гардена. Идеальный вариант в дождливый день.">Excellent local museum in Ortisei covering the history, art, and culture of the Ladin people of Val Gardena. Perfect rainy day option.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DINNER -->
+            <div class="section-block">
+                <div class="section-label" data-en="🍽️ Dinner in Val Gardena / Castelrotto" data-ru="🍽️ Ужин в Валь Гардена / Кастелротто">🍽️ Dinner in Val Gardena / Castelrotto</div>
+                <div class="restaurant-list">
+                    <div class="restaurant-item">
+                        <div class="restaurant-info">
+                            <div class="restaurant-name"><a href="https://www.google.com/maps/search/?api=1&query=Ristorante+Tubladel+Ortisei" class="loc" target="_blank">Ristorante Tubladel</a></div>
+                            <div class="restaurant-rating" data-en="⭐ 4.5/5 · Traditional · Ortisei" data-ru="⭐ 4.5/5 · Традиционный · Ортизей">⭐ 4.5/5 · Traditional · Ortisei</div>
+                            <div class="restaurant-desc" data-en="Authentic South Tyrolean cuisine in a beautiful historic building. Famous for Knödel, Speck platters and local wine." data-ru="Аутентичная южнотирольская кухня в красивом историческом здании. Знаменит Кнёдель, тарелками со Шпеком и местным вином.">Authentic South Tyrolean cuisine in a beautiful historic building. Famous for Knödel, Speck platters and local wine.</div>
+                        </div>
+                    </div>
+                    <div class="restaurant-item">
+                        <div class="restaurant-info">
+                            <div class="restaurant-name"><a href="https://www.google.com/maps/search/?api=1&query=Turonda+Pizza+Bistrot+Ortisei" class="loc" target="_blank">Turonda Pizza Bistrot</a></div>
+                            <div class="restaurant-rating" data-en="⭐ 4.3/5 · Pizza · Ortisei" data-ru="⭐ 4.3/5 · Пицца · Ортизей">⭐ 4.3/5 · Pizza · Ortisei</div>
+                            <div class="restaurant-desc" data-en="Great pizzas and casual atmosphere. Perfect if you want something lighter after a day of hiking." data-ru="Отличные пиццы и непринуждённая атмосфера. Идеально, если хочется чего-то лёгкого после дня походов.">Great pizzas and casual atmosphere. Perfect if you want something lighter after a day of hiking.</div>
+                        </div>
+                    </div>
+                    <div class="restaurant-item">
+                        <div class="restaurant-info">
+                            <div class="restaurant-name"><a href="https://www.google.com/maps/search/?api=1&query=Anna+Stuben+Ortisei" class="loc" target="_blank">Anna Stuben</a></div>
+                            <div class="restaurant-rating" data-en="⭐ Michelin-listed · Fine dining · Ortisei" data-ru="⭐ Мишлен · Изысканная кухня · Ортизей">⭐ Michelin-listed · Fine dining · Ortisei</div>
+                            <div class="restaurant-desc" data-en="For a special evening — one of the finest restaurants in Val Gardena. Book in advance." data-ru="Для особенного вечера — один из лучших ресторанов Валь Гардена. Бронируйте заранее.">For a special evening — one of the finest restaurants in Val Gardena. Book in advance.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAP -->
+            <div class="section-block map-section">
+                <div class="section-label" data-en="🗺️ Morning Drive: Klausen → Val Gardena" data-ru="🗺️ Утренняя поездка: Клаузен → Валь Гардена">🗺️ Morning Drive: Klausen → Val Gardena</div>
+                <div class="map-route-info">
+                    <div class="route-line"><strong data-en="Departure:" data-ru="Отправление:">Departure:</strong> <span data-en="9:00 AM from Ansitz Gamp, Klausen" data-ru="9:00 из Ansitz Gamp, Клаузен">9:00 AM from Ansitz Gamp, Klausen</span></div>
+                    <div class="route-line"><strong data-en="Route A (Campsite 1 or 3):" data-ru="Маршрут A (Кемпинг 1 или 3):">Route A (Campsite 1 or 3):</strong> <span class="route-time" data-en="Klausen → A22 → Bolzano → Ponte Gardena → Ortisei · 1h · 65 km" data-ru="Клаузен → A22 → Больцано → Понте Гардена → Ортизей · 1ч · 65 км">Klausen → A22 → Bolzano → Ponte Gardena → Ortisei · 1h · 65 km</span></div>
+                    <div class="route-line"><strong data-en="Route B (Campsite 2 — Colfosco):" data-ru="Маршрут B (Кемпинг 2 — Кольфоско):">Route B (Campsite 2 — Colfosco):</strong> <span class="route-time" data-en="Klausen → A22 → Bolzano → Bressanone → Badia Valley → Corvara · 1h 20min · 80 km" data-ru="Клаузен → A22 → Больцано → Брессаноне → долина Бадиа → Корвара · 1ч 20мин · 80 км">Klausen → A22 → Bolzano → Bressanone → Badia Valley → Corvara · 1h 20min · 80 km</span></div>
+                </div>
+                <div class="map-dual">
+                    <div>
+                        <div class="map-dual-label" data-en="🗺️ Route A — Klausen → Val Gardena (Campsite 1 or 3)" data-ru="🗺️ Маршрут A — Клаузен → Валь Гардена (Кемпинг 1 или 3)">🗺️ Route A — Klausen → Val Gardena (Campsite 1 or 3)</div>
+                        <div class="map-frame">
+                            <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Ansitz+Gamp+Klausen+South+Tyrol+Italy&destination=Ortisei+Val+Gardena+Italy&mode=driving" allowfullscreen loading="lazy"></iframe>
+                        </div>
+                        <a href="https://www.google.com/maps/dir/Ansitz+Gamp+Klausen+South+Tyrol+Italy/Ortisei+Val+Gardena+Italy" class="btn btn-map" target="_blank" data-en="🗺️ Open Route A" data-ru="🗺️ Открыть маршрут A">🗺️ Open Route A</a>
+                    </div>
+                    <div>
+                        <div class="map-dual-label" data-en="🗺️ Route B — Klausen → Colfosco (Campsite 2)" data-ru="🗺️ Маршрут B — Клаузен → Кольфоско (Кемпинг 2)">🗺️ Route B — Klausen → Colfosco (Campsite 2)</div>
+                        <div class="map-frame">
+                            <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Ansitz+Gamp+Klausen+South+Tyrol+Italy&destination=Camping+Colfosco+Corvara+Alta+Badia+Italy&mode=driving" allowfullscreen loading="lazy"></iframe>
+                        </div>
+                        <a href="https://www.google.com/maps/dir/Ansitz+Gamp+Klausen+South+Tyrol+Italy/Camping+Colfosco+Corvara+Alta+Badia+Italy" class="btn btn-map" target="_blank" data-en="🗺️ Open Route B" data-ru="🗺️ Открыть маршрут B">🗺️ Open Route B</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- /day2 -->
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         DAY 3 — May 2 · Val Gardena → Dobbiaco (Lago di Dobbiaco)
+    ═══════════════════════════════════════════════════════ -->
+    <div class="day-card" id="day3">
+        <div class="day-header">
+            <div>
+                <div class="day-number" data-en="Day 3 · Thursday" data-ru="День 3 · Четверг">Day 3 · Thursday</div>
+                <div class="day-title" data-en="Val Gardena → Lago di Dobbiaco" data-ru="Валь Гардена → Лаго ди Доббьяко">Val Gardena → Lago di Dobbiaco</div>
+                <div class="day-date" data-en="May 2 · Drive 1h 30min · Tre Cime, Cadini & Lago di Braies territory" data-ru="2 мая · Поездка 1ч 30мин · Территория Тре Чиме, Кадини и Лаго ди Брайес">May 2 · Drive 1h 30min · Tre Cime, Cadini & Lago di Braies territory</div>
+            </div>
+        </div>
+        <div class="day-body">
+
+            <!-- CAMPSITE -->
+            <div class="section-block">
+                <div class="section-label" data-en="🏕️ Tonight's Campsite" data-ru="🏕️ Кемпинг на ночь">🏕️ Tonight's Campsite</div>
+                <div class="campsite-grid">
+                    <div class="campsite-card top-pick">
+                        <div class="campsite-rank rank-only" data-en="Your Base" data-ru="Ваша база">Your Base</div>
+                        <div class="campsite-name" style="margin-top:18px;">Camping Toblacher See — Lago di Dobbiaco, South Tyrol</div>
+                        <div class="campsite-meta">
+                            <span class="meta-tag tag-open" data-en="✅ Open from April" data-ru="✅ Открыт с апреля">✅ Open from April</span>
+                            <span class="meta-tag tag-info" data-en="📍 Directly on the lake" data-ru="📍 Прямо на берегу озера">📍 Directly on the lake</span>
+                            <span class="meta-tag tag-info" data-en="⏱ Arrive ~5:00 PM" data-ru="⏱ Прибытие ~17:00">⏱ Arrive ~5:00 PM</span>
+                        </div>
+                        <p class="campsite-desc" data-en="Spectacular lakeside campsite directly on Lago di Dobbiaco — a pristine emerald lake reflecting the surrounding Dolomite peaks. Strategically positioned for an early morning sunrise drive to Lago di Braies (only 20 min away) and day trips to Tre Cime di Lavaredo and Cadini di Misurina." data-ru="Великолепный кемпинг прямо на берегу Лаго ди Доббьяко — нетронутого изумрудного озера, отражающего окружающие доломитовые пики. Стратегически расположен для раннего утреннего восхода на Лаго ди Брайес (всего 20 мин) и дневных поездок к Тре Чиме ди Лаваредо и Кадини ди Мизурина.">Spectacular lakeside campsite directly on Lago di Dobbiaco — a pristine emerald lake reflecting the surrounding Dolomite peaks. Strategically positioned for an early morning sunrise drive to Lago di Braies (only 20 min away) and day trips to Tre Cime di Lavaredo and Cadini di Misurina.</p>
+                        <p class="campsite-desc" style="font-size:0.82em;color:#888;" data-en="Facilities: Direct lake access, restaurant Seeschupfe, wine cellar, modern sanitary block, electricity, WiFi." data-ru="Удобства: Прямой доступ к озеру, ресторан Seeschupfe, винный погреб, современный санузел, электричество, WiFi.">Facilities: Direct lake access, restaurant Seeschupfe, wine cellar, modern sanitary block, electricity, WiFi.</p>
+                        <div class="campsite-links">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Camping+Toblacher+See+Lago+di+Dobbiaco" class="btn btn-primary" target="_blank" data-en="📍 Google Maps" data-ru="📍 Google Maps">📍 Google Maps</a>
+                            <a href="https://www.toblachersee.com/en/" class="btn btn-secondary" target="_blank" data-en="🌐 Official Website" data-ru="🌐 Официальный сайт">🌐 Official Website</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACTIVITIES -->
+            <div class="section-block">
+                <div class="section-label" data-en="🥾 Day Activities — En Route & Around Dobbiaco" data-ru="🥾 Дневные активности — по дороге и вокруг Доббьяко">🥾 Day Activities — En Route & Around Dobbiaco</div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Option A · Scenic Drive + Walk" data-ru="Вариант А · Живописная поездка + прогулка">Option A · Scenic Drive + Walk</div>
+                        <div class="act-title" data-en="Prato Piazza — Panoramic Plateau" data-ru="Прато Пьяцца — Панорамное плато">Prato Piazza — Panoramic Plateau</div>
+                        <div class="act-desc" data-en="Drive up to <a href='https://www.google.com/maps/search/?api=1&query=Prato+Piazza+Dolomites' class='loc' target='_blank'>Prato Piazza</a> (check road conditions in May — may need chains). A high plateau with one of the most dramatic views of Tre Cime di Lavaredo. Easy flat walk across the meadow." data-ru="Поезжайте на <a href='https://www.google.com/maps/search/?api=1&query=Prato+Piazza+Dolomites' class='loc' target='_blank'>Прато Пьяцца</a> (проверьте условия дороги в мае — могут понадобиться цепи). Высокое плато с одним из самых драматичных видов на Тре Чиме ди Лаваредо. Лёгкая прогулка по лугу.">Drive up to <a href="https://www.google.com/maps/search/?api=1&query=Prato+Piazza+Dolomites" class="loc" target="_blank">Prato Piazza</a> (check road conditions in May — may need chains). A high plateau with one of the most dramatic views of Tre Cime di Lavaredo. Easy flat walk across the meadow.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Option B · Lake Walk" data-ru="Вариант Б · Прогулка у озера">Option B · Lake Walk</div>
+                        <div class="act-title" data-en="Lago di Dobbiaco Circuit" data-ru="Маршрут вокруг Лаго ди Доббьяко">Lago di Dobbiaco Circuit</div>
+                        <div class="act-desc" data-en="Walk the easy 5 km circuit around <a href='https://www.google.com/maps/search/?api=1&query=Lago+di+Dobbiaco' class='loc' target='_blank'>Lago di Dobbiaco</a> after arriving at camp. The lake is surrounded by forest and mountains — a peaceful evening walk with stunning reflections." data-ru="Прогуляйтесь по лёгкому маршруту 5 км вокруг <a href='https://www.google.com/maps/search/?api=1&query=Lago+di+Dobbiaco' class='loc' target='_blank'>Лаго ди Доббьяко</a> после прибытия в лагерь. Озеро окружено лесом и горами — спокойная вечерняя прогулка с потрясающими отражениями.">Walk the easy 5 km circuit around <a href="https://www.google.com/maps/search/?api=1&query=Lago+di+Dobbiaco" class="loc" target="_blank">Lago di Dobbiaco</a> after arriving at camp. The lake is surrounded by forest and mountains — a peaceful evening walk with stunning reflections.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Option C · Town Visit" data-ru="Вариант В · Посещение города">Option C · Town Visit</div>
+                        <div class="act-title" data-en="Dobbiaco Town & Gustav Mahler Museum" data-ru="Город Доббьяко и Музей Густава Малера">Dobbiaco Town & Gustav Mahler Museum</div>
+                        <div class="act-desc" data-en="Explore the charming town of <a href='https://www.google.com/maps/search/?api=1&query=Dobbiaco+town+centre' class='loc' target='_blank'>Dobbiaco</a>. Visit the Grand Hotel where Gustav Mahler composed his 9th Symphony. Lovely baroque church and traditional South Tyrolean architecture." data-ru="Исследуйте очаровательный город <a href='https://www.google.com/maps/search/?api=1&query=Dobbiaco+town+centre' class='loc' target='_blank'>Доббьяко</a>. Посетите Гранд-отель, где Густав Малер сочинял свою 9-ю симфонию. Прекрасная барочная церковь и традиционная южнотирольская архитектура.">Explore the charming town of <a href="https://www.google.com/maps/search/?api=1&query=Dobbiaco+town+centre" class="loc" target="_blank">Dobbiaco</a>. Visit the Grand Hotel where Gustav Mahler composed his 9th Symphony. Lovely baroque church and traditional South Tyrolean architecture.</div>
+                    </div>
+                    <div class="activity-item weather-alt">
+                        <div class="act-label" data-en="Bad Weather · Indoor" data-ru="Плохая погода · В помещении">Bad Weather · Indoor</div>
+                        <div class="act-title" data-en="Dobbiaco Cultural Centre" data-ru="Культурный центр Доббьяко">Dobbiaco Cultural Centre</div>
+                        <div class="act-desc" data-en="The Grand Hotel Dobbiaco hosts regular concerts and cultural events. Check the programme for May 2nd." data-ru="Гранд-отель Доббьяко регулярно проводит концерты и культурные мероприятия. Проверьте программу на 2 мая.">The Grand Hotel Dobbiaco hosts regular concerts and cultural events. Check the programme for May 2nd.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DINNER -->
+            <div class="section-block">
+                <div class="section-label" data-en="🍽️ Dinner in Dobbiaco" data-ru="🍽️ Ужин в Доббьяко">🍽️ Dinner in Dobbiaco</div>
+                <div class="restaurant-list">
+                    <div class="restaurant-item">
+                        <div class="restaurant-info">
+                            <div class="restaurant-name"><a href="https://www.google.com/maps/search/?api=1&query=Kugler+Speckstube+Dobbiaco" class="loc" target="_blank">Kugler's Speckstube</a></div>
+                            <div class="restaurant-rating" data-en="⭐ 4.5/5 (1,054 reviews) · Dobbiaco" data-ru="⭐ 4.5/5 (1 054 отзыва) · Доббьяко">⭐ 4.5/5 (1,054 reviews) · Dobbiaco</div>
+                            <div class="restaurant-desc" data-en="Famous for Speck and traditional Tyrolean specialties. A local institution. Must-try: Speck platter and Knödel soup." data-ru="Знаменит Шпеком и традиционными тирольскими блюдами. Местная легенда. Обязательно попробуйте: тарелку Шпека и суп с Кнёдель.">Famous for Speck and traditional Tyrolean specialties. A local institution. Must-try: Speck platter and Knödel soup.</div>
+                        </div>
+                    </div>
+                    <div class="restaurant-item">
+                        <div class="restaurant-info">
+                            <div class="restaurant-name"><a href="https://www.google.com/maps/search/?api=1&query=Gasthaus+Weber+Dobbiaco" class="loc" target="_blank">Gasthaus Weber</a></div>
+                            <div class="restaurant-rating" data-en="⭐ 4.2/5 (1,099 reviews) · Dobbiaco" data-ru="⭐ 4.2/5 (1 099 отзывов) · Доббьяко">⭐ 4.2/5 (1,099 reviews) · Dobbiaco</div>
+                            <div class="restaurant-desc" data-en="Local favourite with hearty mountain food. Cozy atmosphere, good value." data-ru="Местный фаворит с сытной горной едой. Уютная атмосфера, хорошее соотношение цены и качества.">Local favourite with hearty mountain food. Cozy atmosphere, good value.</div>
+                        </div>
+                    </div>
+                    <div class="restaurant-item">
+                        <div class="restaurant-info">
+                            <div class="restaurant-name"><a href="https://www.google.com/maps/search/?api=1&query=Restaurant+Seeschupfe+Lago+di+Dobbiaco" class="loc" target="_blank">Restaurant Seeschupfe</a></div>
+                            <div class="restaurant-rating" data-en="⭐ On-site at Camping Toblacher See" data-ru="⭐ На территории Camping Toblacher See">⭐ On-site at Camping Toblacher See</div>
+                            <div class="restaurant-desc" data-en="The campsite's own lakeside restaurant. Dine with views directly over Lago di Dobbiaco. Convenient and atmospheric." data-ru="Собственный ресторан кемпинга у озера. Ужинайте с видом прямо на Лаго ди Доббьяко. Удобно и атмосферно.">The campsite's own lakeside restaurant. Dine with views directly over Lago di Dobbiaco. Convenient and atmospheric.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAP -->
+            <div class="section-block map-section">
+                <div class="section-label" data-en="🗺️ Drive: Val Gardena → Camping Toblacher See" data-ru="🗺️ Поездка: Валь Гардена → Camping Toblacher See">🗺️ Drive: Val Gardena → Camping Toblacher See</div>
+                <div class="map-route-info">
+                    <div class="route-line"><strong data-en="Departure:" data-ru="Отправление:">Departure:</strong> <span data-en="~3:30 PM from Val Gardena" data-ru="~15:30 из Валь Гардена">~3:30 PM from Val Gardena</span></div>
+                    <div class="route-line"><strong data-en="Route:" data-ru="Маршрут:">Route:</strong> <span data-en="Ortisei → Ponte Gardena → A22 → Bressanone → Val Pusteria → Dobbiaco" data-ru="Ортизей → Понте Гардена → A22 → Брессаноне → Валь Пустерия → Доббьяко">Ortisei → Ponte Gardena → A22 → Bressanone → Val Pusteria → Dobbiaco</span></div>
+                    <div class="route-line"><strong data-en="Drive Time:" data-ru="Время в пути:">Drive Time:</strong> <span class="route-time" data-en="1h 30min · 75 km" data-ru="1ч 30мин · 75 км">1h 30min · 75 km</span></div>
+                    <div class="route-line"><strong data-en="Arrival:" data-ru="Прибытие:">Arrival:</strong> <span data-en="~5:00 PM at Camping Toblacher See" data-ru="~17:00 в Camping Toblacher See">~5:00 PM at Camping Toblacher See</span></div>
+                </div>
+                <div class="map-frame">
+                    <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Ortisei+Val+Gardena+Italy&destination=Camping+Toblacher+See+Dobbiaco+Italy&mode=driving" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <a href="https://www.google.com/maps/dir/Ortisei+Val+Gardena+Italy/Camping+Toblacher+See+Dobbiaco+Italy" class="btn btn-map" target="_blank" data-en="🗺️ Open Full Route in Google Maps" data-ru="🗺️ Открыть маршрут в Google Maps">🗺️ Open Full Route in Google Maps</a>
+            </div>
+
+        </div>
+    </div><!-- /day3 -->
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         DAY 4 — May 3 · Dobbiaco → Lago di Braies (sunrise) → Cortina → Val di Fassa
+    ═══════════════════════════════════════════════════════ -->
+    <div class="day-card" id="day4">
+        <div class="day-header">
+            <div>
+                <div class="day-number" data-en="Day 4 · Friday" data-ru="День 4 · Пятница">Day 4 · Friday</div>
+                <div class="day-title" data-en="Dobbiaco → Lago di Braies → Cortina → Val di Fassa" data-ru="Доббьяко → Лаго ди Брайес → Кортина → Валь ди Фасса">Dobbiaco → Lago di Braies → Cortina → Val di Fassa</div>
+                <div class="day-date" data-en="May 3 · Big day — Sunrise, Tre Cime views, Passo Giau drive" data-ru="3 мая · Большой день — Рассвет, виды Тре Чиме, поездка через Пассо Джау">May 3 · Big day — Sunrise, Tre Cime views, Passo Giau drive</div>
+            </div>
+        </div>
+        <div class="day-body">
+
+            <!-- CAMPSITE -->
+            <div class="section-block">
+                <div class="section-label" data-en="🏕️ Tonight's Campsite" data-ru="🏕️ Кемпинг на ночь">🏕️ Tonight's Campsite</div>
+                <div class="campsite-grid">
+                    <div class="campsite-card top-pick">
+                        <div class="campsite-rank rank-only" data-en="Your Base" data-ru="Ваша база">Your Base</div>
+                        <div class="campsite-name" style="margin-top:18px;">Camping Vidor — Pozza di Fassa, Val di Fassa</div>
+                        <div class="campsite-meta">
+                            <span class="meta-tag tag-open" data-en="✅ Open in May" data-ru="✅ Открыт в мае">✅ Open in May</span>
+                            <span class="meta-tag tag-info" data-en="📍 Val di Fassa · Catinaccio/Rosengarten views" data-ru="📍 Валь ди Фасса · Виды на Катиначчо/Розенгартен">📍 Val di Fassa · Catinaccio/Rosengarten views</span>
+                            <span class="meta-tag tag-info" data-en="⏱ Arrive ~5:00 PM" data-ru="⏱ Прибытие ~17:00">⏱ Arrive ~5:00 PM</span>
+                        </div>
+                        <p class="campsite-desc" data-en="Perfectly positioned in Val di Fassa for your last mountain night. Stunning views of the Catinaccio/Rosengarten massif — famous for its fiery red glow at sunset. Excellent facilities including an aquatic park. Ideal base for the morning visit to Lago di Carezza before heading back to Milan." data-ru="Идеально расположен в Валь ди Фасса для вашей последней горной ночи. Потрясающие виды на массив Катиначчо/Розенгартен — знаменитый огненно-красным свечением на закате. Отличные удобства, включая аквапарк. Идеальная база для утреннего посещения Лаго ди Кареца перед возвращением в Милан.">Perfectly positioned in Val di Fassa for your last mountain night. Stunning views of the Catinaccio/Rosengarten massif — famous for its fiery red glow at sunset. Excellent facilities including an aquatic park. Ideal base for the morning visit to Lago di Carezza before heading back to Milan.</p>
+                        <div class="campsite-links">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Camping+Vidor+Pozza+di+Fassa" class="btn btn-primary" target="_blank" data-en="📍 Google Maps" data-ru="📍 Google Maps">📍 Google Maps</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACTIVITIES -->
+            <div class="section-block">
+                <div class="section-label" data-en="🥾 Day Activities — Sunrise, Tre Cime & Cortina" data-ru="🥾 Дневные активности — Рассвет, Тре Чиме и Кортина">🥾 Day Activities — Sunrise, Tre Cime & Cortina</div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="act-label" data-en="🌅 5:00 AM · Sunrise Mission" data-ru="🌅 5:00 · Миссия рассвет">🌅 5:00 AM · Sunrise Mission</div>
+                        <div class="act-title" data-en="Lago di Braies at Sunrise" data-ru="Лаго ди Брайес на рассвете">Lago di Braies at Sunrise</div>
+                        <div class="act-desc" data-en="Drive to <a href='https://www.google.com/maps/search/?api=1&query=Lago+di+Braies+Pragser+Wildsee' class='loc' target='_blank'>Lago di Braies</a> — only 20 min from your campsite. Arrive before sunrise to secure a spot on the shore. Walk the easy 3.5 km circuit around the lake as the first golden light hits the Croda del Becco peak. One of the most magical moments of the entire trip." data-ru="Поезжайте к <a href='https://www.google.com/maps/search/?api=1&query=Lago+di+Braies+Pragser+Wildsee' class='loc' target='_blank'>Лаго ди Брайес</a> — всего 20 мин от вашего кемпинга. Приезжайте до восхода, чтобы занять место на берегу. Прогуляйтесь по лёгкому маршруту 3,5 км вокруг озера, когда первый золотой свет коснётся пика Крода дель Беккo. Один из самых волшебных моментов всей поездки.">Drive to <a href="https://www.google.com/maps/search/?api=1&query=Lago+di+Braies+Pragser+Wildsee" class="loc" target="_blank">Lago di Braies</a> — only 20 min from your campsite. Arrive before sunrise to secure a spot on the shore. Walk the easy 3.5 km circuit around the lake as the first golden light hits the Croda del Becco peak. One of the most magical moments of the entire trip.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Option A · Morning · Iconic Views" data-ru="Вариант А · Утро · Культовые виды">Option A · Morning · Iconic Views</div>
+                        <div class="act-title" data-en="Lago di Misurina + Tre Cime & Cadini di Misurina Views" data-ru="Лаго ди Мизурина + Виды на Тре Чиме и Кадини ди Мизурина">Lago di Misurina + Tre Cime & Cadini di Misurina Views</div>
+                        <div class="act-desc" data-en="After sunrise, drive to <a href='https://www.google.com/maps/search/?api=1&query=Lago+di+Misurina' class='loc' target='_blank'>Lago di Misurina</a>. From the lake you get a breathtaking view of the south face of <a href='https://www.google.com/maps/search/?api=1&query=Tre+Cime+di+Lavaredo' class='loc' target='_blank'>Tre Cime di Lavaredo</a> and the jagged <a href='https://www.google.com/maps/search/?api=1&query=Cadini+di+Misurina' class='loc' target='_blank'>Cadini di Misurina</a> peaks. Walk the easy lake circuit (3 km). Note: the toll road to Tre Cime may be snowy/closed — check before going." data-ru="После рассвета поезжайте к <a href='https://www.google.com/maps/search/?api=1&query=Lago+di+Misurina' class='loc' target='_blank'>Лаго ди Мизурина</a>. С озера открывается захватывающий вид на южную стену <a href='https://www.google.com/maps/search/?api=1&query=Tre+Cime+di+Lavaredo' class='loc' target='_blank'>Тре Чиме ди Лаваредо</a> и зубчатые пики <a href='https://www.google.com/maps/search/?api=1&query=Cadini+di+Misurina' class='loc' target='_blank'>Кадини ди Мизурина</a>. Лёгкий маршрут вокруг озера (3 км). Примечание: платная дорога к Тре Чиме может быть заснежена/закрыта — проверьте заранее.">After sunrise, drive to <a href="https://www.google.com/maps/search/?api=1&query=Lago+di+Misurina" class="loc" target="_blank">Lago di Misurina</a>. From the lake you get a breathtaking view of the south face of <a href="https://www.google.com/maps/search/?api=1&query=Tre+Cime+di+Lavaredo" class="loc" target="_blank">Tre Cime di Lavaredo</a> and the jagged <a href="https://www.google.com/maps/search/?api=1&query=Cadini+di+Misurina" class="loc" target="_blank">Cadini di Misurina</a> peaks. Walk the easy lake circuit (3 km). Note: the toll road to Tre Cime may be snowy/closed — check before going.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Option B · Late Morning · Town" data-ru="Вариант Б · Позднее утро · Город">Option B · Late Morning · Town</div>
+                        <div class="act-title" data-en="Cortina d'Ampezzo — Stroll & Lunch" data-ru="Кортина д'Ампеццо — Прогулка и обед">Cortina d'Ampezzo — Stroll & Lunch</div>
+                        <div class="act-desc" data-en="Drive to <a href='https://www.google.com/maps/search/?api=1&query=Cortina+d%27Ampezzo' class='loc' target='_blank'>Cortina d'Ampezzo</a> — the 'Queen of the Dolomites'. Walk the pedestrianised Corso Italia, browse the boutiques, and enjoy lunch surrounded by the famous Tofane and Cristallo peaks." data-ru="Поезжайте в <a href='https://www.google.com/maps/search/?api=1&query=Cortina+d%27Ampezzo' class='loc' target='_blank'>Кортина д'Ампеццо</a> — 'Королеву Доломитов'. Прогуляйтесь по пешеходному Корсо Италия, зайдите в бутики и пообедайте в окружении знаменитых пиков Тофане и Кристалло.">Drive to <a href="https://www.google.com/maps/search/?api=1&query=Cortina+d%27Ampezzo" class="loc" target="_blank">Cortina d'Ampezzo</a> — the 'Queen of the Dolomites'. Walk the pedestrianised Corso Italia, browse the boutiques, and enjoy lunch surrounded by the famous Tofane and Cristallo peaks.</div>
+                    </div>
+                    <div class="activity-item weather-alt">
+                        <div class="act-label" data-en="Bad Weather · Scenic Drive" data-ru="Плохая погода · Живописная поездка">Bad Weather · Scenic Drive</div>
+                        <div class="act-title" data-en="Great Dolomite Road (SS48) Drive" data-ru="Поездка по Большой Доломитовой дороге (SS48)">Great Dolomite Road (SS48) Drive</div>
+                        <div class="act-desc" data-en="Even in bad weather, the drive from Cortina through Passo Falzarego and Passo Pordoi to Val di Fassa is spectacular. Stop at <a href='https://www.google.com/maps/search/?api=1&query=Passo+Pordoi' class='loc' target='_blank'>Passo Pordoi</a> to see the famous 'Coffin Cable Car' from the pass." data-ru="Даже в плохую погоду поездка из Кортины через Пассо Фальзарего и Пассо Пордои в Валь ди Фасса впечатляет. Остановитесь на <a href='https://www.google.com/maps/search/?api=1&query=Passo+Pordoi' class='loc' target='_blank'>Пассо Пордои</a>, чтобы увидеть знаменитую 'Канатную дорогу-гроб' с перевала.">Even in bad weather, the drive from Cortina through Passo Falzarego and Passo Pordoi to Val di Fassa is spectacular. Stop at <a href="https://www.google.com/maps/search/?api=1&query=Passo+Pordoi" class="loc" target="_blank">Passo Pordoi</a> to see the famous 'Coffin Cable Car' from the pass.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DINNER -->
+            <div class="section-block">
+                <div class="section-label" data-en="🍽️ Lunch in Cortina / Dinner in Val di Fassa" data-ru="🍽️ Обед в Кортине / Ужин в Валь ди Фасса">🍽️ Lunch in Cortina / Dinner in Val di Fassa</div>
+                <div class="restaurant-list">
+                    <div class="restaurant-item">
+                        <div class="restaurant-info">
+                            <div class="restaurant-name"><a href="https://www.google.com/maps/search/?api=1&query=Ristorante+Al+Camin+Cortina+d%27Ampezzo" class="loc" target="_blank">Ristorante Al Camin</a> <span style="font-size:0.8em;color:#888;" data-en="· Lunch · Cortina" data-ru="· Обед · Кортина">· Lunch · Cortina</span></div>
+                            <div class="restaurant-rating" data-en="⭐ 4.4/5 · Cozy & local" data-ru="⭐ 4.4/5 · Уютный и местный">⭐ 4.4/5 · Cozy & local</div>
+                            <div class="restaurant-desc" data-en="Cozy atmosphere with excellent local Ampezzano dishes. Great for a warm lunch after the early morning." data-ru="Уютная атмосфера с отличными местными блюдами Ампеццо. Отлично для тёплого обеда после раннего утра.">Cozy atmosphere with excellent local Ampezzano dishes. Great for a warm lunch after the early morning.</div>
+                        </div>
+                    </div>
+                    <div class="restaurant-item">
+                        <div class="restaurant-info">
+                            <div class="restaurant-name"><a href="https://www.google.com/maps/search/?api=1&query=SanBrite+Cortina+d%27Ampezzo" class="loc" target="_blank">SanBrite</a> <span style="font-size:0.8em;color:#888;" data-en="· Lunch · Cortina" data-ru="· Обед · Кортина">· Lunch · Cortina</span></div>
+                            <div class="restaurant-rating" data-en="⭐ Michelin-listed · Fine dining" data-ru="⭐ Мишлен · Изысканная кухня">⭐ Michelin-listed · Fine dining</div>
+                            <div class="restaurant-desc" data-en="Farm-to-table fine dining in a stunning mountain setting. Book in advance for a special lunch." data-ru="Изысканная кухня 'от фермы к столу' в потрясающих горных условиях. Бронируйте заранее для особенного обеда.">Farm-to-table fine dining in a stunning mountain setting. Book in advance for a special lunch.</div>
+                        </div>
+                    </div>
+                    <div class="restaurant-item">
+                        <div class="restaurant-info">
+                            <div class="restaurant-name"><a href="https://www.google.com/maps/search/?api=1&query=Malga+Aloch+Val+di+Fassa" class="loc" target="_blank">Malga Aloch</a> <span style="font-size:0.8em;color:#888;" data-en="· Dinner · Val di Fassa" data-ru="· Ужин · Валь ди Фасса">· Dinner · Val di Fassa</span></div>
+                            <div class="restaurant-rating" data-en="⭐ 4.3/5 (1,161 reviews) · Mountain hut" data-ru="⭐ 4.3/5 (1 161 отзыв) · Горная хижина">⭐ 4.3/5 (1,161 reviews) · Mountain hut</div>
+                            <div class="restaurant-desc" data-en="Mountain hut with stunning views. Traditional Ladin cuisine — try Canederli and Strangolapreti." data-ru="Горная хижина с потрясающими видами. Традиционная ладинская кухня — попробуйте Канедерли и Странголапрети.">Mountain hut with stunning views. Traditional Ladin cuisine — try Canederli and Strangolapreti.</div>
+                        </div>
+                    </div>
+                    <div class="restaurant-item">
+                        <div class="restaurant-info">
+                            <div class="restaurant-name"><a href="https://www.google.com/maps/search/?api=1&query=Ramon+Pizzeria+Pozza+di+Fassa" class="loc" target="_blank">Ramon</a> <span style="font-size:0.8em;color:#888;" data-en="· Dinner · Pozza di Fassa" data-ru="· Ужин · Поцца ди Фасса">· Dinner · Pozza di Fassa</span></div>
+                            <div class="restaurant-rating" data-en="⭐ Local favourite · Best pizza in the valley" data-ru="⭐ Местный фаворит · Лучшая пицца в долине">⭐ Local favourite · Best pizza in the valley</div>
+                            <div class="restaurant-desc" data-en="Legendary local pizzeria. Famous for the best pizza in Val di Fassa. Casual and fun." data-ru="Легендарная местная пиццерия. Знаменита лучшей пиццей в Валь ди Фасса. Непринуждённо и весело.">Legendary local pizzeria. Famous for the best pizza in Val di Fassa. Casual and fun.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAP -->
+            <div class="section-block map-section">
+                <div class="section-label" data-en="🗺️ Today's Route: Dobbiaco → Braies → Cortina → Passo Giau → Val di Fassa" data-ru="🗺️ Сегодняшний маршрут: Доббьяко → Брайес → Кортина → Пассо Джау → Валь ди Фасса">🗺️ Today's Route: Dobbiaco → Braies → Cortina → Passo Giau → Val di Fassa</div>
+                <div class="map-route-info">
+                    <div class="route-line"><strong data-en="5:00 AM:" data-ru="5:00:">5:00 AM:</strong> <span data-en="Dobbiaco → Lago di Braies (20 min)" data-ru="Доббьяко → Лаго ди Брайес (20 мин)">Dobbiaco → Lago di Braies (20 min)</span></div>
+                    <div class="route-line"><strong data-en="~8:30 AM:" data-ru="~8:30:">~8:30 AM:</strong> <span data-en="Lago di Braies → Lago di Misurina (40 min)" data-ru="Лаго ди Брайес → Лаго ди Мизурина (40 мин)">Lago di Braies → Lago di Misurina (40 min)</span></div>
+                    <div class="route-line"><strong data-en="~11:00 AM:" data-ru="~11:00:">~11:00 AM:</strong> <span data-en="Misurina → Cortina d'Ampezzo (30 min)" data-ru="Мизурина → Кортина д'Ампеццо (30 мин)">Misurina → Cortina d'Ampezzo (30 min)</span></div>
+                    <div class="route-line"><strong data-en="~3:00 PM:" data-ru="~15:00:">~3:00 PM:</strong> <span data-en="Cortina → Passo Giau → Val di Fassa (2h via scenic route)" data-ru="Кортина → Пассо Джау → Валь ди Фасса (2ч по живописному маршруту)">Cortina → Passo Giau → Val di Fassa (2h via scenic route)</span></div>
+                    <div class="route-line"><strong data-en="Arrival:" data-ru="Прибытие:">Arrival:</strong> <span class="route-time" data-en="~5:00 PM at Camping Vidor, Pozza di Fassa" data-ru="~17:00 в Camping Vidor, Поцца ди Фасса">~5:00 PM at Camping Vidor, Pozza di Fassa</span></div>
+                </div>
+                <div class="map-dual">
+                    <div>
+                        <div class="map-dual-label" data-en="🌅 Early Morning: Dobbiaco → Lago di Braies" data-ru="🌅 Раннее утро: Доббьяко → Лаго ди Брайес">🌅 Early Morning: Dobbiaco → Lago di Braies</div>
+                        <div class="map-frame">
+                            <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Camping+Toblacher+See+Dobbiaco+Italy&destination=Lago+di+Braies+Pragser+Wildsee+Italy&mode=driving" allowfullscreen loading="lazy"></iframe>
+                        </div>
+                        <a href="https://www.google.com/maps/dir/Camping+Toblacher+See+Dobbiaco+Italy/Lago+di+Braies+Pragser+Wildsee+Italy" class="btn btn-map" target="_blank" data-en="🗺️ Open in Google Maps" data-ru="🗺️ Открыть в Google Maps">🗺️ Open in Google Maps</a>
+                    </div>
+                    <div>
+                        <div class="map-dual-label" data-en="🚗 Afternoon: Cortina → Passo Giau → Val di Fassa" data-ru="🚗 Послеполудень: Кортина → Пассо Джау → Валь ди Фасса">🚗 Afternoon: Cortina → Passo Giau → Val di Fassa</div>
+                        <div class="map-frame">
+                            <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Cortina+d%27Ampezzo+Italy&destination=Pozza+di+Fassa+Italy&waypoints=Passo+Giau+Italy&mode=driving" allowfullscreen loading="lazy"></iframe>
+                        </div>
+                        <a href="https://www.google.com/maps/dir/Cortina+d%27Ampezzo+Italy/Passo+Giau+Italy/Pozza+di+Fassa+Italy" class="btn btn-map" target="_blank" data-en="🗺️ Open in Google Maps" data-ru="🗺️ Открыть в Google Maps">🗺️ Open in Google Maps</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- /day4 -->
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         DAY 5 — May 4 · Val di Fassa → Lago di Carezza → Milan (Drop-off)
+    ═══════════════════════════════════════════════════════ -->
+    <div class="day-card" id="day5">
+        <div class="day-header" style="background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%);">
+            <div>
+                <div class="day-number" data-en="Day 5 · Saturday" data-ru="День 5 · Суббота">Day 5 · Saturday</div>
+                <div class="day-title" data-en="Val di Fassa → Lago di Carezza → Milan Drop-off" data-ru="Валь ди Фасса → Лаго ди Кареца → Сдача в Милане">Val di Fassa → Lago di Carezza → Milan Drop-off</div>
+                <div class="day-date" data-en="May 4 · Drop-off at 10:00 AM · Roadsurfer Milan" data-ru="4 мая · Сдача в 10:00 · Roadsurfer Милан">May 4 · Drop-off at 10:00 AM · Roadsurfer Milan</div>
+            </div>
+        </div>
+        <div class="day-body">
+
+            <!-- MORNING ACTIVITY -->
+            <div class="section-block">
+                <div class="section-label" data-en="🥾 Morning Activity (Before Drive)" data-ru="🥾 Утренняя активность (перед поездкой)">🥾 Morning Activity (Before Drive)</div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Option A · 25 min walk" data-ru="Вариант А · Прогулка 25 мин">Option A · 25 min walk</div>
+                        <div class="act-title" data-en="Lago di Carezza — Rainbow Lake" data-ru="Лаго ди Кареца — Радужное озеро">Lago di Carezza — Rainbow Lake</div>
+                        <div class="act-desc" data-en="A short 30-min drive from camp to <a href='https://www.google.com/maps/search/?api=1&query=Lago+di+Carezza+Karersee' class='loc' target='_blank'>Lago di Carezza</a>. Walk the easy 25-min circuit around this stunning multi-coloured lake with the jagged Latemar peaks as a backdrop. One of the most beautiful lakes in the Dolomites — the perfect final stop." data-ru="Короткая поездка 30 мин от лагеря до <a href='https://www.google.com/maps/search/?api=1&query=Lago+di+Carezza+Karersee' class='loc' target='_blank'>Лаго ди Кареца</a>. Лёгкий маршрут 25 мин вокруг этого потрясающего разноцветного озера с зубчатыми пиками Латемар на заднем плане. Одно из красивейших озёр Доломитов — идеальная последняя остановка.">A short 30-min drive from camp to <a href="https://www.google.com/maps/search/?api=1&query=Lago+di+Carezza+Karersee" class="loc" target="_blank">Lago di Carezza</a>. Walk the easy 25-min circuit around this stunning multi-coloured lake with the jagged Latemar peaks as a backdrop. One of the most beautiful lakes in the Dolomites — the perfect final stop.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Option B · Scenic Stop" data-ru="Вариант Б · Живописная остановка">Option B · Scenic Stop</div>
+                        <div class="act-title" data-en="Passo Pordoi — Coffin Cable Car Viewpoint" data-ru="Пассо Пордои — Смотровая площадка 'Канатная дорога-гроб'">Passo Pordoi — Coffin Cable Car Viewpoint</div>
+                        <div class="act-desc" data-en="Drive up to <a href='https://www.google.com/maps/search/?api=1&query=Passo+Pordoi' class='loc' target='_blank'>Passo Pordoi</a> (30 min from camp). See the legendary single-pylon cable car — nicknamed the 'Coffin' for its shape. Even with the cable car closed, the pass itself offers dramatic views of the Sella Group and Marmolada glacier." data-ru="Поезжайте на <a href='https://www.google.com/maps/search/?api=1&query=Passo+Pordoi' class='loc' target='_blank'>Пассо Пордои</a> (30 мин от лагеря). Увидите легендарную канатную дорогу с одной опорой — прозванную 'Гробом' за форму. Даже при закрытой канатной дороге сам перевал предлагает драматичные виды на группу Селла и ледник Мармолада.">Drive up to <a href="https://www.google.com/maps/search/?api=1&query=Passo+Pordoi" class="loc" target="_blank">Passo Pordoi</a> (30 min from camp). See the legendary single-pylon cable car — nicknamed the 'Coffin' for its shape. Even with the cable car closed, the pass itself offers dramatic views of the Sella Group and Marmolada glacier.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BREAKFAST -->
+            <div class="section-block">
+                <div class="section-label" data-en="☕ Breakfast Before Departure" data-ru="☕ Завтрак перед отъездом">☕ Breakfast Before Departure</div>
+                <div class="restaurant-list">
+                    <div class="restaurant-item">
+                        <div class="restaurant-info">
+                            <div class="restaurant-name"><a href="https://www.google.com/maps/search/?api=1&query=Agritur+El+Mas+Val+di+Fassa" class="loc" target="_blank">Agritur El Mas</a></div>
+                            <div class="restaurant-rating" data-en="⭐ 4.6/5 (1,548 reviews) · Farm breakfast" data-ru="⭐ 4.6/5 (1 548 отзывов) · Фермерский завтрак">⭐ 4.6/5 (1,548 reviews) · Farm breakfast</div>
+                            <div class="restaurant-desc" data-en="Farm-to-table breakfast with fresh local products. A wonderful final morning meal." data-ru="Фермерский завтрак со свежими местными продуктами. Прекрасная финальная утренняя трапеза.">Farm-to-table breakfast with fresh local products. A wonderful final morning meal.</div>
+                        </div>
+                    </div>
+                    <div class="restaurant-item">
+                        <div class="restaurant-info">
+                            <div class="restaurant-name"><a href="https://www.google.com/maps/search/?api=1&query=Vecchio+Mulino+Pozza+di+Fassa" class="loc" target="_blank">Vecchio Mulino</a></div>
+                            <div class="restaurant-rating" data-en="⭐ 4.2/5 (1,772 reviews) · Popular local" data-ru="⭐ 4.2/5 (1 772 отзыва) · Популярный местный">⭐ 4.2/5 (1,772 reviews) · Popular local</div>
+                            <div class="restaurant-desc" data-en="Popular local restaurant. Great for a hearty breakfast before the long drive back to Milan." data-ru="Популярный местный ресторан. Отлично для сытного завтрака перед долгой дорогой обратно в Милан.">Popular local restaurant. Great for a hearty breakfast before the long drive back to Milan.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAP -->
+            <div class="section-block map-section">
+                <div class="section-label" data-en="🗺️ Return Drive: Val di Fassa → Milan" data-ru="🗺️ Обратная поездка: Валь ди Фасса → Милан">🗺️ Return Drive: Val di Fassa → Milan</div>
+                <div class="map-route-info">
+                    <div class="route-line"><strong data-en="Departure:" data-ru="Отправление:">Departure:</strong> <span data-en="~6:00 AM from Pozza di Fassa (to allow time for Lago di Carezza stop)" data-ru="~6:00 из Поцца ди Фасса (чтобы успеть на Лаго ди Кареца)">~6:00 AM from Pozza di Fassa (to allow time for Lago di Carezza stop)</span></div>
+                    <div class="route-line"><strong data-en="Route:" data-ru="Маршрут:">Route:</strong> <span data-en="Val di Fassa → Bolzano → A22 Brenner motorway → Trento → Brescia → Milan" data-ru="Валь ди Фасса → Больцано → A22 автострада Бреннер → Тренто → Брешиа → Милан">Val di Fassa → Bolzano → A22 Brenner motorway → Trento → Brescia → Milan</span></div>
+                    <div class="route-line"><strong data-en="Drive Time:" data-ru="Время в пути:">Drive Time:</strong> <span class="route-time" data-en="3h 45min · 300 km (without stops)" data-ru="3ч 45мин · 300 км (без остановок)">3h 45min · 300 km (without stops)</span></div>
+                    <div class="route-line"><strong data-en="Drop-off:" data-ru="Сдача:">Drop-off:</strong> <span class="route-time" data-en="10:00 AM at Roadsurfer Milan Office" data-ru="10:00 в офисе Roadsurfer в Милане">10:00 AM at Roadsurfer Milan Office</span></div>
+                </div>
+                <div class="map-frame">
+                    <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Pozza+di+Fassa+Italy&destination=Via+Salvo+D%27Acquisto+28+Castellanza+Italy&mode=driving" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <a href="https://www.google.com/maps/dir/Pozza+di+Fassa+Italy/Via+Salvo+D%27Acquisto+28+Castellanza+Italy" class="btn btn-map" target="_blank" data-en="🗺️ Open Full Route in Google Maps" data-ru="🗺️ Открыть маршрут в Google Maps">🗺️ Open Full Route in Google Maps</a>
+
+                <div style="background:#d1fae5;border-radius:10px;padding:16px;margin-top:20px;text-align:center;">
+                    <p style="font-size:1.15em;font-weight:700;color:#065f46;" data-en="🎉 Congratulations! You've completed your Dolomites adventure!" data-ru="🎉 Поздравляем! Вы завершили своё путешествие по Доломитам!">🎉 Congratulations! You've completed your Dolomites adventure!</p>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- /day5 -->
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<footer>
+    <h3 data-en="📍 All 10 Must-See Locations" data-ru="📍 Все 10 обязательных мест">📍 All 10 Must-See Locations</h3>
+    <div class="must-see-list">
+        <span class="must-see-tag">✓ Tre Cime di Lavaredo</span>
+        <span class="must-see-tag">✓ Cadini di Misurina</span>
+        <span class="must-see-tag">✓ Alpe di Siusi</span>
+        <span class="must-see-tag">✓ Passo Giau</span>
+        <span class="must-see-tag">✓ Lago di Braies (Sunrise)</span>
+        <span class="must-see-tag">✓ Seceda</span>
+        <span class="must-see-tag">✓ Lago di Carezza</span>
+        <span class="must-see-tag">✓ Giesler Alm</span>
+        <span class="must-see-tag">✓ Coffin Cable Car (Passo Pordoi)</span>
+        <span class="must-see-tag">✓ Cortina d'Ampezzo</span>
+    </div>
+    <p style="font-size:0.85em;opacity:0.5;margin-top:16px;" data-en="Created with ❤️ for your Dolomites adventure | April 30 - May 4, 2026" data-ru="Создано с ❤️ для вашего путешествия по Доломитам | 30 апреля - 4 мая 2026">Created with ❤️ for your Dolomites adventure | April 30 - May 4, 2026</p>
+</footer>
+
+<script>
+    function setLang(lang) {
+        document.querySelectorAll('[data-en]').forEach(el => {
+            const val = el.getAttribute('data-' + lang);
+            if (!val) return;
+            if (el.innerHTML.includes('<') && el.tagName !== 'BUTTON') {
+                el.innerHTML = val;
+            } else {
+                el.textContent = val;
+            }
+        });
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector('.lang-btn[onclick="setLang(\'' + lang + '\')"]').classList.add('active');
+        document.documentElement.lang = lang;
+    }
+
+    function goTo(id, btn) {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.querySelectorAll('.day-nav-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+</script>
 </body>
 </html>
