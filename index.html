@@ -240,14 +240,59 @@
         }
         footer p { font-size: 0.85em; opacity: 0.5; margin-top: 16px; }
 
+        /* ── WHATSAPP / PHONE BUTTONS ── */
+        .btn-whatsapp { background: #25D366; color: white; }
+        .btn-whatsapp:hover { background: #1ebe5a; }
+        .btn-phone { background: #34495e; color: white; }
+        .btn-phone:hover { background: #2c3e50; }
+        .contact-strip {
+            display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;
+            padding-top: 12px; border-top: 1px dashed #e8e8e8;
+        }
+        .contact-strip-label {
+            font-size: 0.75em; font-weight: 700; color: #999;
+            text-transform: uppercase; letter-spacing: 1px;
+            width: 100%; margin-bottom: 2px;
+        }
+
+        /* ── BOOKING NOTICE ── */
+        .booking-notice {
+            background: #f0fdf4; border: 1px solid #86efac;
+            border-radius: 8px; padding: 10px 14px;
+            font-size: 0.82em; color: #166534; margin-top: 10px;
+        }
+
         /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
-            .site-header h1 { font-size: 1.7em; }
+            .site-header h1 { font-size: 1.6em; }
+            .site-header .subtitle { font-size: 0.95em; }
             .lang-switcher { position: static; justify-content: center; margin-bottom: 16px; }
-            .day-title { font-size: 1.2em; }
-            .section-block { padding: 18px; }
+            .day-header { padding: 16px 18px; gap: 12px; }
+            .day-title { font-size: 1.1em; }
+            .day-date { font-size: 0.82em; }
+            .section-block { padding: 16px 18px; }
             .map-dual { grid-template-columns: 1fr; }
-            .map-frame { height: 320px; }
+            .map-frame { height: 280px; }
+            .campsite-card { padding: 14px; }
+            .campsite-links { flex-direction: column; }
+            .campsite-links .btn { width: 100%; justify-content: center; }
+            .contact-strip { flex-direction: column; }
+            .contact-strip .btn { width: 100%; justify-content: center; }
+            .btn { padding: 10px 16px; font-size: 0.9em; }
+            .day-nav { padding: 10px 12px; gap: 6px; }
+            .day-nav-btn { padding: 7px 12px; font-size: 0.8em; }
+            .restaurant-item { flex-direction: column; }
+            .activity-item { padding: 12px 14px; }
+            .trip-badges { gap: 6px; }
+            .badge { font-size: 0.78em; padding: 4px 10px; }
+            .map-route-info { padding: 12px 14px; font-size: 0.88em; }
+        }
+        @media (max-width: 480px) {
+            .site-header { padding: 24px 16px 20px; }
+            .site-header h1 { font-size: 1.35em; }
+            .container { padding: 12px; }
+            .day-card { border-radius: 12px; }
+            .day-nav-btn { padding: 6px 10px; font-size: 0.75em; }
         }
     </style>
 </head>
@@ -320,6 +365,12 @@
                         <div class="campsite-links">
                             <a href="https://www.google.com/maps/search/?api=1&query=Ansitz+Gamp+Klausen+South+Tyrol" class="btn btn-primary" target="_blank" data-en="📍 Google Maps" data-ru="📍 Google Maps">📍 Google Maps</a>
                             <a href="https://ansitzgamp.com/en/camperstop/" class="btn btn-secondary" target="_blank" data-en="🌐 Official Website" data-ru="🌐 Официальный сайт">🌐 Official Website</a>
+                        </div>
+                        <div class="contact-strip">
+                            <span class="contact-strip-label" data-en="📞 Contact & Book" data-ru="📞 Контакт и бронирование">📞 Contact & Book</span>
+                            <a href="https://wa.me/390472847425" class="btn btn-whatsapp" target="_blank">💬 WhatsApp</a>
+                            <a href="tel:+390472847425" class="btn btn-phone">📞 +39 0472 847425</a>
+                            <div class="booking-notice" data-en="✅ Book directly — 1-night stays accepted. Open year-round." data-ru="✅ Бронируйте напрямую — принимают на 1 ночь. Открыт круглогодично.">✅ Book directly — 1-night stays accepted. Open year-round.</div>
                         </div>
                     </div>
                 </div>
@@ -431,6 +482,12 @@
                             <a href="https://www.google.com/maps/search/?api=1&query=Camping+Seiser+Alm+Castelrotto+South+Tyrol" class="btn btn-primary" target="_blank" data-en="📍 Google Maps" data-ru="📍 Google Maps">📍 Google Maps</a>
                             <a href="https://www.camping-seiseralm.com/en/" class="btn btn-secondary" target="_blank" data-en="🌐 Official Website" data-ru="🌐 Официальный сайт">🌐 Official Website</a>
                         </div>
+                        <div class="contact-strip">
+                            <span class="contact-strip-label" data-en="📞 Contact & Book" data-ru="📞 Контакт и бронирование">📞 Contact & Book</span>
+                            <a href="https://wa.me/390471706459" class="btn btn-whatsapp" target="_blank">💬 WhatsApp</a>
+                            <a href="tel:+390471706459" class="btn btn-phone">📞 +39 0471 706459</a>
+                            <div class="booking-notice" style="background:#fff7ed;border-color:#fed7aa;color:#9a3412;" data-en="⚠️ Motorhome pitches: NO advance booking — first come, first served. Opens May 1st. Arrive early!" data-ru="⚠️ Места для автодомов: БЕЗ бронирования — первый пришёл — первый обслужился. Открывается 1 мая. Приезжайте пораньше!">⚠️ Motorhome pitches: NO advance booking — first come, first served. Opens May 1st. Arrive early!</div>
+                        </div>
                     </div>
                     <!-- Option 2 -->
                     <div class="campsite-card">
@@ -446,6 +503,12 @@
                             <a href="https://www.google.com/maps/search/?api=1&query=Camping+Colfosco+Corvara+Alta+Badia" class="btn btn-primary" target="_blank" data-en="📍 Google Maps" data-ru="📍 Google Maps">📍 Google Maps</a>
                             <a href="https://campingcolfosco.org/en" class="btn btn-secondary" target="_blank" data-en="🌐 Official Website" data-ru="🌐 Официальный сайт">🌐 Official Website</a>
                         </div>
+                        <div class="contact-strip">
+                            <span class="contact-strip-label" data-en="📞 Contact" data-ru="📞 Контакт">📞 Contact</span>
+                            <a href="https://wa.me/390471836515" class="btn btn-whatsapp" target="_blank">💬 WhatsApp</a>
+                            <a href="tel:+390471836515" class="btn btn-phone">📞 +39 0471 836515</a>
+                            <div class="booking-notice" data-en="✅ Walk-in welcome — open year-round. No minimum stay required." data-ru="✅ Принимают без бронирования — открыт круглогодично.">✅ Walk-in welcome — open year-round. No minimum stay required.</div>
+                        </div>
                     </div>
                     <!-- Option 3 -->
                     <div class="campsite-card">
@@ -458,6 +521,13 @@
                         <p class="campsite-desc" data-en="Well-organised campsite with stunning views of the Sciliar massif. Perfect base for Alpe di Siusi, Seceda, and Val di Funes. Good facilities and restaurant on site." data-ru="Хорошо организованный кемпинг с потрясающими видами на массив Шлерн. Идеальная база для Альпе ди Сьюзи, Секеда и Валь ди Фунес. Хорошие удобства и ресторан.">Well-organised campsite with stunning views of the Sciliar massif. Perfect base for Alpe di Siusi, Seceda, and Val di Funes. Good facilities and restaurant on site.</p>
                         <div class="campsite-links">
                             <a href="https://www.google.com/maps/search/?api=1&query=Camping+Alpe+di+Siusi+Siusi+allo+Sciliar" class="btn btn-primary" target="_blank" data-en="📍 Google Maps" data-ru="📍 Google Maps">📍 Google Maps</a>
+                            <a href="https://www.campingalpedisiusi.it/en/" class="btn btn-secondary" target="_blank" data-en="🌐 Official Website" data-ru="🌐 Официальный сайт">🌐 Official Website</a>
+                        </div>
+                        <div class="contact-strip">
+                            <span class="contact-strip-label" data-en="📞 Contact & Book" data-ru="📞 Контакт и бронирование">📞 Contact & Book</span>
+                            <a href="https://wa.me/390471706803" class="btn btn-whatsapp" target="_blank">💬 WhatsApp</a>
+                            <a href="tel:+390471706803" class="btn btn-phone">📞 +39 0471 706803</a>
+                            <div class="booking-notice" style="background:#fff7ed;border-color:#fed7aa;color:#9a3412;" data-en="⚠️ Opens May 1st. Call ahead to confirm 1-night availability on a holiday weekend." data-ru="⚠️ Открывается 1 мая. Позвоните заранее, чтобы подтвердить доступность на 1 ночь в праздничные выходные.">⚠️ Opens May 1st. Call ahead to confirm 1-night availability on a holiday weekend.</div>
                         </div>
                     </div>
                 </div>
@@ -579,6 +649,12 @@
                             <a href="https://www.google.com/maps/search/?api=1&query=Camping+Toblacher+See+Lago+di+Dobbiaco" class="btn btn-primary" target="_blank" data-en="📍 Google Maps" data-ru="📍 Google Maps">📍 Google Maps</a>
                             <a href="https://www.toblachersee.com/en/" class="btn btn-secondary" target="_blank" data-en="🌐 Official Website" data-ru="🌐 Официальный сайт">🌐 Official Website</a>
                         </div>
+                        <div class="contact-strip">
+                            <span class="contact-strip-label" data-en="📞 Contact & Book" data-ru="📞 Контакт и бронирование">📞 Contact & Book</span>
+                            <a href="https://wa.me/390474973138" class="btn btn-whatsapp" target="_blank">💬 WhatsApp</a>
+                            <a href="tel:+390474973138" class="btn btn-phone">📞 +39 0474 973138</a>
+                            <div class="booking-notice" style="background:#fff7ed;border-color:#fed7aa;color:#9a3412;" data-en="⚠️ Call to confirm 1-night stay is accepted (some periods require minimum 3 nights)." data-ru="⚠️ Позвоните, чтобы подтвердить приём на 1 ночь (в некоторые периоды требуется мин. 3 ночи).">⚠️ Call to confirm 1-night stay is accepted (some periods require minimum 3 nights).</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -691,6 +767,13 @@
                         <p class="campsite-desc" data-en="Stunning panoramic views over Lake Como surrounded by mountains. Many pitches directly on the lakeside. Perfect final night — you wake up to the shimmering blue waters of Lake Como with only 1 hour to Milan for the morning drop-off. Facilities include beach access, bar, snack bar, and water sports." data-ru="Потрясающие панорамные виды на Озеро Комо в окружении гор. Многие места прямо на берегу озера. Идеальная последняя ночь — просыпаетесь с видом на серебристые воды Озера Комо, и всего 1 час до Милана для утренней сдачи. Удобства: пляж, бар, снэк-бар и водные виды спорта.">Stunning panoramic views over Lake Como surrounded by mountains. Many pitches directly on the lakeside. Perfect final night — you wake up to the shimmering blue waters of Lake Como with only 1 hour to Milan for the morning drop-off. Facilities include beach access, bar, snack bar, and water sports.</p>
                         <div class="campsite-links">
                             <a href="https://www.google.com/maps/search/?api=1&query=Camping+Panorama+Dongo+Lake+Como" class="btn btn-primary" target="_blank" data-en="📍 Google Maps" data-ru="📍 Google Maps">📍 Google Maps</a>
+                            <a href="http://www.campingpanorama.info/en/" class="btn btn-secondary" target="_blank" data-en="🌐 Official Website" data-ru="🌐 Официальный сайт">🌐 Official Website</a>
+                        </div>
+                        <div class="contact-strip">
+                            <span class="contact-strip-label" data-en="📞 Contact & Book" data-ru="📞 Контакт и бронирование">📞 Contact & Book</span>
+                            <a href="https://wa.me/393298950912" class="btn btn-whatsapp" target="_blank">💬 WhatsApp</a>
+                            <a href="tel:+393298950912" class="btn btn-phone">📞 +39 329 895 0912</a>
+                            <div class="booking-notice" data-en="✅ Mobile number — WhatsApp likely active. 1-night stays accepted. Email: info@campingpanorama.info" data-ru="✅ Мобильный номер — WhatsApp, вероятно, активен. Принимают на 1 ночь. Email: info@campingpanorama.info">✅ Mobile number — WhatsApp likely active. 1-night stays accepted. Email: info@campingpanorama.info</div>
                         </div>
                     </div>
                     <div class="campsite-card">
@@ -703,6 +786,13 @@
                         <p class="campsite-desc" data-en="Lakeside campsite with views of Lake Como and surrounding mountains. Pitches for tents, motorhomes and caravans. Pizzeria on site. Also only ~1h from Milan." data-ru="Кемпинг на берегу озера с видами на Озеро Комо и окружающие горы. Места для палаток, автодомов и караванов. Пиццерия на территории. Также ~1ч от Милана.">Lakeside campsite with views of Lake Como and surrounding mountains. Pitches for tents, motorhomes and caravans. Pizzeria on site. Also only ~1h from Milan.</p>
                         <div class="campsite-links">
                             <a href="https://www.google.com/maps/search/?api=1&query=Camping+TuriSport+Dervio+Lake+Como" class="btn btn-primary" target="_blank" data-en="📍 Google Maps" data-ru="📍 Google Maps">📍 Google Maps</a>
+                            <a href="https://www.campingturisport.it/" class="btn btn-secondary" target="_blank" data-en="🌐 Official Website" data-ru="🌐 Официальный сайт">🌐 Official Website</a>
+                        </div>
+                        <div class="contact-strip">
+                            <span class="contact-strip-label" data-en="📞 Contact" data-ru="📞 Контакт">📞 Contact</span>
+                            <a href="https://wa.me/390341804050" class="btn btn-whatsapp" target="_blank">💬 WhatsApp</a>
+                            <a href="tel:+390341804050" class="btn btn-phone">📞 +39 0341 804050</a>
+                            <div class="booking-notice" data-en="✅ Open from end of February. 1-night stays accepted." data-ru="✅ Открыт с конца февраля. Принимают на 1 ночь.">✅ Open from end of February. 1-night stays accepted.</div>
                         </div>
                     </div>
                 </div>
