@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎒 Packing Checklist — Dolomites Campervan Trip</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            color: #2c3e50;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* ── HEADER ── */
+        .site-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            padding: 40px 20px 30px;
+            text-align: center;
+            position: relative;
+        }
+        .site-header h1 { font-size: 2.2em; margin-bottom: 8px; letter-spacing: -0.5px; }
+        .site-header .subtitle { font-size: 1em; opacity: 0.8; margin-bottom: 16px; }
+
+        /* ── LANGUAGE SWITCHER ── */
+        .lang-switcher {
+            position: absolute; top: 20px; right: 20px;
+            display: flex; gap: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px; padding: 4px;
+        }
+        .lang-btn {
+            padding: 6px 14px; border: none; border-radius: 16px;
+            cursor: pointer; font-weight: 600; font-size: 0.85em;
+            transition: all 0.2s; background: transparent; color: rgba(255,255,255,0.7);
+        }
+        .lang-btn.active { background: white; color: #1a1a2e; }
+        .lang-btn:hover:not(.active) { background: rgba(255,255,255,0.2); color: white; }
+
+        /* ── BACK LINK ── */
+        .back-bar {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 12px 20px;
+            text-align: center;
+        }
+        .back-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: #0f3460; font-weight: 600; text-decoration: none;
+            font-size: 0.9em; padding: 8px 18px;
+            background: #f0f4ff; border-radius: 20px;
+            transition: background 0.2s;
+        }
+        .back-link:hover { background: #dde8ff; }
+
+        /* ── MAIN WRAPPER ── */
+        .wrapper {
+            max-width: 960px;
+            margin: 32px auto 48px;
+            padding: 0 16px;
+        }
+
+        /* ── BAG GUIDE ── */
+        .bag-guide {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+        .bag-card {
+            border-radius: 14px;
+            padding: 16px 18px;
+        }
+        .bag-card.big { background: #f0f9ff; border: 1px solid #bae6fd; }
+        .bag-card.small { background: #f0fdf4; border: 1px solid #bbf7d0; }
+        .bag-title { font-weight: 700; font-size: 1em; }
+        .bag-title.big { color: #0369a1; }
+        .bag-title.small { color: #166534; }
+        .bag-desc { font-size: 0.82em; color: #555; margin-top: 4px; }
+
+        /* ── CHECKLIST GRID ── */
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .check-card {
+            background: #fafafa;
+            border-radius: 14px;
+            padding: 18px 20px;
+            border: 1px solid #e5e7eb;
+        }
+        .check-card.orange { background: #fff7ed; border-color: #fed7aa; }
+        .check-card.blue   { background: #f0f9ff; border-color: #bae6fd; }
+        .check-card.green  { background: #f0fdf4; border-color: #bbf7d0; }
+        .check-card.red    { background: #fff1f2; border-color: #fecdd3; }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 1em;
+            color: #1e3a5f;
+            margin-bottom: 12px;
+        }
+        .check-card.orange .card-title { color: #9a3412; }
+        .check-card.blue   .card-title { color: #0369a1; }
+        .check-card.green  .card-title { color: #166534; }
+        .check-card.red    .card-title { color: #9f1239; }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .check-item:last-child { margin-bottom: 0; }
+        .check-item input[type="checkbox"] {
+            width: 18px; height: 18px;
+            margin-top: 2px;
+            flex-shrink: 0;
+            cursor: pointer;
+            accent-color: #0f3460;
+        }
+        .check-item span {
+            font-size: 0.92em;
+            line-height: 1.5;
+        }
+        .check-item.checked span {
+            text-decoration: line-through;
+            color: #aaa;
+        }
+
+        /* ── PROGRESS BAR ── */
+        .progress-wrap {
+            background: white;
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin-bottom: 24px;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .progress-label {
+            font-weight: 700;
+            font-size: 0.9em;
+            color: #1e3a5f;
+            white-space: nowrap;
+        }
+        .progress-bar-bg {
+            flex: 1;
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 99px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2d6a4f, #40916c);
+            border-radius: 99px;
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+        .progress-count {
+            font-size: 0.88em;
+            color: #555;
+            white-space: nowrap;
+        }
+
+        /* ── TIP BOX ── */
+        .tip-box {
+            margin-top: 24px;
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-size: 0.88em;
+            color: #78350f;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 24px 20px;
+            font-size: 0.85em;
+            margin-top: 48px;
+        }
+        footer a { color: rgba(255,255,255,0.8); text-decoration: none; }
+        footer a:hover { color: white; }
+
+        /* ── MOBILE ── */
+        @media (max-width: 600px) {
+            .site-header h1 { font-size: 1.5em; }
+            .lang-switcher { top: 12px; right: 12px; }
+            .lang-btn { padding: 5px 10px; font-size: 0.8em; }
+            .bag-guide { grid-template-columns: 1fr; }
+            .checklist-grid { grid-template-columns: 1fr; }
+            .progress-wrap { flex-wrap: wrap; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('ru')">RU</button>
+    </div>
+    <h1 data-en="🎒 Packing Checklist" data-ru="🎒 Список вещей">🎒 Packing Checklist</h1>
+    <p class="subtitle" data-en="Dolomites Campervan Trip · April 30 – May 4, 2026 · 2 adults + 1 child (8y)" data-ru="Путешествие на кемпервэне по Доломитам · 30 апр – 4 мая 2026 · 2 взрослых + 1 ребёнок (8 лет)">Dolomites Campervan Trip · April 30 – May 4, 2026 · 2 adults + 1 child (8y)</p>
+</header>
+
+<!-- BACK LINK -->
+<div class="back-bar">
+    <a href="/dolomites-itinerary/" class="back-link">← <span data-en="Back to Itinerary" data-ru="Назад к маршруту">Back to Itinerary</span></a>
+</div>
+
+<div class="wrapper">
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-wrap">
+        <span class="progress-label" data-en="✅ Packed:" data-ru="✅ Упаковано:">✅ Packed:</span>
+        <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+        <span class="progress-count" id="progressCount">0 / 0</span>
+    </div>
+
+    <!-- BAG GUIDE -->
+    <div class="bag-guide">
+        <div class="bag-card big">
+            <div class="bag-title big" data-en="🧳 Big Bag" data-ru="🧳 Большая сумка">🧳 Big Bag</div>
+            <div class="bag-desc" data-en="Clothes, shoes, sleeping gear" data-ru="Одежда, обувь, спальные принадлежности">Clothes, shoes, sleeping gear</div>
+        </div>
+        <div class="bag-card small">
+            <div class="bag-title small" data-en="🎒 Small Bag" data-ru="🎒 Маленькая сумка">🎒 Small Bag</div>
+            <div class="bag-desc" data-en="Daily essentials, documents, kid's bag" data-ru="Ежедневные вещи, документы, сумка ребёнка">Daily essentials, documents, kid's bag</div>
+        </div>
+    </div>
+
+    <!-- CHECKLIST GRID -->
+    <div class="checklist-grid">
+
+        <!-- Clothing -->
+        <div class="check-card">
+            <div class="card-title" data-en="👕 Clothing (per person)" data-ru="👕 Одежда (на человека)">👕 Clothing (per person)</div>
+            <label class="check-item"><input type="checkbox"> <span data-en="3–4 base layer tops (merino or synthetic)" data-ru="3–4 базовых футболки (мерино или синтетика)">3–4 base layer tops (merino or synthetic)</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="1 warm mid-layer fleece" data-ru="1 тёплый флисовый слой">1 warm mid-layer fleece</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="1 waterproof jacket (rain likely in May)" data-ru="1 непромокаемая куртка (дожди в мае)">1 waterproof jacket (rain likely in May)</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="2 pairs hiking/trekking trousers" data-ru="2 пары треккинговых брюк">2 pairs hiking/trekking trousers</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="1 pair casual trousers/jeans (restaurants)" data-ru="1 пара джинсов (для ресторанов)">1 pair casual trousers/jeans (restaurants)</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="4–5 underwear + socks" data-ru="4–5 нижнего белья + носков">4–5 underwear + socks</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Light hat + gloves (mornings can be cold)" data-ru="Лёгкая шапка + перчатки (утром холодно)">Light hat + gloves (mornings can be cold)</span></label>
+        </div>
+
+        <!-- Footwear -->
+        <div class="check-card">
+            <div class="card-title" data-en="👟 Footwear" data-ru="👟 Обувь">👟 Footwear</div>
+            <label class="check-item"><input type="checkbox"> <span data-en="Hiking boots / trail shoes (waterproof)" data-ru="Треккинговые ботинки (водонепроницаемые)">Hiking boots / trail shoes (waterproof)</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Sandals or light shoes (evenings)" data-ru="Сандалии или лёгкие туфли (вечером)">Sandals or light shoes (evenings)</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Kid: 1 pair sturdy trainers + 1 pair sandals" data-ru="Ребёнок: 1 пара кроссовок + 1 пара сандалий">Kid: 1 pair sturdy trainers + 1 pair sandals</span></label>
+        </div>
+
+        <!-- Kid Essentials -->
+        <div class="check-card orange">
+            <div class="card-title" data-en="🧒 Kid Essentials (8y)" data-ru="🧒 Для ребёнка (8 лет)">🧒 Kid Essentials (8y)</div>
+            <label class="check-item"><input type="checkbox"> <span data-en="Small backpack (for hikes — water, snacks)" data-ru="Маленький рюкзак (для походов — вода, перекус)">Small backpack (for hikes — water, snacks)</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="1 favourite small toy / book / tablet" data-ru="1 любимая игрушка / книга / планшет">1 favourite small toy / book / tablet</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Headlamp (kids love them on trails)" data-ru="Налобный фонарик (дети обожают на тропах)">Headlamp (kids love them on trails)</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Snacks for the road (biscuits, fruit pouches)" data-ru="Перекусы в дорогу (печенье, фруктовые пюре)">Snacks for the road (biscuits, fruit pouches)</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Motion sickness tablets (mountain roads!)" data-ru="Таблетки от укачивания (горные дороги!)">Motion sickness tablets (mountain roads!)</span></label>
+        </div>
+
+        <!-- Toiletries -->
+        <div class="check-card">
+            <div class="card-title" data-en="🧴 Toiletries (compact)" data-ru="🧴 Туалетные принадлежности (компактные)">🧴 Toiletries (compact)</div>
+            <label class="check-item"><input type="checkbox"> <span data-en="Toothbrushes + toothpaste" data-ru="Зубные щётки + паста">Toothbrushes + toothpaste</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Shampoo + shower gel (travel size)" data-ru="Шампунь + гель для душа (дорожный размер)">Shampoo + shower gel (travel size)</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Sunscreen SPF 50+ (high altitude sun is strong)" data-ru="Солнцезащитный крем SPF 50+ (на высоте солнце сильнее)">Sunscreen SPF 50+ (high altitude sun is strong)</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Lip balm with SPF" data-ru="Бальзам для губ с SPF">Lip balm with SPF</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Insect repellent (May = bugs in valleys)" data-ru="Репеллент от насекомых (май = насекомые в долинах)">Insect repellent (May = bugs in valleys)</span></label>
+        </div>
+
+        <!-- Documents & Money -->
+        <div class="check-card blue">
+            <div class="card-title" data-en="📄 Documents & Money" data-ru="📄 Документы и деньги">📄 Documents & Money</div>
+            <label class="check-item"><input type="checkbox"> <span data-en="Passports / ID cards (all 3)" data-ru="Паспорта / удостоверения (все 3)">Passports / ID cards (all 3)</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Driver's licence" data-ru="Водительское удостоверение">Driver's licence</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Roadsurfer booking confirmation" data-ru="Подтверждение бронирования Roadsurfer">Roadsurfer booking confirmation</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Travel insurance documents" data-ru="Документы страхования путешествия">Travel insurance documents</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Cash €100–150 (some huts/markets are cash only)" data-ru="Наличные €100–150 (некоторые хижины принимают только наличные)">Cash €100–150 (some huts/markets are cash only)</span></label>
+        </div>
+
+        <!-- Hiking & Outdoors -->
+        <div class="check-card green">
+            <div class="card-title" data-en="🥾 Hiking & Outdoors" data-ru="🥾 Походное снаряжение">🥾 Hiking & Outdoors</div>
+            <label class="check-item"><input type="checkbox"> <span data-en="2 reusable water bottles" data-ru="2 многоразовые бутылки для воды">2 reusable water bottles</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Daypack / small backpack (adult)" data-ru="Дневной рюкзак (взрослый)">Daypack / small backpack (adult)</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Trekking poles (optional but helpful on passes)" data-ru="Треккинговые палки (опционально, но полезны)">Trekking poles (optional but helpful on passes)</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Sunglasses (all 3 — UV is intense at altitude)" data-ru="Солнечные очки (все 3 — УФ на высоте интенсивный)">Sunglasses (all 3 — UV is intense at altitude)</span></label>
+        </div>
+
+        <!-- Tech & Charging -->
+        <div class="check-card">
+            <div class="card-title" data-en="🔌 Tech & Charging" data-ru="🔌 Техника и зарядка">🔌 Tech & Charging</div>
+            <label class="check-item"><input type="checkbox"> <span data-en="Phone chargers (x2) + power bank" data-ru="Зарядки для телефонов (x2) + павербанк">Phone chargers (x2) + power bank</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Camera + memory card + charger" data-ru="Фотоаппарат + карта памяти + зарядка">Camera + memory card + charger</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="EU plug adapter (if needed)" data-ru="Адаптер для розеток ЕС (если нужен)">EU plug adapter (if needed)</span></label>
+        </div>
+
+        <!-- First Aid -->
+        <div class="check-card red">
+            <div class="card-title" data-en="🩹 First Aid (small kit)" data-ru="🩹 Аптечка (компактная)">🩹 First Aid (small kit)</div>
+            <label class="check-item"><input type="checkbox"> <span data-en="Plasters / blister pads" data-ru="Пластыри / подушечки от мозолей">Plasters / blister pads</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Ibuprofen + paracetamol" data-ru="Ибупрофен + парацетамол">Ibuprofen + paracetamol</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Antihistamine (hay fever season)" data-ru="Антигистаминное (сезон аллергии)">Antihistamine (hay fever season)</span></label>
+            <label class="check-item"><input type="checkbox"> <span data-en="Any personal / child medications" data-ru="Личные лекарства / лекарства для ребёнка">Any personal / child medications</span></label>
+        </div>
+
+    </div><!-- /checklist-grid -->
+
+    <!-- TIP BOX -->
+    <div class="tip-box">
+        <strong data-en="💡 Space-saving tip:" data-ru="💡 Совет по экономии места:">💡 Space-saving tip:</strong>
+        <span data-en=" Roll clothes instead of folding — saves ~30% space. Pack the kid's clothes in the small bag so they can access their own things. The campervan has storage under the bed and above the cab — use it for bulky items like boots and jackets." data-ru=" Сворачивайте одежду рулоном, а не складывайте — экономит ~30% места. Упакуйте вещи ребёнка в маленькую сумку, чтобы он мог сам добраться до своих вещей. В кемпервэне есть хранение под кроватью и над кабиной — используйте для объёмных вещей: ботинок и курток."> Roll clothes instead of folding — saves ~30% space. Pack the kid's clothes in the small bag so they can access their own things. The campervan has storage under the bed and above the cab — use it for bulky items like boots and jackets.</span>
+    </div>
+
+</div><!-- /wrapper -->
+
+<!-- FOOTER -->
+<footer>
+    <p><a href="/dolomites-itinerary/" data-en="← Back to Full Itinerary" data-ru="← Назад к полному маршруту">← Back to Full Itinerary</a></p>
+    <p style="margin-top:8px;" data-en="Created with ❤️ for your Dolomites adventure | April 30 - May 4, 2026" data-ru="Создано с ❤️ для вашего путешествия по Доломитам | 30 апреля - 4 мая 2026">Created with ❤️ for your Dolomites adventure | April 30 - May 4, 2026</p>
+</footer>
+
+<script>
+    // Language switcher
+    function setLang(lang) {
+        document.querySelectorAll('[data-en]').forEach(el => {
+            const val = el.getAttribute('data-' + lang);
+            if (!val) return;
+            if (el.innerHTML.includes('<') && el.tagName !== 'BUTTON') {
+                el.innerHTML = val;
+            } else {
+                el.textContent = val;
+            }
+        });
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector('.lang-btn[onclick="setLang(\'' + lang + '\')"]').classList.add('active');
+        document.documentElement.lang = lang;
+        localStorage.setItem('lang', lang);
+    }
+
+    // Checkbox strikethrough + progress
+    function updateProgress() {
+        const all = document.querySelectorAll('.check-item input[type="checkbox"]');
+        const checked = document.querySelectorAll('.check-item input[type="checkbox"]:checked');
+        const pct = all.length ? Math.round((checked.length / all.length) * 100) : 0;
+        document.getElementById('progressFill').style.width = pct + '%';
+        document.getElementById('progressCount').textContent = checked.length + ' / ' + all.length;
+    }
+
+    document.querySelectorAll('.check-item input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', function() {
+            this.closest('.check-item').classList.toggle('checked', this.checked);
+            saveState();
+            updateProgress();
+        });
+    });
+
+    // Persist checkbox state in localStorage
+    function saveState() {
+        const state = {};
+        document.querySelectorAll('.check-item input[type="checkbox"]').forEach((cb, i) => {
+            state[i] = cb.checked;
+        });
+        localStorage.setItem('checklistState', JSON.stringify(state));
+    }
+
+    function loadState() {
+        const state = JSON.parse(localStorage.getItem('checklistState') || '{}');
+        document.querySelectorAll('.check-item input[type="checkbox"]').forEach((cb, i) => {
+            if (state[i]) {
+                cb.checked = true;
+                cb.closest('.check-item').classList.add('checked');
+            }
+        });
+        updateProgress();
+    }
+
+    // Init
+    loadState();
+    const savedLang = localStorage.getItem('lang');
+    if (savedLang && savedLang !== 'en') setLang(savedLang);
+</script>
+</body>
+</html>
