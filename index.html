@@ -294,6 +294,78 @@
             .day-card { border-radius: 12px; }
             .day-nav-btn { padding: 6px 10px; font-size: 0.75em; }
         }
+
+        /* ── WEATHER WIDGET ── */
+        .weather-widget {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 14px;
+            padding: 12px 16px;
+            min-width: 200px;
+            backdrop-filter: blur(6px);
+            color: white;
+            flex-shrink: 0;
+        }
+        .weather-widget .w-location {
+            font-size: 0.7em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.75;
+            margin-bottom: 6px;
+        }
+        .weather-widget .w-main {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .weather-widget .w-icon {
+            font-size: 2em;
+            line-height: 1;
+        }
+        .weather-widget .w-temp {
+            font-size: 1.8em;
+            font-weight: 700;
+            line-height: 1;
+        }
+        .weather-widget .w-desc {
+            font-size: 0.78em;
+            opacity: 0.85;
+            margin-top: 3px;
+        }
+        .weather-widget .w-details {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+            font-size: 0.75em;
+            opacity: 0.8;
+            flex-wrap: wrap;
+        }
+        .weather-widget .w-detail {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        .weather-widget .w-loading {
+            font-size: 0.82em;
+            opacity: 0.6;
+            font-style: italic;
+        }
+        .weather-widget .w-updated {
+            font-size: 0.65em;
+            opacity: 0.5;
+            margin-top: 6px;
+        }
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        @media (max-width: 600px) {
+            .weather-widget { width: 100%; min-width: unset; }
+        }
     </style>
 </head>
 <body>
@@ -345,6 +417,7 @@
                 <div class="day-title" data-en="Milan → Klausen (Chiusa)" data-ru="Милан → Клаузен (Chiusa)">Milan → Klausen (Chiusa)</div>
                 <div class="day-date" data-en="April 30 · Pick-up at 12:00 PM · Drive 2h 45min" data-ru="30 апреля · Получение в 12:00 · Поездка 2ч 45мин">April 30 · Pick-up at 12:00 PM · Drive 2h 45min</div>
             </div>
+            <div class="weather-widget" id="weather-day1"><div class="w-loading">Loading weather...</div></div>
         </div>
         <div class="day-body">
 
@@ -452,9 +525,10 @@
         <div class="day-header">
             <div>
                 <div class="day-number" data-en="Day 2 · Wednesday" data-ru="День 2 · Среда">Day 2 · Wednesday</div>
-                <div class="day-title" data-en="Klausen → Val Gardena & Alpe di Siusi" data-ru="Клаузен → Валь Гардена и Альпе ди Сьюзи">Klausen → Val Gardena & Alpe di Siusi</div>
+                <div class="day-title" data-en="Klausen → Val Gardena &amp; Alpe di Siusi" data-ru="Клаузен → Валь Гардена и Альпе ди Сьюзи">Klausen → Val Gardena &amp; Alpe di Siusi</div>
                 <div class="day-date" data-en="May 1 (Labour Day) · Drive 1h · Full day in the mountains" data-ru="1 мая (День труда) · Поездка 1ч · Полный день в горах">May 1 (Labour Day) · Drive 1h · Full day in the mountains</div>
             </div>
+            <div class="weather-widget" id="weather-day2"><div class="w-loading">Loading weather...</div></div>
         </div>
         <div class="day-body">
 
@@ -628,6 +702,7 @@
                 <div class="day-title" data-en="Val Gardena → Lago di Carezza → Lago di Dobbiaco" data-ru="Валь Гардена → Лаго ди Кареца → Лаго ди Доббьяко">Val Gardena → Lago di Carezza → Lago di Dobbiaco</div>
                 <div class="day-date" data-en="May 2 · Scenic stop at Rainbow Lake · Arrive Dobbiaco evening" data-ru="2 мая · Живописная остановка у Радужного озера · Прибытие в Доббьяко вечером">May 2 · Scenic stop at Rainbow Lake · Arrive Dobbiaco evening</div>
             </div>
+            <div class="weather-widget" id="weather-day3"><div class="w-loading">Loading weather...</div></div>
         </div>
         <div class="day-body">
 
@@ -749,6 +824,7 @@
                 <div class="day-title" data-en="Dobbiaco → Lago di Braies → Cortina → Lake Como" data-ru="Доббьяко → Лаго ди Брайес → Кортина → Озеро Комо">Dobbiaco → Lago di Braies → Cortina → Lake Como</div>
                 <div class="day-date" data-en="May 3 · Sunrise at Braies, Tre Cime views, Passo Giau drive — final night on Lake Como" data-ru="3 мая · Рассвет на Брайес, виды Тре Чиме, поездка через Пассо Джау — последняя ночь на озере Комо">May 3 · Sunrise at Braies, Tre Cime views, Passo Giau drive — final night on Lake Como</div>
             </div>
+            <div class="weather-widget" id="weather-day4"><div class="w-loading">Loading weather...</div></div>
         </div>
         <div class="day-body">
 
@@ -902,6 +978,7 @@
                 <div class="day-title" data-en="Lake Como → Milan Drop-off" data-ru="Озеро Комо → Сдача в Милане">Lake Como → Milan Drop-off</div>
                 <div class="day-date" data-en="May 4 · Easy 1h drive · Drop-off at 10:00 AM · Roadsurfer Milan" data-ru="4 мая · Лёгкая поездка 1ч · Сдача в 10:00 · Roadsurfer Милан">May 4 · Easy 1h drive · Drop-off at 10:00 AM · Roadsurfer Milan</div>
             </div>
+            <div class="weather-widget" id="weather-day5"><div class="w-loading">Loading weather...</div></div>
         </div>
         <div class="day-body">
 
@@ -989,6 +1066,85 @@
 </footer>
 
 <script>
+    // ── WEATHER WIDGET (Open-Meteo API — no key required) ──
+    const WEATHER_LOCATIONS = [
+        { id: 'weather-day1', name: 'Klausen, South Tyrol', lat: 46.6414, lon: 11.5683, date: '2026-04-30' },
+        { id: 'weather-day2', name: 'Val Gardena', lat: 46.5748, lon: 11.6717, date: '2026-05-01' },
+        { id: 'weather-day3', name: 'Dobbiaco', lat: 46.7317, lon: 12.2219, date: '2026-05-02' },
+        { id: 'weather-day4', name: 'Dongo, Lake Como', lat: 46.1167, lon: 9.2667, date: '2026-05-03' },
+        { id: 'weather-day5', name: 'Dongo, Lake Como', lat: 46.1167, lon: 9.2667, date: '2026-05-04' }
+    ];
+
+    const WMO_CODES = {
+        0: ['Clear sky', '☀️'],
+        1: ['Mainly clear', '🌤️'],
+        2: ['Partly cloudy', '⛅'],
+        3: ['Overcast', '☁️'],
+        45: ['Foggy', '🌫️'],
+        48: ['Icy fog', '🌫️'],
+        51: ['Light drizzle', '🌦️'],
+        53: ['Drizzle', '🌦️'],
+        55: ['Heavy drizzle', '🌧️'],
+        61: ['Slight rain', '🌧️'],
+        63: ['Moderate rain', '🌧️'],
+        65: ['Heavy rain', '🌧️'],
+        71: ['Slight snow', '🌨️'],
+        73: ['Moderate snow', '❄️'],
+        75: ['Heavy snow', '❄️'],
+        77: ['Snow grains', '🌨️'],
+        80: ['Showers', '🌦️'],
+        81: ['Rain showers', '🌧️'],
+        82: ['Violent showers', '⛈️'],
+        85: ['Snow showers', '🌨️'],
+        86: ['Heavy snow showers', '❄️'],
+        95: ['Thunderstorm', '⚡'],
+        96: ['Thunderstorm + hail', '⚡'],
+        99: ['Thunderstorm + hail', '⚡']
+    };
+
+    async function fetchWeather(loc) {
+        const el = document.getElementById(loc.id);
+        if (!el) return;
+        try {
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${loc.lat}&longitude=${loc.lon}&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max,windspeed_10m_max&timezone=Europe%2FRome&start_date=${loc.date}&end_date=${loc.date}`;
+            const res = await fetch(url);
+            const data = await res.json();
+            const d = data.daily;
+            const code = d.weathercode[0];
+            const [desc, icon] = WMO_CODES[code] || ['Unknown', '🌡️'];
+            const tmax = Math.round(d.temperature_2m_max[0]);
+            const tmin = Math.round(d.temperature_2m_min[0]);
+            const rain = d.precipitation_probability_max[0];
+            const wind = Math.round(d.windspeed_10m_max[0]);
+            const now = new Date().toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'});
+            el.innerHTML = `
+                <div class="w-location">📍 ${loc.name}</div>
+                <div class="w-main">
+                    <div class="w-icon">${icon}</div>
+                    <div>
+                        <div class="w-temp">${tmax}°C</div>
+                        <div class="w-desc">${desc}</div>
+                    </div>
+                </div>
+                <div class="w-details">
+                    <div class="w-detail">🌡️ ${tmin}°–${tmax}°C</div>
+                    <div class="w-detail">💧 ${rain}% rain</div>
+                    <div class="w-detail">💨 ${wind} km/h</div>
+                </div>
+                <div class="w-updated">Updated ${now}</div>
+            `;
+        } catch(e) {
+            el.innerHTML = '<div class="w-loading">Weather unavailable</div>';
+        }
+    }
+
+    // Fetch all weather widgets on load
+    window.addEventListener('load', () => {
+        WEATHER_LOCATIONS.forEach(loc => fetchWeather(loc));
+        // Refresh every 30 minutes
+        setInterval(() => WEATHER_LOCATIONS.forEach(loc => fetchWeather(loc)), 30 * 60 * 1000);
+    });
+
     function setLang(lang) {
         document.querySelectorAll('[data-en]').forEach(el => {
             const val = el.getAttribute('data-' + lang);
