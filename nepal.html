@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏔️ Nepal · Mardi Himal Trek — October 9 to 19</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            color: #2c3e50;
+            line-height: 1.7;
+        }
+
+        /* ── TRIP TABS ── */
+        .trip-tabs {
+            display: flex; justify-content: center; gap: 4px;
+            background: #0b0b16; padding: 8px 12px 0;
+        }
+        .trip-tab {
+            padding: 10px 20px; border-radius: 10px 10px 0 0;
+            color: rgba(255,255,255,0.6); text-decoration: none;
+            font-weight: 600; font-size: 0.9em; white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .trip-tab:hover { color: white; background: rgba(255,255,255,0.08); }
+        .trip-tab.active { background: #3a0d1a; color: white; }
+        @media (max-width: 520px) {
+            .trip-tab { padding: 8px 12px; font-size: 0.78em; white-space: normal; text-align: center; flex: 1; }
+        }
+
+        /* ── HEADER ── */
+        .site-header {
+            background: linear-gradient(135deg, #3a0d1a 0%, #7a1f2b 45%, #0f3460 100%);
+            color: white;
+            padding: 40px 20px 30px;
+            text-align: center;
+            position: relative;
+        }
+        .site-header h1 { font-size: 2.4em; margin-bottom: 8px; letter-spacing: -0.5px; }
+        .site-header .subtitle { font-size: 1.1em; opacity: 0.8; margin-bottom: 20px; }
+        .trip-badges {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px;
+        }
+        .badge {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: 0.85em;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ── LANGUAGE SWITCHER ── */
+        .lang-switcher {
+            position: absolute; top: 20px; right: 20px;
+            display: flex; gap: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px; padding: 4px;
+        }
+        .lang-btn {
+            padding: 6px 14px; border: none; border-radius: 16px;
+            cursor: pointer; font-weight: 600; font-size: 0.85em;
+            transition: all 0.2s; background: transparent; color: rgba(255,255,255,0.7);
+        }
+        .lang-btn.active { background: white; color: #3a0d1a; }
+        .lang-btn:hover:not(.active) { background: rgba(255,255,255,0.2); color: white; }
+
+        /* ── DAY NAVIGATION ── */
+        .day-nav {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 12px 20px;
+            display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .day-nav-btn {
+            padding: 8px 16px; border: 2px solid #e0e0e0; border-radius: 20px;
+            cursor: pointer; font-weight: 600; font-size: 0.85em;
+            background: white; color: #666; transition: all 0.2s;
+        }
+        .day-nav-btn:hover { border-color: #c2410c; color: #c2410c; }
+        .day-nav-btn.active { background: #c2410c; border-color: #c2410c; color: white; }
+        .day-nav-btn.big { border-color: #fca5a5; }
+
+        /* ── ADVISORY ── */
+        .advisory {
+            background: #fff8e1; border-left: 5px solid #f59e0b;
+            padding: 16px 20px; margin: 20px auto; max-width: 1200px;
+            border-radius: 0 8px 8px 0; font-size: 0.92em; color: #92400e;
+        }
+        .advisory strong { display: block; margin-bottom: 4px; font-size: 1em; }
+
+        /* ── MAIN CONTAINER ── */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+        /* ── DAY CARD ── */
+        .day-card {
+            background: white; border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px; overflow: hidden;
+            scroll-margin-top: 80px;
+        }
+
+        /* ── DAY HEADER STRIP ── */
+        .day-header {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            flex-wrap: wrap; gap: 12px;
+            padding: 20px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .day-header.travel { background: linear-gradient(135deg, #0ea5e9 0%, #1e3a8a 100%); }
+        .day-header.city { background: linear-gradient(135deg, #a855f7 0%, #6b21a8 100%); }
+        .day-header.road { background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%); }
+        .day-header.trek { background: linear-gradient(135deg, #10b981 0%, #065f46 100%); }
+        .day-header.big { background: linear-gradient(135deg, #ef4444 0%, #7f1d1d 100%); }
+        .day-number {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px; padding: 6px 14px;
+            font-size: 0.8em; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase; white-space: nowrap;
+        }
+        .day-title { font-size: 1.5em; font-weight: 700; margin-top: 6px; }
+        .day-date { font-size: 0.9em; opacity: 0.85; margin-top: 2px; }
+
+        /* ── SECTION BLOCK ── */
+        .section-block {
+            padding: 24px 28px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .section-block:last-child { border-bottom: none; }
+        .section-label {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 0.75em; font-weight: 700; letter-spacing: 1.5px;
+            text-transform: uppercase; color: #999; margin-bottom: 16px;
+        }
+        .section-label::after {
+            content: ''; flex: 1; height: 1px; background: #e8e8e8;
+        }
+
+        /* ── TREK STATS ── */
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px;
+        }
+        .stat {
+            background: #f0fdf4; border-radius: 12px; padding: 14px 16px; text-align: center;
+            border: 1px solid #bbf7d0;
+        }
+        .stat .stat-value { font-size: 1.4em; font-weight: 800; color: #065f46; line-height: 1.2; }
+        .stat .stat-label {
+            font-size: 0.72em; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; color: #6b7280; margin-top: 4px;
+        }
+        .stat.up .stat-value { color: #b45309; }
+        .stat.up { background: #fffbeb; border-color: #fde68a; }
+        .stat.down .stat-value { color: #1d4ed8; }
+        .stat.down { background: #eff6ff; border-color: #bfdbfe; }
+        .stat.peak .stat-value { color: #b91c1c; }
+        .stat.peak { background: #fef2f2; border-color: #fecaca; }
+
+        /* ── STAY CARDS ── */
+        .stay-card {
+            border-radius: 12px; padding: 18px;
+            border: 2px solid #10b981; position: relative;
+        }
+        .stay-rank {
+            position: absolute; top: -1px; left: 16px;
+            font-size: 0.72em; font-weight: 700; letter-spacing: 0.5px;
+            padding: 3px 10px; border-radius: 0 0 8px 8px;
+            text-transform: uppercase; background: #10b981; color: white;
+        }
+        .stay-name { font-size: 1.05em; font-weight: 700; color: #1a1a2e; margin: 18px 0 6px; }
+        .stay-meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+        .meta-tag {
+            font-size: 0.78em; padding: 3px 10px; border-radius: 12px;
+            font-weight: 600;
+        }
+        .tag-open { background: #d1fae5; color: #065f46; }
+        .tag-warning { background: #fef3c7; color: #92400e; }
+        .tag-info { background: #dbeafe; color: #1e40af; }
+        .tag-alt { background: #fee2e2; color: #991b1b; }
+        .stay-desc { font-size: 0.9em; color: #555; margin: 8px 0; }
+        .stay-links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+
+        /* ── WARNING BOX ── */
+        .warning-box {
+            background: #fff7ed; border: 1px solid #fed7aa;
+            border-radius: 10px; padding: 12px 16px;
+            font-size: 0.88em; color: #9a3412; margin-bottom: 14px;
+        }
+        .warning-box strong { display: block; margin-bottom: 3px; }
+        .warning-box ul { margin: 6px 0 0 18px; }
+
+        /* ── ACTIVITY LIST ── */
+        .activity-list { display: grid; gap: 10px; }
+        .activity-item {
+            background: #f8f7ff; border-radius: 10px;
+            padding: 14px 16px; border-left: 4px solid #764ba2;
+        }
+        .activity-item .act-label {
+            font-size: 0.75em; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; color: #764ba2; margin-bottom: 4px;
+        }
+        .activity-item .act-title { font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+        .activity-item .act-desc { font-size: 0.9em; color: #555; }
+        .activity-item.flight { border-left-color: #0ea5e9; background: #f0f9ff; }
+        .activity-item.flight .act-label { color: #0369a1; }
+        .activity-item.shop { border-left-color: #f59e0b; background: #fffbeb; }
+        .activity-item.shop .act-label { color: #b45309; }
+        .activity-item.trek { border-left-color: #10b981; background: #f0fdf4; }
+        .activity-item.trek .act-label { color: #047857; }
+
+        /* ── SCHEDULE TABLE ── */
+        .schedule-table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+        .schedule-table th {
+            text-align: left; font-size: 0.75em; text-transform: uppercase; letter-spacing: 1px;
+            color: #999; padding: 8px 10px; border-bottom: 2px solid #eee;
+        }
+        .schedule-table td { padding: 12px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+        .schedule-table tr { cursor: pointer; transition: background 0.15s; }
+        .schedule-table tbody tr:hover { background: #fafafa; }
+        .schedule-table tr.big-row { background: #fef2f2; }
+        .schedule-table tr.big-row:hover { background: #fee2e2; }
+        .schedule-table .s-date { font-weight: 700; color: #1a1a2e; white-space: nowrap; }
+        .schedule-table .s-where { font-weight: 600; color: #7a1f2b; }
+        .schedule-table .s-night { white-space: nowrap; font-weight: 600; color: #065f46; }
+
+        /* ── ROUTE TIMELINE ── */
+        .route-timeline { position: relative; margin-left: 10px; padding-left: 26px; }
+        .route-timeline::before {
+            content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px;
+            width: 3px; background: linear-gradient(#0ea5e9, #10b981 35%, #ef4444 60%, #10b981 75%, #0ea5e9);
+            border-radius: 2px;
+        }
+        .route-stop { position: relative; padding: 6px 0 14px; }
+        .route-stop::before {
+            content: ''; position: absolute; left: -26px; top: 12px;
+            width: 15px; height: 15px; border-radius: 50%;
+            background: white; border: 3px solid #10b981;
+        }
+        .route-stop.fly::before { border-color: #0ea5e9; }
+        .route-stop.peak::before { border-color: #ef4444; background: #ef4444; width: 19px; height: 19px; left: -28px; top: 10px; }
+        .route-stop .r-name { font-weight: 700; color: #1a1a2e; }
+        .route-stop.peak .r-name { color: #b91c1c; font-size: 1.1em; }
+        .route-stop .r-when { font-size: 0.82em; color: #888; }
+        .route-stop .r-how { font-size: 0.8em; color: #666; margin-top: 2px; }
+
+        /* ── SHOPPING ── */
+        .shop-list { display: grid; gap: 10px; }
+        .shop-item {
+            display: flex; align-items: center; gap: 14px;
+            background: #fffbeb; border-radius: 10px; padding: 12px 16px;
+            border-left: 4px solid #f59e0b; cursor: pointer; transition: opacity 0.2s;
+        }
+        .shop-item input { width: 20px; height: 20px; accent-color: #10b981; cursor: pointer; flex-shrink: 0; }
+        .shop-item .shop-emoji { font-size: 1.5em; }
+        .shop-item .shop-info { flex: 1; }
+        .shop-item .shop-name { font-weight: 700; color: #1a1a2e; }
+        .shop-item .shop-note { font-size: 0.82em; color: #777; }
+        .shop-item .shop-price { font-weight: 700; color: #b45309; white-space: nowrap; }
+        .shop-item.done { opacity: 0.55; border-left-color: #10b981; background: #f0fdf4; }
+        .shop-item.done .shop-name { text-decoration: line-through; }
+        .shop-total {
+            display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+            margin-top: 14px; padding: 12px 16px; border-radius: 10px;
+            background: #1a1a2e; color: white; font-weight: 700;
+        }
+
+        /* ── MAP SECTION ── */
+        .map-section { background: #f8f9fa; }
+        .map-route-info {
+            background: #e8f4fd; border-radius: 10px;
+            padding: 14px 18px; margin-bottom: 16px;
+            border-left: 4px solid #2196F3; font-size: 0.9em;
+        }
+        .map-route-info .route-line { margin: 4px 0; }
+        .route-time { font-weight: 700; color: #1565c0; }
+        .map-frame {
+            width: 100%; height: 400px; border-radius: 10px;
+            overflow: hidden; border: 2px solid #e0e0e0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .map-frame iframe { width: 100%; height: 100%; border: none; }
+
+        /* ── BUTTONS ── */
+        .btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 8px 16px; border-radius: 8px; font-size: 0.85em;
+            font-weight: 600; text-decoration: none; cursor: pointer;
+            border: none; transition: all 0.2s;
+        }
+        .btn-primary { background: #7a1f2b; color: white; }
+        .btn-primary:hover { background: #5c1520; }
+        .btn-secondary { background: #f0f0f0; color: #444; }
+        .btn-secondary:hover { background: #e0e0e0; }
+        .btn-map { background: #1a73e8; color: white; margin-top: 12px; }
+        .btn-map:hover { background: #1557b0; }
+
+        a.loc { color: #7a1f2b; font-weight: 600; text-decoration: none; }
+        a.loc:hover { text-decoration: underline; }
+
+        .finish-box {
+            background: #d1fae5; border-radius: 10px; padding: 16px; margin-top: 20px; text-align: center;
+        }
+        .finish-box p { font-size: 1.15em; font-weight: 700; color: #065f46; }
+
+        /* ── FOOTER ── */
+        footer {
+            background: #1a1a2e; color: white;
+            text-align: center; padding: 30px 20px; margin-top: 10px;
+        }
+        footer h3 { margin-bottom: 12px; font-size: 1.1em; opacity: 0.9; }
+        .must-see-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 12px 0; }
+        .must-see-tag {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 16px; padding: 4px 12px; font-size: 0.82em;
+        }
+        .footer-link {
+            display: inline-block; background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3); border-radius: 20px;
+            padding: 10px 22px; color: white; text-decoration: none;
+            font-weight: 600; font-size: 0.9em; transition: background 0.2s;
+        }
+        .footer-link:hover { background: rgba(255,255,255,0.25); }
+
+        /* ── WEATHER WIDGET ── */
+        .weather-widget {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 14px;
+            padding: 12px 16px;
+            min-width: 200px;
+            backdrop-filter: blur(6px);
+            color: white;
+            flex-shrink: 0;
+        }
+        .weather-widget .w-location {
+            font-size: 0.7em; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; opacity: 0.75; margin-bottom: 6px;
+        }
+        .weather-widget .w-main { display: flex; align-items: center; gap: 10px; }
+        .weather-widget .w-icon { font-size: 2em; line-height: 1; }
+        .weather-widget .w-temp { font-size: 1.8em; font-weight: 700; line-height: 1; }
+        .weather-widget .w-desc { font-size: 0.78em; opacity: 0.85; margin-top: 3px; }
+        .weather-widget .w-details {
+            display: flex; gap: 10px; margin-top: 8px;
+            font-size: 0.75em; opacity: 0.8; flex-wrap: wrap;
+        }
+        .weather-widget .w-loading { font-size: 0.82em; opacity: 0.6; font-style: italic; }
+        .weather-widget .w-updated { font-size: 0.65em; opacity: 0.5; margin-top: 6px; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .site-header h1 { font-size: 1.6em; }
+            .site-header .subtitle { font-size: 0.95em; }
+            .lang-switcher { position: static; justify-content: center; margin-bottom: 16px; display: inline-flex; }
+            .day-header { padding: 16px 18px; gap: 12px; }
+            .day-title { font-size: 1.15em; }
+            .day-date { font-size: 0.82em; }
+            .section-block { padding: 16px 18px; }
+            .map-frame { height: 280px; }
+            .stay-links { flex-direction: column; }
+            .stay-links .btn { width: 100%; justify-content: center; }
+            .btn { padding: 10px 16px; font-size: 0.9em; }
+            .day-nav { padding: 10px 12px; gap: 6px; flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; }
+            .day-nav-btn { padding: 7px 12px; font-size: 0.8em; white-space: nowrap; flex-shrink: 0; }
+            .trip-badges { gap: 6px; }
+            .badge { font-size: 0.78em; padding: 4px 10px; }
+
+            .schedule-table thead { display: none; }
+            .schedule-table, .schedule-table tbody, .schedule-table tr, .schedule-table td { display: block; width: 100%; }
+            .schedule-table tr { border: 1px solid #eee; border-radius: 10px; margin-bottom: 10px; padding: 8px 4px; }
+            .schedule-table td { border: none; padding: 3px 10px; }
+            .schedule-table .s-date { font-size: 1.05em; }
+        }
+        @media (max-width: 600px) {
+            .weather-widget { width: 100%; min-width: unset; }
+        }
+        @media (max-width: 480px) {
+            .site-header { padding: 24px 16px 20px; }
+            .site-header h1 { font-size: 1.35em; }
+            .container { padding: 12px; }
+            .day-card { border-radius: 12px; }
+            .shop-item { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="trip-tabs">
+    <a href="./" class="trip-tab">🚐 Dolomites Campervan Adventure</a>
+    <a href="nepal.html" class="trip-tab active">🏔️ Nepal · Mardi Himal</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════
+     HEADER
+═══════════════════════════════════════════════════════════ -->
+<header class="site-header">
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('ru')">RU</button>
+    </div>
+    <h1 data-en="🏔️ Nepal · Mardi Himal Trek" data-ru="🏔️ Непал · Трек к Марди Химал">🏔️ Nepal · Mardi Himal Trek</h1>
+    <p class="subtitle" data-en="October 9 – 19, 2026 · Yerevan → Kathmandu → Mardi Himal Base Camp → Yerevan" data-ru="9 – 19 октября 2026 · Ереван → Катманду → Базовый лагерь Марди Химал → Ереван">October 9 – 19, 2026 · Yerevan → Kathmandu → Mardi Himal Base Camp → Yerevan</p>
+    <div class="trip-badges">
+        <span class="badge" data-en="🧭 ArmGeo group · Oct 10–18" data-ru="🧭 Группа ArmGeo · 10–18 окт">🧭 ArmGeo group · Oct 10–18</span>
+        <span class="badge" data-en="🥾 5 trekking days" data-ru="🥾 5 дней трекинга">🥾 5 trekking days</span>
+        <span class="badge" data-en="⛰️ Max altitude 4,500 m" data-ru="⛰️ Макс. высота 4 500 м">⛰️ Max altitude 4,500 m</span>
+        <span class="badge" data-en="✈️ Via Sharjah" data-ru="✈️ Через Шарджу">✈️ Via Sharjah</span>
+        <span class="badge" data-en="🇳🇵 Kathmandu · Pokhara · Annapurna region" data-ru="🇳🇵 Катманду · Покхара · район Аннапурны">🇳🇵 Kathmandu · Pokhara · Annapurna region</span>
+    </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════
+     STICKY DAY NAVIGATION
+═══════════════════════════════════════════════════════════ -->
+<nav class="day-nav">
+    <button class="day-nav-btn active" onclick="goTo('overview',this)" data-en="📋 Overview" data-ru="📋 Обзор">📋 Overview</button>
+    <button class="day-nav-btn" onclick="goTo('shopping',this)" data-en="🛍️ Shopping" data-ru="🛍️ Покупки">🛍️ Shopping</button>
+    <button class="day-nav-btn" onclick="goTo('oct9',this)" data-en="Oct 9" data-ru="9 окт">Oct 9</button>
+    <button class="day-nav-btn" onclick="goTo('oct10',this)" data-en="Oct 10" data-ru="10 окт">Oct 10</button>
+    <button class="day-nav-btn" onclick="goTo('oct11',this)" data-en="Oct 11" data-ru="11 окт">Oct 11</button>
+    <button class="day-nav-btn" onclick="goTo('oct12',this)" data-en="Oct 12" data-ru="12 окт">Oct 12</button>
+    <button class="day-nav-btn" onclick="goTo('oct13',this)" data-en="Oct 13" data-ru="13 окт">Oct 13</button>
+    <button class="day-nav-btn" onclick="goTo('oct14',this)" data-en="Oct 14" data-ru="14 окт">Oct 14</button>
+    <button class="day-nav-btn big" onclick="goTo('oct15',this)" data-en="🔥 Oct 15" data-ru="🔥 15 окт">🔥 Oct 15</button>
+    <button class="day-nav-btn" onclick="goTo('oct16',this)" data-en="Oct 16" data-ru="16 окт">Oct 16</button>
+    <button class="day-nav-btn" onclick="goTo('oct17',this)" data-en="Oct 17" data-ru="17 окт">Oct 17</button>
+    <button class="day-nav-btn" onclick="goTo('oct18',this)" data-en="Oct 18" data-ru="18 окт">Oct 18</button>
+    <button class="day-nav-btn" onclick="goTo('oct19',this)" data-en="Oct 19" data-ru="19 окт">Oct 19</button>
+</nav>
+
+<div class="container">
+
+    <!-- ADVISORY -->
+    <div class="advisory">
+        <strong data-en="📌 Program dates: ArmGeo runs Oct 10–18" data-ru="📌 Даты программы: ArmGeo — 10–18 октября">📌 Program dates: ArmGeo runs Oct 10–18</strong>
+        <span data-en="The official ArmGeo program is Oct 10–18, not just an Oct 11–17 trek. You arrive late on Oct 9 and fly out late on Oct 18, so both fit around the group program." data-ru="Официальная программа ArmGeo — 10–18 октября, а не просто трек 11–17 октября. Вы прилетаете поздно 9-го и улетаете поздно 18-го, так что оба перелёта укладываются в программу группы.">The official ArmGeo program is Oct 10–18, not just an Oct 11–17 trek. You arrive late on Oct 9 and fly out late on Oct 18, so both fit around the group program.</span>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         OVERVIEW
+    ═══════════════════════════════════════════════════════ -->
+    <div class="day-card" id="overview">
+        <div class="day-header">
+            <div>
+                <div class="day-number" data-en="Overview" data-ru="Обзор">Overview</div>
+                <div class="day-title" data-en="Your Nepal schedule — October 9–19" data-ru="Ваше расписание в Непале — 9–19 октября">Your Nepal schedule — October 9–19</div>
+                <div class="day-date" data-en="Tap any row to jump to that day" data-ru="Нажмите на строку, чтобы перейти к дню">Tap any row to jump to that day</div>
+            </div>
+        </div>
+        <div class="day-body">
+            <div class="section-block">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th data-en="Date" data-ru="Дата">Date</th>
+                            <th data-en="Where" data-ru="Где">Where</th>
+                            <th data-en="What you're doing" data-ru="Что вы делаете">What you're doing</th>
+                            <th data-en="Night" data-ru="Ночь">Night</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr onclick="jump('oct9')">
+                            <td class="s-date" data-en="Oct 9, Fri" data-ru="9 окт, Пт">Oct 9, Fri</td>
+                            <td class="s-where" data-en="✈️ Yerevan → Sharjah → Kathmandu" data-ru="✈️ Ереван → Шарджа → Катманду">✈️ Yerevan → Sharjah → Kathmandu</td>
+                            <td data-en="12:05 Yerevan departure → 16:05 Sharjah. 17:00 flight to Kathmandu → 23:00 arrival" data-ru="12:05 вылет из Еревана → 16:05 Шарджа. 17:00 рейс в Катманду → прилёт 23:00">12:05 Yerevan departure → 16:05 Sharjah. 17:00 flight to Kathmandu → 23:00 arrival</td>
+                            <td class="s-night" data-en="🏨 Kathmandu" data-ru="🏨 Катманду">🏨 Kathmandu</td>
+                        </tr>
+                        <tr onclick="jump('oct10')">
+                            <td class="s-date" data-en="Oct 10, Sat" data-ru="10 окт, Сб">Oct 10, Sat</td>
+                            <td class="s-where" data-en="🏙️ Kathmandu" data-ru="🏙️ Катманду">🏙️ Kathmandu</td>
+                            <td data-en="ArmGeo Day 1: arrival/meeting, transfer to hotel. Main shopping day: trekking duffle, Scarpa boots, TNF shell, Julbo Fury, hat." data-ru="ArmGeo День 1: встреча, трансфер в отель. Главный день покупок: баул, ботинки Scarpa, мембрана TNF, Julbo Fury, шляпа.">ArmGeo Day 1: arrival/meeting, transfer to hotel. Main shopping day: trekking duffle, Scarpa boots, TNF shell, Julbo Fury, hat.</td>
+                            <td class="s-night" data-en="🏨 Kathmandu" data-ru="🏨 Катманду">🏨 Kathmandu</td>
+                        </tr>
+                        <tr onclick="jump('oct11')">
+                            <td class="s-date" data-en="Oct 11, Sun" data-ru="11 окт, Вс">Oct 11, Sun</td>
+                            <td class="s-where" data-en="🚐 Kathmandu → Pokhara" data-ru="🚐 Катманду → Покхара">🚐 Kathmandu → Pokhara</td>
+                            <td data-en="ArmGeo Day 2: long road transfer to Pokhara, around 7–8 hours. Evening in Pokhara." data-ru="ArmGeo День 2: долгий переезд в Покхару, около 7–8 часов. Вечер в Покхаре.">ArmGeo Day 2: long road transfer to Pokhara, around 7–8 hours. Evening in Pokhara.</td>
+                            <td class="s-night" data-en="🏨 Pokhara" data-ru="🏨 Покхара">🏨 Pokhara</td>
+                        </tr>
+                        <tr onclick="jump('oct12')">
+                            <td class="s-date" data-en="Oct 12, Mon" data-ru="12 окт, Пн">Oct 12, Mon</td>
+                            <td class="s-where" data-en="🥾 Pokhara → Kande → Deurali" data-ru="🥾 Покхара → Канде → Деурали">🥾 Pokhara → Kande → Deurali</td>
+                            <td data-en="ArmGeo Day 3: ~1 hr drive to Kande, then start trekking. 5–6 km / 3–4 h / +550 m." data-ru="ArmGeo День 3: ~1 ч до Канде, затем начало трека. 5–6 км / 3–4 ч / +550 м.">ArmGeo Day 3: ~1 hr drive to Kande, then start trekking. 5–6 km / 3–4 h / +550 m.</td>
+                            <td class="s-night" data-en="🏔️ Guesthouse" data-ru="🏔️ Гестхаус">🏔️ Guesthouse</td>
+                        </tr>
+                        <tr onclick="jump('oct13')">
+                            <td class="s-date" data-en="Oct 13, Tue" data-ru="13 окт, Вт">Oct 13, Tue</td>
+                            <td class="s-where" data-en="🏔️ Deurali → Camp 1" data-ru="🏔️ Деурали → Лагерь 1">🏔️ Deurali → Camp 1</td>
+                            <td data-en="ArmGeo Day 4: long ascent through meadows and forests. 12–13 km / 5–6 h / +1,200 m. Camp around 3,050 m." data-ru="ArmGeo День 4: долгий подъём через луга и леса. 12–13 км / 5–6 ч / +1 200 м. Лагерь около 3 050 м.">ArmGeo Day 4: long ascent through meadows and forests. 12–13 km / 5–6 h / +1,200 m. Camp around 3,050 m.</td>
+                            <td class="s-night" data-en="🏔️ 3,050 m" data-ru="🏔️ 3 050 м">🏔️ 3,050 m</td>
+                        </tr>
+                        <tr onclick="jump('oct14')">
+                            <td class="s-date" data-en="Oct 14, Wed" data-ru="14 окт, Ср">Oct 14, Wed</td>
+                            <td class="s-where" data-en="🏔️ Camp 1 → Camp 2" data-ru="🏔️ Лагерь 1 → Лагерь 2">🏔️ Camp 1 → Camp 2</td>
+                            <td data-en="ArmGeo Day 5: relatively shorter day. 5–6 km / 3–4 h / +550 m. Camp around 3,600 m." data-ru="ArmGeo День 5: относительно короткий день. 5–6 км / 3–4 ч / +550 м. Лагерь около 3 600 м.">ArmGeo Day 5: relatively shorter day. 5–6 km / 3–4 h / +550 m. Camp around 3,600 m.</td>
+                            <td class="s-night" data-en="🏔️ 3,600 m" data-ru="🏔️ 3 600 м">🏔️ 3,600 m</td>
+                        </tr>
+                        <tr class="big-row" onclick="jump('oct15')">
+                            <td class="s-date" data-en="Oct 15, Thu" data-ru="15 окт, Чт">Oct 15, Thu</td>
+                            <td class="s-where" data-en="🏔️ Mardi Himal BC → Badal Danda" data-ru="🏔️ БЛ Марди Химал → Бадал Данда">🏔️ Mardi Himal BC → Badal Danda</td>
+                            <td data-en="🔥 BIG DAY. Trek to Mardi Himal Base Camp (4,500 m), then descend to Badal Danda. 15 km / 9–10 h / +1,300 m / −1,600 m." data-ru="🔥 БОЛЬШОЙ ДЕНЬ. Подъём к базовому лагерю Марди Химал (4 500 м), затем спуск в Бадал Данда. 15 км / 9–10 ч / +1 300 м / −1 600 м.">🔥 BIG DAY. Trek to Mardi Himal Base Camp (4,500 m), then descend to Badal Danda. 15 km / 9–10 h / +1,300 m / −1,600 m.</td>
+                            <td class="s-night" data-en="🏔️ Badal Danda" data-ru="🏔️ Бадал Данда">🏔️ Badal Danda</td>
+                        </tr>
+                        <tr onclick="jump('oct16')">
+                            <td class="s-date" data-en="Oct 16, Fri" data-ru="16 окт, Пт">Oct 16, Fri</td>
+                            <td class="s-where" data-en="🥾 Badal Danda → Sidhing → Pokhara" data-ru="🥾 Бадал Данда → Сидхинг → Покхара">🥾 Badal Danda → Sidhing → Pokhara</td>
+                            <td data-en="Final trekking day. Descend to Sidhing: 7 km / 3–4 h / +110 m / −1,650 m. Then ~2 h drive to Pokhara." data-ru="Последний день трека. Спуск в Сидхинг: 7 км / 3–4 ч / +110 м / −1 650 м. Затем ~2 ч езды до Покхары.">Final trekking day. Descend to Sidhing: 7 km / 3–4 h / +110 m / −1,650 m. Then ~2 h drive to Pokhara.</td>
+                            <td class="s-night" data-en="🏨 Pokhara" data-ru="🏨 Покхара">🏨 Pokhara</td>
+                        </tr>
+                        <tr onclick="jump('oct17')">
+                            <td class="s-date" data-en="Oct 17, Sat" data-ru="17 окт, Сб">Oct 17, Sat</td>
+                            <td class="s-where" data-en="🚐 Pokhara → Kathmandu" data-ru="🚐 Покхара → Катманду">🚐 Pokhara → Kathmandu</td>
+                            <td data-en="ArmGeo Day 8: return to Kathmandu, around 7–8 h. Evening in Kathmandu." data-ru="ArmGeo День 8: возвращение в Катманду, около 7–8 ч. Вечер в Катманду.">ArmGeo Day 8: return to Kathmandu, around 7–8 h. Evening in Kathmandu.</td>
+                            <td class="s-night" data-en="🏨 Kathmandu" data-ru="🏨 Катманду">🏨 Kathmandu</td>
+                        </tr>
+                        <tr onclick="jump('oct18')">
+                            <td class="s-date" data-en="Oct 18, Sun" data-ru="18 окт, Вс">Oct 18, Sun</td>
+                            <td class="s-where" data-en="🏙️ Kathmandu → ✈️ Sharjah" data-ru="🏙️ Катманду → ✈️ Шарджа">🏙️ Kathmandu → ✈️ Sharjah</td>
+                            <td data-en="ArmGeo Day 9 / departure day. Free Kathmandu time during the day. Flight 23:45 Kathmandu → 02:25 Sharjah (Oct 19)." data-ru="ArmGeo День 9 / день отъезда. Свободное время в Катманду днём. Рейс 23:45 Катманду → 02:25 Шарджа (19 окт).">ArmGeo Day 9 / departure day. Free Kathmandu time during the day. Flight 23:45 Kathmandu → 02:25 Sharjah (Oct 19).</td>
+                            <td class="s-night" data-en="✈️ Flight" data-ru="✈️ Перелёт">✈️ Flight</td>
+                        </tr>
+                        <tr onclick="jump('oct19')">
+                            <td class="s-date" data-en="Oct 19, Mon" data-ru="19 окт, Пн">Oct 19, Mon</td>
+                            <td class="s-where" data-en="✈️ Sharjah → Yerevan" data-ru="✈️ Шарджа → Ереван">✈️ Sharjah → Yerevan</td>
+                            <td data-en="07:30 Sharjah → 11:15 Yerevan. 🇦🇲 Home." data-ru="07:30 Шарджа → 11:15 Ереван. 🇦🇲 Дома.">07:30 Sharjah → 11:15 Yerevan. 🇦🇲 Home.</td>
+                            <td class="s-night">🏠</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- TRIP IN ONE PICTURE -->
+            <div class="section-block">
+                <div class="section-label" data-en="🏔️ The trip in one picture" data-ru="🏔️ Поездка на одной картинке">🏔️ The trip in one picture</div>
+                <div class="route-timeline">
+                    <div class="route-stop fly"><div class="r-name" data-en="Yerevan" data-ru="Ереван">Yerevan</div><div class="r-how" data-en="✈️ 12:05, Oct 9" data-ru="✈️ 12:05, 9 окт">✈️ 12:05, Oct 9</div></div>
+                    <div class="route-stop fly"><div class="r-name" data-en="Sharjah" data-ru="Шарджа">Sharjah</div><div class="r-how" data-en="✈️ 17:00 connection" data-ru="✈️ пересадка, 17:00">✈️ 17:00 connection</div></div>
+                    <div class="route-stop fly"><div class="r-name" data-en="Kathmandu" data-ru="Катманду">Kathmandu</div><div class="r-when" data-en="Oct 9 (23:00) – Oct 10" data-ru="9 окт (23:00) – 10 окт">Oct 9 (23:00) – Oct 10</div><div class="r-how" data-en="🛍️ Shopping + ArmGeo meeting" data-ru="🛍️ Покупки + встреча ArmGeo">🛍️ Shopping + ArmGeo meeting</div></div>
+                    <div class="route-stop"><div class="r-name" data-en="Pokhara" data-ru="Покхара">Pokhara</div><div class="r-when" data-en="Oct 11" data-ru="11 окт">Oct 11</div><div class="r-how" data-en="🚐 7–8 h by road" data-ru="🚐 7–8 ч по дороге">🚐 7–8 h by road</div></div>
+                    <div class="route-stop"><div class="r-name" data-en="Kande → Deurali" data-ru="Канде → Деурали">Kande → Deurali</div><div class="r-when" data-en="Oct 12" data-ru="12 окт">Oct 12</div><div class="r-how" data-en="🥾 Trek starts" data-ru="🥾 Начало трека">🥾 Trek starts</div></div>
+                    <div class="route-stop"><div class="r-name" data-en="Camp 1 · 3,050 m" data-ru="Лагерь 1 · 3 050 м">Camp 1 · 3,050 m</div><div class="r-when" data-en="Oct 13" data-ru="13 окт">Oct 13</div></div>
+                    <div class="route-stop"><div class="r-name" data-en="Camp 2 · 3,600 m" data-ru="Лагерь 2 · 3 600 м">Camp 2 · 3,600 m</div><div class="r-when" data-en="Oct 14" data-ru="14 окт">Oct 14</div></div>
+                    <div class="route-stop peak"><div class="r-name" data-en="🔥 Mardi Himal Base Camp · 4,500 m" data-ru="🔥 Базовый лагерь Марди Химал · 4 500 м">🔥 Mardi Himal Base Camp · 4,500 m</div><div class="r-when" data-en="Oct 15" data-ru="15 окт">Oct 15</div></div>
+                    <div class="route-stop"><div class="r-name" data-en="Badal Danda" data-ru="Бадал Данда">Badal Danda</div><div class="r-when" data-en="Oct 15 (night)" data-ru="15 окт (ночь)">Oct 15 (night)</div></div>
+                    <div class="route-stop"><div class="r-name" data-en="Sidhing → Pokhara" data-ru="Сидхинг → Покхара">Sidhing → Pokhara</div><div class="r-when" data-en="Oct 16" data-ru="16 окт">Oct 16</div><div class="r-how" data-en="🥾 Last trekking day + 🚐 2 h" data-ru="🥾 Последний день трека + 🚐 2 ч">🥾 Last trekking day + 🚐 2 h</div></div>
+                    <div class="route-stop fly"><div class="r-name" data-en="Kathmandu" data-ru="Катманду">Kathmandu</div><div class="r-when" data-en="Oct 17–18" data-ru="17–18 окт">Oct 17–18</div><div class="r-how" data-en="✈️ 23:45, Oct 18" data-ru="✈️ 23:45, 18 окт">✈️ 23:45, Oct 18</div></div>
+                    <div class="route-stop fly"><div class="r-name" data-en="Sharjah" data-ru="Шарджа">Sharjah</div><div class="r-when" data-en="02:25 – 07:30, Oct 19" data-ru="02:25 – 07:30, 19 окт">02:25 – 07:30, Oct 19</div></div>
+                    <div class="route-stop fly"><div class="r-name" data-en="🇦🇲 Yerevan" data-ru="🇦🇲 Ереван">🇦🇲 Yerevan</div><div class="r-when" data-en="11:15, Oct 19" data-ru="11:15, 19 окт">11:15, Oct 19</div></div>
+                </div>
+                <p class="stay-desc" style="margin-top:6px;font-size:0.82em;color:#888;" data-en="ArmGeo's published route confirms the trekking sequence: Kathmandu → Pokhara → Kande → Deurali → 3,050 m → 3,600 m → Mardi Himal Base Camp 4,500 m → Badal Danda → Sidhing → Pokhara → Kathmandu." data-ru="Опубликованный маршрут ArmGeo подтверждает последовательность: Катманду → Покхара → Канде → Деурали → 3 050 м → 3 600 м → БЛ Марди Химал 4 500 м → Бадал Данда → Сидхинг → Покхара → Катманду.">ArmGeo's published route confirms the trekking sequence: Kathmandu → Pokhara → Kande → Deurali → 3,050 m → 3,600 m → Mardi Himal Base Camp 4,500 m → Badal Danda → Sidhing → Pokhara → Kathmandu.</p>
+            </div>
+        </div>
+    </div><!-- /overview -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         SHOPPING
+    ═══════════════════════════════════════════════════════ -->
+    <div class="day-card" id="shopping">
+        <div class="day-header road">
+            <div>
+                <div class="day-number" data-en="Kathmandu · Oct 10" data-ru="Катманду · 10 окт">Kathmandu · Oct 10</div>
+                <div class="day-title" data-en="🛍️ Your Kathmandu shopping" data-ru="🛍️ Ваши покупки в Катманду">🛍️ Your Kathmandu shopping</div>
+                <div class="day-date" data-en="Get everything sorted before leaving for Pokhara on Oct 11" data-ru="Всё купить до отъезда в Покхару 11 октября">Get everything sorted before leaving for Pokhara on Oct 11</div>
+            </div>
+        </div>
+        <div class="day-body">
+            <div class="section-block">
+                <div class="warning-box">
+                    <strong data-en="⚠️ Oct 10 is a shopping day, not just a sightseeing day" data-ru="⚠️ 10 октября — день покупок, а не только экскурсий">⚠️ Oct 10 is a shopping day, not just a sightseeing day</strong>
+                    <span data-en="The group leaves for Pokhara on Oct 11 and the trek starts on Oct 12, so this is your only real chance to buy gear in Kathmandu. Try the boots on and walk around in them before you buy." data-ru="Группа уезжает в Покхару 11 октября, а трек начинается 12-го, так что это ваш единственный настоящий шанс купить снаряжение в Катманду. Примерьте ботинки и походите в них перед покупкой.">The group leaves for Pokhara on Oct 11 and the trek starts on Oct 12, so this is your only real chance to buy gear in Kathmandu. Try the boots on and walk around in them before you buy.</span>
+                </div>
+                <div class="section-label" data-en="✅ Shopping list (tap to tick off)" data-ru="✅ Список покупок (нажмите, чтобы отметить)">✅ Shopping list (tap to tick off)</div>
+                <div class="shop-list">
+                    <label class="shop-item">
+                        <input type="checkbox" data-shop="duffle">
+                        <span class="shop-emoji">🎒</span>
+                        <span class="shop-info">
+                            <span class="shop-name" style="display:block;" data-en="Black Hole 100L / large trekking duffle" data-ru="Black Hole 100L / большой треккинговый баул">Black Hole 100L / large trekking duffle</span>
+                        </span>
+                        <span class="shop-price">~$200–225</span>
+                    </label>
+                    <label class="shop-item">
+                        <input type="checkbox" data-shop="boots">
+                        <span class="shop-emoji">🥾</span>
+                        <span class="shop-info">
+                            <span class="shop-name" style="display:block;">Scarpa Ribelle Cross 2 Mid GTX Woman</span>
+                            <span class="shop-note" style="display:block;" data-en="Size EU 39" data-ru="Размер EU 39">Size EU 39</span>
+                        </span>
+                        <span class="shop-price">~$150–180</span>
+                    </label>
+                    <label class="shop-item">
+                        <input type="checkbox" data-shop="shell">
+                        <span class="shop-emoji">🧥</span>
+                        <span class="shop-info">
+                            <span class="shop-name" style="display:block;" data-en="The North Face waterproof shell" data-ru="Мембранная куртка The North Face">The North Face waterproof shell</span>
+                        </span>
+                        <span class="shop-price">~$100–180</span>
+                    </label>
+                    <label class="shop-item">
+                        <input type="checkbox" data-shop="julbo">
+                        <span class="shop-emoji">🕶️</span>
+                        <span class="shop-info">
+                            <span class="shop-name" style="display:block;">Julbo Fury</span>
+                            <span class="shop-note" style="display:block;" data-en="One pair only" data-ru="Только одна пара">One pair only</span>
+                        </span>
+                        <span class="shop-price">~$100–130</span>
+                    </label>
+                    <label class="shop-item">
+                        <input type="checkbox" data-shop="hat">
+                        <span class="shop-emoji">🧢</span>
+                        <span class="shop-info">
+                            <span class="shop-name" style="display:block;">Horizon Breeze Brimmer</span>
+                        </span>
+                        <span class="shop-price">~$40–50</span>
+                    </label>
+                </div>
+                <div class="shop-total">
+                    <span data-en="💰 Estimated total" data-ru="💰 Примерная сумма">💰 Estimated total</span>
+                    <span>~$590–765</span>
+                </div>
+            </div>
+
+            <div class="section-block">
+                <div class="section-label" data-en="🏨 Your base" data-ru="🏨 Ваша база">🏨 Your base</div>
+                <div class="stay-card">
+                    <div class="stay-rank" data-en="Kathmandu hotel" data-ru="Отель в Катманду">Kathmandu hotel</div>
+                    <div class="stay-name">Hotel Blue Horizon — Thamel, Kathmandu</div>
+                    <p class="stay-desc" data-en="Thamel is Kathmandu's trekking-gear district, so the shops are within walking distance of the hotel." data-ru="Тамель — район треккингового снаряжения в Катманду, так что магазины в пешей доступности от отеля.">Thamel is Kathmandu's trekking-gear district, so the shops are within walking distance of the hotel.</p>
+                    <div class="stay-links">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Blue+Horizon+Thamel+Kathmandu" class="btn btn-primary" target="_blank" data-en="📍 Hotel on Google Maps" data-ru="📍 Отель на Google Maps">📍 Hotel on Google Maps</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=trekking+gear+shop+Thamel+Kathmandu" class="btn btn-secondary" target="_blank" data-en="🛍️ Gear shops in Thamel" data-ru="🛍️ Магазины снаряжения в Тамеле">🛍️ Gear shops in Thamel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /shopping -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         OCT 9 — Yerevan → Sharjah → Kathmandu
+    ═══════════════════════════════════════════════════════ -->
+    <div class="day-card" id="oct9">
+        <div class="day-header travel">
+            <div>
+                <div class="day-number" data-en="Oct 9 · Friday" data-ru="9 окт · Пятница">Oct 9 · Friday</div>
+                <div class="day-title" data-en="✈️ Yerevan → Sharjah → Kathmandu" data-ru="✈️ Ереван → Шарджа → Катманду">✈️ Yerevan → Sharjah → Kathmandu</div>
+                <div class="day-date" data-en="Travel day · Arrive Kathmandu 23:00" data-ru="День перелёта · Прилёт в Катманду в 23:00">Travel day · Arrive Kathmandu 23:00</div>
+            </div>
+            <div class="weather-widget" id="weather-oct9"><div class="w-loading">Loading weather...</div></div>
+        </div>
+        <div class="day-body">
+            <div class="section-block">
+                <div class="section-label" data-en="✈️ Flights" data-ru="✈️ Перелёты">✈️ Flights</div>
+                <div class="activity-list">
+                    <div class="activity-item flight">
+                        <div class="act-label" data-en="Flight 1" data-ru="Рейс 1">Flight 1</div>
+                        <div class="act-title" data-en="Yerevan 12:05 → Sharjah 16:05" data-ru="Ереван 12:05 → Шарджа 16:05">Yerevan 12:05 → Sharjah 16:05</div>
+                    </div>
+                    <div class="activity-item flight">
+                        <div class="act-label" data-en="Flight 2" data-ru="Рейс 2">Flight 2</div>
+                        <div class="act-title" data-en="Sharjah 17:00 → Kathmandu 23:00" data-ru="Шарджа 17:00 → Катманду 23:00">Sharjah 17:00 → Kathmandu 23:00</div>
+                        <div class="act-desc" data-en="Under an hour between landing and the next departure in Sharjah, so keep moving through transfers." data-ru="В Шардже меньше часа между посадкой и следующим вылетом — не задерживайтесь на пересадке.">Under an hour between landing and the next departure in Sharjah, so keep moving through transfers.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-block">
+                <div class="section-label" data-en="🏨 Tonight" data-ru="🏨 Ночь">🏨 Tonight</div>
+                <div class="stay-card">
+                    <div class="stay-rank" data-en="Your base" data-ru="Ваша база">Your base</div>
+                    <div class="stay-name">Hotel Blue Horizon — Thamel, Kathmandu</div>
+                    <div class="stay-meta">
+                        <span class="meta-tag tag-info" data-en="⏱ Late arrival ~midnight" data-ru="⏱ Поздний заезд ~полночь">⏱ Late arrival ~midnight</span>
+                        <span class="meta-tag tag-open" data-en="📍 Thamel" data-ru="📍 Тамель">📍 Thamel</span>
+                    </div>
+                    <div class="stay-links">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Blue+Horizon+Thamel+Kathmandu" class="btn btn-primary" target="_blank" data-en="📍 Google Maps" data-ru="📍 Google Maps">📍 Google Maps</a>
+                    </div>
+                </div>
+            </div>
+            <div class="section-block map-section">
+                <div class="section-label" data-en="🗺️ Airport → Hotel" data-ru="🗺️ Аэропорт → Отель">🗺️ Airport → Hotel</div>
+                <div class="map-frame">
+                    <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Tribhuvan+International+Airport+Kathmandu&destination=Hotel+Blue+Horizon+Thamel+Kathmandu&mode=driving" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <a href="https://www.google.com/maps/dir/Tribhuvan+International+Airport+Kathmandu/Hotel+Blue+Horizon+Thamel+Kathmandu" class="btn btn-map" target="_blank" data-en="🗺️ Open in Google Maps" data-ru="🗺️ Открыть в Google Maps">🗺️ Open in Google Maps</a>
+            </div>
+        </div>
+    </div><!-- /oct9 -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         OCT 10 — Kathmandu
+    ═══════════════════════════════════════════════════════ -->
+    <div class="day-card" id="oct10">
+        <div class="day-header city">
+            <div>
+                <div class="day-number" data-en="Oct 10 · Saturday · ArmGeo Day 1" data-ru="10 окт · Суббота · ArmGeo День 1">Oct 10 · Saturday · ArmGeo Day 1</div>
+                <div class="day-title" data-en="🏙️ Kathmandu" data-ru="🏙️ Катманду">🏙️ Kathmandu</div>
+                <div class="day-date" data-en="Group meeting · Main shopping day" data-ru="Встреча группы · Главный день покупок">Group meeting · Main shopping day</div>
+            </div>
+            <div class="weather-widget" id="weather-oct10"><div class="w-loading">Loading weather...</div></div>
+        </div>
+        <div class="day-body">
+            <div class="section-block">
+                <div class="section-label" data-en="📋 Today's plan" data-ru="📋 План на день">📋 Today's plan</div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="act-label" data-en="ArmGeo" data-ru="ArmGeo">ArmGeo</div>
+                        <div class="act-title" data-en="Arrival, group meeting, hotel transfer" data-ru="Прибытие, встреча группы, трансфер в отель">Arrival, group meeting, hotel transfer</div>
+                        <div class="act-desc" data-en="Official start of the ArmGeo program." data-ru="Официальное начало программы ArmGeo.">Official start of the ArmGeo program.</div>
+                    </div>
+                    <div class="activity-item shop">
+                        <div class="act-label" data-en="Must do" data-ru="Обязательно">Must do</div>
+                        <div class="act-title" data-en="🛍️ Buy all trekking gear in Thamel" data-ru="🛍️ Купить всё снаряжение в Тамеле">🛍️ Buy all trekking gear in Thamel</div>
+                        <div class="act-desc" data-en="Duffle, Scarpa boots, TNF shell, Julbo Fury, hat. <a href='#shopping' class='loc' onclick='jump(&quot;shopping&quot;);return false;'>Open the shopping list →</a>" data-ru="Баул, ботинки Scarpa, мембрана TNF, Julbo Fury, шляпа. <a href='#shopping' class='loc' onclick='jump(&quot;shopping&quot;);return false;'>Открыть список покупок →</a>">Duffle, Scarpa boots, TNF shell, Julbo Fury, hat. <a href="#shopping" class="loc" onclick="jump('shopping');return false;">Open the shopping list →</a></div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Evening" data-ru="Вечер">Evening</div>
+                        <div class="act-title" data-en="Pack for the trek" data-ru="Собрать вещи на трек">Pack for the trek</div>
+                        <div class="act-desc" data-en="Tomorrow is an early 7–8 hour drive to Pokhara. Pack the new duffle tonight." data-ru="Завтра ранний выезд — 7–8 часов до Покхары. Соберите новый баул сегодня вечером.">Tomorrow is an early 7–8 hour drive to Pokhara. Pack the new duffle tonight.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-block">
+                <div class="section-label" data-en="🏨 Tonight" data-ru="🏨 Ночь">🏨 Tonight</div>
+                <div class="stay-card">
+                    <div class="stay-rank" data-en="Your base" data-ru="Ваша база">Your base</div>
+                    <div class="stay-name">Hotel Blue Horizon — Thamel, Kathmandu</div>
+                    <div class="stay-links">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Blue+Horizon+Thamel+Kathmandu" class="btn btn-primary" target="_blank" data-en="📍 Google Maps" data-ru="📍 Google Maps">📍 Google Maps</a>
+                    </div>
+                </div>
+            </div>
+            <div class="section-block map-section">
+                <div class="section-label" data-en="🗺️ Thamel" data-ru="🗺️ Тамель">🗺️ Thamel</div>
+                <div class="map-frame">
+                    <iframe src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=trekking+gear+shops+Thamel+Kathmandu" allowfullscreen loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </div><!-- /oct10 -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         OCT 11 — Kathmandu → Pokhara
+    ═══════════════════════════════════════════════════════ -->
+    <div class="day-card" id="oct11">
+        <div class="day-header road">
+            <div>
+                <div class="day-number" data-en="Oct 11 · Sunday · ArmGeo Day 2" data-ru="11 окт · Воскресенье · ArmGeo День 2">Oct 11 · Sunday · ArmGeo Day 2</div>
+                <div class="day-title" data-en="🚐 Kathmandu → Pokhara" data-ru="🚐 Катманду → Покхара">🚐 Kathmandu → Pokhara</div>
+                <div class="day-date" data-en="Long road transfer · 7–8 h · Evening in Pokhara" data-ru="Долгий переезд · 7–8 ч · Вечер в Покхаре">Long road transfer · 7–8 h · Evening in Pokhara</div>
+            </div>
+            <div class="weather-widget" id="weather-oct11"><div class="w-loading">Loading weather...</div></div>
+        </div>
+        <div class="day-body">
+            <div class="section-block">
+                <div class="section-label" data-en="📋 Today's plan" data-ru="📋 План на день">📋 Today's plan</div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Road transfer" data-ru="Переезд">Road transfer</div>
+                        <div class="act-title" data-en="Drive to Pokhara, around 7–8 hours" data-ru="Дорога в Покхару, около 7–8 часов">Drive to Pokhara, around 7–8 hours</div>
+                        <div class="act-desc" data-en="Mountain roads, so keep snacks, water and anything for motion sickness in your day bag." data-ru="Горные дороги — держите перекус, воду и средство от укачивания в рюкзаке.">Mountain roads, so keep snacks, water and anything for motion sickness in your day bag.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Evening" data-ru="Вечер">Evening</div>
+                        <div class="act-title" data-en="Lakeside, Pokhara" data-ru="Набережная, Покхара">Lakeside, Pokhara</div>
+                        <div class="act-desc" data-en="Stretch your legs along <a href='https://www.google.com/maps/search/?api=1&query=Phewa+Lake+Pokhara' class='loc' target='_blank'>Phewa Lake</a>. Last proper bed before the mountains." data-ru="Прогуляйтесь вдоль <a href='https://www.google.com/maps/search/?api=1&query=Phewa+Lake+Pokhara' class='loc' target='_blank'>озера Пхева</a>. Последняя нормальная кровать перед горами.">Stretch your legs along <a href="https://www.google.com/maps/search/?api=1&query=Phewa+Lake+Pokhara" class="loc" target="_blank">Phewa Lake</a>. Last proper bed before the mountains.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-block">
+                <div class="section-label" data-en="🏨 Tonight" data-ru="🏨 Ночь">🏨 Tonight</div>
+                <div class="stay-card">
+                    <div class="stay-rank" data-en="ArmGeo hotel" data-ru="Отель ArmGeo">ArmGeo hotel</div>
+                    <div class="stay-name" data-en="Hotel in Pokhara" data-ru="Отель в Покхаре">Hotel in Pokhara</div>
+                </div>
+            </div>
+            <div class="section-block map-section">
+                <div class="section-label" data-en="🗺️ Today's drive: Kathmandu → Pokhara" data-ru="🗺️ Сегодняшний маршрут: Катманду → Покхара">🗺️ Today's drive: Kathmandu → Pokhara</div>
+                <div class="map-route-info">
+                    <div class="route-line"><strong data-en="Route:" data-ru="Маршрут:">Route:</strong> <span data-en="Kathmandu → Prithvi Highway → Pokhara" data-ru="Катманду → шоссе Притхви → Покхара">Kathmandu → Prithvi Highway → Pokhara</span></div>
+                    <div class="route-line"><strong data-en="Drive time:" data-ru="Время в пути:">Drive time:</strong> <span class="route-time" data-en="~7–8 h" data-ru="~7–8 ч">~7–8 h</span></div>
+                </div>
+                <div class="map-frame">
+                    <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Thamel+Kathmandu+Nepal&destination=Lakeside+Pokhara+Nepal&mode=driving" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <a href="https://www.google.com/maps/dir/Thamel+Kathmandu+Nepal/Lakeside+Pokhara+Nepal" class="btn btn-map" target="_blank" data-en="🗺️ Open full route in Google Maps" data-ru="🗺️ Открыть маршрут в Google Maps">🗺️ Open full route in Google Maps</a>
+            </div>
+        </div>
+    </div><!-- /oct11 -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         OCT 12 — Pokhara → Kande → Deurali
+    ═══════════════════════════════════════════════════════ -->
+    <div class="day-card" id="oct12">
+        <div class="day-header trek">
+            <div>
+                <div class="day-number" data-en="Oct 12 · Monday · ArmGeo Day 3" data-ru="12 окт · Понедельник · ArmGeo День 3">Oct 12 · Monday · ArmGeo Day 3</div>
+                <div class="day-title" data-en="🥾 Pokhara → Kande → Deurali" data-ru="🥾 Покхара → Канде → Деурали">🥾 Pokhara → Kande → Deurali</div>
+                <div class="day-date" data-en="~1 h drive · Trekking day 1" data-ru="~1 ч езды · 1-й день трека">~1 h drive · Trekking day 1</div>
+            </div>
+            <div class="weather-widget" id="weather-oct12"><div class="w-loading">Loading weather...</div></div>
+        </div>
+        <div class="day-body">
+            <div class="section-block">
+                <div class="section-label" data-en="📊 Trek stats" data-ru="📊 Параметры трека">📊 Trek stats</div>
+                <div class="stats-grid">
+                    <div class="stat"><div class="stat-value" data-en="5–6 km" data-ru="5–6 км">5–6 km</div><div class="stat-label" data-en="Distance" data-ru="Расстояние">Distance</div></div>
+                    <div class="stat"><div class="stat-value" data-en="3–4 h" data-ru="3–4 ч">3–4 h</div><div class="stat-label" data-en="Walking" data-ru="В пути">Walking</div></div>
+                    <div class="stat up"><div class="stat-value" data-en="+550 m" data-ru="+550 м">+550 m</div><div class="stat-label" data-en="Ascent" data-ru="Подъём">Ascent</div></div>
+                </div>
+            </div>
+            <div class="section-block">
+                <div class="section-label" data-en="📋 Today's plan" data-ru="📋 План на день">📋 Today's plan</div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Morning" data-ru="Утро">Morning</div>
+                        <div class="act-title" data-en="~1 h drive Pokhara → Kande" data-ru="~1 ч езды Покхара → Канде">~1 h drive Pokhara → Kande</div>
+                    </div>
+                    <div class="activity-item trek">
+                        <div class="act-label" data-en="Trek" data-ru="Трек">Trek</div>
+                        <div class="act-title" data-en="Kande → Deurali" data-ru="Канде → Деурали">Kande → Deurali</div>
+                        <div class="act-desc" data-en="A gentle first day, and a good test for the new boots. Fix any hot spots early." data-ru="Мягкий первый день и хорошая проверка новых ботинок. Сразу заклеивайте натёртые места.">A gentle first day, and a good test for the new boots. Fix any hot spots early.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-block">
+                <div class="section-label" data-en="🏔️ Tonight" data-ru="🏔️ Ночь">🏔️ Tonight</div>
+                <div class="stay-card">
+                    <div class="stay-rank" data-en="Guesthouse" data-ru="Гестхаус">Guesthouse</div>
+                    <div class="stay-name" data-en="Mountain guesthouse, Deurali" data-ru="Горный гестхаус, Деурали">Mountain guesthouse, Deurali</div>
+                </div>
+            </div>
+            <div class="section-block map-section">
+                <div class="section-label" data-en="🗺️ Pokhara → Kande" data-ru="🗺️ Покхара → Канде">🗺️ Pokhara → Kande</div>
+                <div class="map-frame">
+                    <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Lakeside+Pokhara+Nepal&destination=Kande+Kaski+Nepal&mode=driving" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <a href="https://www.google.com/maps/dir/Lakeside+Pokhara+Nepal/Kande+Kaski+Nepal" class="btn btn-map" target="_blank" data-en="🗺️ Open in Google Maps" data-ru="🗺️ Открыть в Google Maps">🗺️ Open in Google Maps</a>
+            </div>
+        </div>
+    </div><!-- /oct12 -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         OCT 13 — Deurali → Camp 1 (3,050 m)
+    ═══════════════════════════════════════════════════════ -->
+    <div class="day-card" id="oct13">
+        <div class="day-header trek">
+            <div>
+                <div class="day-number" data-en="Oct 13 · Tuesday · ArmGeo Day 4" data-ru="13 окт · Вторник · ArmGeo День 4">Oct 13 · Tuesday · ArmGeo Day 4</div>
+                <div class="day-title" data-en="🏔️ Deurali → Camp 1 (3,050 m)" data-ru="🏔️ Деурали → Лагерь 1 (3 050 м)">🏔️ Deurali → Camp 1 (3,050 m)</div>
+                <div class="day-date" data-en="Long ascent through meadows and forests" data-ru="Долгий подъём через луга и леса">Long ascent through meadows and forests</div>
+            </div>
+            <div class="weather-widget" id="weather-oct13"><div class="w-loading">Loading weather...</div></div>
+        </div>
+        <div class="day-body">
+            <div class="section-block">
+                <div class="section-label" data-en="📊 Trek stats" data-ru="📊 Параметры трека">📊 Trek stats</div>
+                <div class="stats-grid">
+                    <div class="stat"><div class="stat-value" data-en="12–13 km" data-ru="12–13 км">12–13 km</div><div class="stat-label" data-en="Distance" data-ru="Расстояние">Distance</div></div>
+                    <div class="stat"><div class="stat-value" data-en="5–6 h" data-ru="5–6 ч">5–6 h</div><div class="stat-label" data-en="Walking" data-ru="В пути">Walking</div></div>
+                    <div class="stat up"><div class="stat-value" data-en="+1,200 m" data-ru="+1 200 м">+1,200 m</div><div class="stat-label" data-en="Ascent" data-ru="Подъём">Ascent</div></div>
+                    <div class="stat peak"><div class="stat-value" data-en="3,050 m" data-ru="3 050 м">3,050 m</div><div class="stat-label" data-en="Sleep altitude" data-ru="Высота ночёвки">Sleep altitude</div></div>
+                </div>
+            </div>
+            <div class="section-block">
+                <div class="section-label" data-en="📋 Today's plan" data-ru="📋 План на день">📋 Today's plan</div>
+                <div class="activity-list">
+                    <div class="activity-item trek">
+                        <div class="act-label" data-en="Trek" data-ru="Трек">Trek</div>
+                        <div class="act-title" data-en="Biggest climb so far: +1,200 m" data-ru="Самый большой подъём на данный момент: +1 200 м">Biggest climb so far: +1,200 m</div>
+                        <div class="act-desc" data-en="First night above 3,000 m. Walk slowly, drink plenty and let the guide know about any headache." data-ru="Первая ночь выше 3 000 м. Идите медленно, много пейте и сообщайте гиду о головной боли.">First night above 3,000 m. Walk slowly, drink plenty and let the guide know about any headache.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-block">
+                <div class="section-label" data-en="🏔️ Tonight" data-ru="🏔️ Ночь">🏔️ Tonight</div>
+                <div class="stay-card">
+                    <div class="stay-rank" data-en="Camp 1" data-ru="Лагерь 1">Camp 1</div>
+                    <div class="stay-name" data-en="Camp around 3,050 m" data-ru="Лагерь на высоте около 3 050 м">Camp around 3,050 m</div>
+                    <div class="stay-meta"><span class="meta-tag tag-warning" data-en="🌡️ Cold nights, bring warm layers" data-ru="🌡️ Холодные ночи, нужны тёплые слои">🌡️ Cold nights, bring warm layers</span></div>
+                </div>
+            </div>
+            <div class="section-block map-section">
+                <div class="section-label" data-en="🗺️ Mardi Himal trail" data-ru="🗺️ Тропа Марди Химал">🗺️ Mardi Himal trail</div>
+                <div class="map-frame">
+                    <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Mardi+Himal+Low+Camp+Nepal&maptype=satellite&zoom=12" allowfullscreen loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </div><!-- /oct13 -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         OCT 14 — Camp 1 → Camp 2 (3,600 m)
+    ═══════════════════════════════════════════════════════ -->
+    <div class="day-card" id="oct14">
+        <div class="day-header trek">
+            <div>
+                <div class="day-number" data-en="Oct 14 · Wednesday · ArmGeo Day 5" data-ru="14 окт · Среда · ArmGeo День 5">Oct 14 · Wednesday · ArmGeo Day 5</div>
+                <div class="day-title" data-en="🏔️ Camp 1 → Camp 2 (3,600 m)" data-ru="🏔️ Лагерь 1 → Лагерь 2 (3 600 м)">🏔️ Camp 1 → Camp 2 (3,600 m)</div>
+                <div class="day-date" data-en="Relatively shorter day · Acclimatise before the big one" data-ru="Относительно короткий день · Акклиматизация перед большим днём">Relatively shorter day · Acclimatise before the big one</div>
+            </div>
+            <div class="weather-widget" id="weather-oct14"><div class="w-loading">Loading weather...</div></div>
+        </div>
+        <div class="day-body">
+            <div class="section-block">
+                <div class="section-label" data-en="📊 Trek stats" data-ru="📊 Параметры трека">📊 Trek stats</div>
+                <div class="stats-grid">
+                    <div class="stat"><div class="stat-value" data-en="5–6 km" data-ru="5–6 км">5–6 km</div><div class="stat-label" data-en="Distance" data-ru="Расстояние">Distance</div></div>
+                    <div class="stat"><div class="stat-value" data-en="3–4 h" data-ru="3–4 ч">3–4 h</div><div class="stat-label" data-en="Walking" data-ru="В пути">Walking</div></div>
+                    <div class="stat up"><div class="stat-value" data-en="+550 m" data-ru="+550 м">+550 m</div><div class="stat-label" data-en="Ascent" data-ru="Подъём">Ascent</div></div>
+                    <div class="stat peak"><div class="stat-value" data-en="3,600 m" data-ru="3 600 м">3,600 m</div><div class="stat-label" data-en="Sleep altitude" data-ru="Высота ночёвки">Sleep altitude</div></div>
+                </div>
+            </div>
+            <div class="section-block">
+                <div class="section-label" data-en="📋 Today's plan" data-ru="📋 План на день">📋 Today's plan</div>
+                <div class="activity-list">
+                    <div class="activity-item trek">
+                        <div class="act-label" data-en="Trek" data-ru="Трек">Trek</div>
+                        <div class="act-title" data-en="Short climb to Camp 2" data-ru="Короткий подъём в Лагерь 2">Short climb to Camp 2</div>
+                        <div class="act-desc" data-en="Use the free afternoon to rest. Get your summit-day kit ready tonight: headlamp, warm layers, shell, gloves, water, snacks, sunglasses and sunscreen." data-ru="Используйте свободное время для отдыха. Подготовьте вещи на штурмовой день сегодня вечером: фонарик, тёплые слои, мембрану, перчатки, воду, перекус, очки и солнцезащитный крем.">Use the free afternoon to rest. Get your summit-day kit ready tonight: headlamp, warm layers, shell, gloves, water, snacks, sunglasses and sunscreen.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-block">
+                <div class="section-label" data-en="🏔️ Tonight" data-ru="🏔️ Ночь">🏔️ Tonight</div>
+                <div class="stay-card">
+                    <div class="stay-rank" data-en="Camp 2" data-ru="Лагерь 2">Camp 2</div>
+                    <div class="stay-name" data-en="Camp around 3,600 m" data-ru="Лагерь на высоте около 3 600 м">Camp around 3,600 m</div>
+                    <div class="stay-meta"><span class="meta-tag tag-warning" data-en="😴 Early night, big day tomorrow" data-ru="😴 Ранний отбой, завтра большой день">😴 Early night, big day tomorrow</span></div>
+                </div>
+            </div>
+            <div class="section-block map-section">
+                <div class="section-label" data-en="🗺️ Mardi Himal High Camp" data-ru="🗺️ Высокий лагерь Марди Химал">🗺️ Mardi Himal High Camp</div>
+                <div class="map-frame">
+                    <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Mardi+Himal+High+Camp+Nepal&maptype=satellite&zoom=12" allowfullscreen loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </div><!-- /oct14 -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         OCT 15 — BIG DAY · Mardi Himal Base Camp → Badal Danda
+    ═══════════════════════════════════════════════════════ -->
+    <div class="day-card" id="oct15">
+        <div class="day-header big">
+            <div>
+                <div class="day-number" data-en="Oct 15 · Thursday · 🔥 Big day" data-ru="15 окт · Четверг · 🔥 Большой день">Oct 15 · Thursday · 🔥 Big day</div>
+                <div class="day-title" data-en="🏔️ Mardi Himal Base Camp (4,500 m) → Badal Danda" data-ru="🏔️ БЛ Марди Химал (4 500 м) → Бадал Данда">🏔️ Mardi Himal Base Camp (4,500 m) → Badal Danda</div>
+                <div class="day-date" data-en="Highest point of the trip · Longest day" data-ru="Высшая точка поездки · Самый длинный день">Highest point of the trip · Longest day</div>
+            </div>
+            <div class="weather-widget" id="weather-oct15"><div class="w-loading">Loading weather...</div></div>
+        </div>
+        <div class="day-body">
+            <div class="section-block">
+                <div class="section-label" data-en="📊 Trek stats" data-ru="📊 Параметры трека">📊 Trek stats</div>
+                <div class="stats-grid">
+                    <div class="stat"><div class="stat-value" data-en="15 km" data-ru="15 км">15 km</div><div class="stat-label" data-en="Distance" data-ru="Расстояние">Distance</div></div>
+                    <div class="stat"><div class="stat-value" data-en="9–10 h" data-ru="9–10 ч">9–10 h</div><div class="stat-label" data-en="Walking" data-ru="В пути">Walking</div></div>
+                    <div class="stat up"><div class="stat-value" data-en="+1,300 m" data-ru="+1 300 м">+1,300 m</div><div class="stat-label" data-en="Ascent" data-ru="Подъём">Ascent</div></div>
+                    <div class="stat down"><div class="stat-value" data-en="−1,600 m" data-ru="−1 600 м">−1,600 m</div><div class="stat-label" data-en="Descent" data-ru="Спуск">Descent</div></div>
+                    <div class="stat peak"><div class="stat-value" data-en="4,500 m" data-ru="4 500 м">4,500 m</div><div class="stat-label" data-en="High point" data-ru="Высшая точка">High point</div></div>
+                </div>
+            </div>
+            <div class="section-block">
+                <div class="warning-box">
+                    <strong data-en="⚠️ Your hardest day, and the highest altitude of the trip" data-ru="⚠️ Самый тяжёлый день и максимальная высота поездки">⚠️ Your hardest day, and the highest altitude of the trip</strong>
+                    <ul>
+                        <li data-en="Expect an early start, probably in the dark. Have your headlamp ready." data-ru="Ожидайте ранний выход, вероятно в темноте. Держите фонарик под рукой.">Expect an early start, probably in the dark. Have your headlamp ready.</li>
+                        <li data-en="It is cold at the top. Wear layers and keep the TNF shell handy for the wind." data-ru="Наверху холодно. Одевайтесь слоями и держите мембрану TNF под рукой от ветра.">It is cold at the top. Wear layers and keep the TNF shell handy for the wind.</li>
+                        <li data-en="The sun is strong at 4,500 m. Wear the Julbo Fury and sunscreen." data-ru="На 4 500 м солнце очень сильное. Надевайте Julbo Fury и солнцезащитный крем.">The sun is strong at 4,500 m. Wear the Julbo Fury and sunscreen.</li>
+                        <li data-en="Carry enough water and snacks for 9–10 hours of walking." data-ru="Возьмите достаточно воды и перекуса на 9–10 часов ходьбы.">Carry enough water and snacks for 9–10 hours of walking.</li>
+                        <li data-en="The 1,600 m descent is hard on the knees. Go slowly, and use trekking poles if you have them." data-ru="Спуск 1 600 м — нагрузка на колени. Идите медленно, используйте палки, если есть.">The 1,600 m descent is hard on the knees. Go slowly, and use trekking poles if you have them.</li>
+                        <li data-en="Tell the guide straight away about a headache, nausea or dizziness." data-ru="Сразу сообщайте гиду о головной боли, тошноте или головокружении.">Tell the guide straight away about a headache, nausea or dizziness.</li>
+                    </ul>
+                </div>
+                <div class="activity-list">
+                    <div class="activity-item trek">
+                        <div class="act-label" data-en="Up" data-ru="Подъём">Up</div>
+                        <div class="act-title" data-en="Camp 2 → Mardi Himal Base Camp, 4,500 m" data-ru="Лагерь 2 → Базовый лагерь Марди Химал, 4 500 м">Camp 2 → Mardi Himal Base Camp, 4,500 m</div>
+                        <div class="act-desc" data-en="Close-up views of Mardi Himal and Machapuchare (Fishtail)." data-ru="Виды вблизи на Марди Химал и Мачапучаре (Рыбий хвост).">Close-up views of Mardi Himal and Machapuchare (Fishtail).</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Down" data-ru="Спуск">Down</div>
+                        <div class="act-title" data-en="Mardi Himal Base Camp → Badal Danda" data-ru="БЛ Марди Химал → Бадал Данда">Mardi Himal Base Camp → Badal Danda</div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-block">
+                <div class="section-label" data-en="🏔️ Tonight" data-ru="🏔️ Ночь">🏔️ Tonight</div>
+                <div class="stay-card">
+                    <div class="stay-rank" data-en="Mountain camp" data-ru="Горный лагерь">Mountain camp</div>
+                    <div class="stay-name">Badal Danda</div>
+                </div>
+            </div>
+            <div class="section-block map-section">
+                <div class="section-label" data-en="🗺️ Mardi Himal Base Camp" data-ru="🗺️ Базовый лагерь Марди Химал">🗺️ Mardi Himal Base Camp</div>
+                <div class="map-frame">
+                    <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Mardi+Himal+Base+Camp+Nepal&maptype=satellite&zoom=12" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Mardi+Himal+Base+Camp+Nepal" class="btn btn-map" target="_blank" data-en="🗺️ Open in Google Maps" data-ru="🗺️ Открыть в Google Maps">🗺️ Open in Google Maps</a>
+            </div>
+        </div>
+    </div><!-- /oct15 -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         OCT 16 — Badal Danda → Sidhing → Pokhara
+    ═══════════════════════════════════════════════════════ -->
+    <div class="day-card" id="oct16">
+        <div class="day-header trek">
+            <div>
+                <div class="day-number" data-en="Oct 16 · Friday · Last trekking day" data-ru="16 окт · Пятница · Последний день трека">Oct 16 · Friday · Last trekking day</div>
+                <div class="day-title" data-en="🥾 Badal Danda → Sidhing → Pokhara" data-ru="🥾 Бадал Данда → Сидхинг → Покхара">🥾 Badal Danda → Sidhing → Pokhara</div>
+                <div class="day-date" data-en="Descent to Sidhing · ~2 h drive to Pokhara" data-ru="Спуск в Сидхинг · ~2 ч езды до Покхары">Descent to Sidhing · ~2 h drive to Pokhara</div>
+            </div>
+            <div class="weather-widget" id="weather-oct16"><div class="w-loading">Loading weather...</div></div>
+        </div>
+        <div class="day-body">
+            <div class="section-block">
+                <div class="section-label" data-en="📊 Trek stats" data-ru="📊 Параметры трека">📊 Trek stats</div>
+                <div class="stats-grid">
+                    <div class="stat"><div class="stat-value" data-en="7 km" data-ru="7 км">7 km</div><div class="stat-label" data-en="Distance" data-ru="Расстояние">Distance</div></div>
+                    <div class="stat"><div class="stat-value" data-en="3–4 h" data-ru="3–4 ч">3–4 h</div><div class="stat-label" data-en="Walking" data-ru="В пути">Walking</div></div>
+                    <div class="stat up"><div class="stat-value" data-en="+110 m" data-ru="+110 м">+110 m</div><div class="stat-label" data-en="Ascent" data-ru="Подъём">Ascent</div></div>
+                    <div class="stat down"><div class="stat-value" data-en="−1,650 m" data-ru="−1 650 м">−1,650 m</div><div class="stat-label" data-en="Descent" data-ru="Спуск">Descent</div></div>
+                </div>
+            </div>
+            <div class="section-block">
+                <div class="section-label" data-en="📋 Today's plan" data-ru="📋 План на день">📋 Today's plan</div>
+                <div class="activity-list">
+                    <div class="activity-item trek">
+                        <div class="act-label" data-en="Trek" data-ru="Трек">Trek</div>
+                        <div class="act-title" data-en="Badal Danda → Sidhing" data-ru="Бадал Данда → Сидхинг">Badal Danda → Sidhing</div>
+                        <div class="act-desc" data-en="Almost all downhill, 1,650 m. Take it slow on tired legs." data-ru="Почти всё вниз — 1 650 м. Не спешите, ноги уставшие.">Almost all downhill, 1,650 m. Take it slow on tired legs.</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Drive" data-ru="Переезд">Drive</div>
+                        <div class="act-title" data-en="Sidhing → Pokhara, ~2 h" data-ru="Сидхинг → Покхара, ~2 ч">Sidhing → Pokhara, ~2 h</div>
+                        <div class="act-desc" data-en="Hot shower and a celebration dinner by the lake 🎉" data-ru="Горячий душ и праздничный ужин у озера 🎉">Hot shower and a celebration dinner by the lake 🎉</div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-block">
+                <div class="section-label" data-en="🏨 Tonight" data-ru="🏨 Ночь">🏨 Tonight</div>
+                <div class="stay-card">
+                    <div class="stay-rank" data-en="ArmGeo hotel" data-ru="Отель ArmGeo">ArmGeo hotel</div>
+                    <div class="stay-name" data-en="Hotel in Pokhara" data-ru="Отель в Покхаре">Hotel in Pokhara</div>
+                </div>
+            </div>
+            <div class="section-block map-section">
+                <div class="section-label" data-en="🗺️ Sidhing → Pokhara" data-ru="🗺️ Сидхинг → Покхара">🗺️ Sidhing → Pokhara</div>
+                <div class="map-frame">
+                    <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Sidhing+Kaski+Nepal&destination=Lakeside+Pokhara+Nepal&mode=driving" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <a href="https://www.google.com/maps/dir/Sidhing+Kaski+Nepal/Lakeside+Pokhara+Nepal" class="btn btn-map" target="_blank" data-en="🗺️ Open in Google Maps" data-ru="🗺️ Открыть в Google Maps">🗺️ Open in Google Maps</a>
+            </div>
+        </div>
+    </div><!-- /oct16 -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         OCT 17 — Pokhara → Kathmandu
+    ═══════════════════════════════════════════════════════ -->
+    <div class="day-card" id="oct17">
+        <div class="day-header road">
+            <div>
+                <div class="day-number" data-en="Oct 17 · Saturday · ArmGeo Day 8" data-ru="17 окт · Суббота · ArmGeo День 8">Oct 17 · Saturday · ArmGeo Day 8</div>
+                <div class="day-title" data-en="🚐 Pokhara → Kathmandu" data-ru="🚐 Покхара → Катманду">🚐 Pokhara → Kathmandu</div>
+                <div class="day-date" data-en="Road transfer · 7–8 h · Evening in Kathmandu" data-ru="Переезд · 7–8 ч · Вечер в Катманду">Road transfer · 7–8 h · Evening in Kathmandu</div>
+            </div>
+            <div class="weather-widget" id="weather-oct17"><div class="w-loading">Loading weather...</div></div>
+        </div>
+        <div class="day-body">
+            <div class="section-block">
+                <div class="section-label" data-en="📋 Today's plan" data-ru="📋 План на день">📋 Today's plan</div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Road transfer" data-ru="Переезд">Road transfer</div>
+                        <div class="act-title" data-en="Return to Kathmandu, around 7–8 hours" data-ru="Возвращение в Катманду, около 7–8 часов">Return to Kathmandu, around 7–8 hours</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Evening" data-ru="Вечер">Evening</div>
+                        <div class="act-title" data-en="Evening in Kathmandu" data-ru="Вечер в Катманду">Evening in Kathmandu</div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-block">
+                <div class="section-label" data-en="🏨 Tonight" data-ru="🏨 Ночь">🏨 Tonight</div>
+                <div class="stay-card">
+                    <div class="stay-rank" data-en="Kathmandu" data-ru="Катманду">Kathmandu</div>
+                    <div class="stay-name" data-en="Hotel in Kathmandu" data-ru="Отель в Катманду">Hotel in Kathmandu</div>
+                </div>
+            </div>
+            <div class="section-block map-section">
+                <div class="section-label" data-en="🗺️ Today's drive: Pokhara → Kathmandu" data-ru="🗺️ Сегодняшний маршрут: Покхара → Катманду">🗺️ Today's drive: Pokhara → Kathmandu</div>
+                <div class="map-frame">
+                    <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Lakeside+Pokhara+Nepal&destination=Thamel+Kathmandu+Nepal&mode=driving" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <a href="https://www.google.com/maps/dir/Lakeside+Pokhara+Nepal/Thamel+Kathmandu+Nepal" class="btn btn-map" target="_blank" data-en="🗺️ Open full route in Google Maps" data-ru="🗺️ Открыть маршрут в Google Maps">🗺️ Open full route in Google Maps</a>
+            </div>
+        </div>
+    </div><!-- /oct17 -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         OCT 18 — Kathmandu → Sharjah
+    ═══════════════════════════════════════════════════════ -->
+    <div class="day-card" id="oct18">
+        <div class="day-header city">
+            <div>
+                <div class="day-number" data-en="Oct 18 · Sunday · ArmGeo Day 9" data-ru="18 окт · Воскресенье · ArmGeo День 9">Oct 18 · Sunday · ArmGeo Day 9</div>
+                <div class="day-title" data-en="🏙️ Kathmandu → ✈️ Sharjah" data-ru="🏙️ Катманду → ✈️ Шарджа">🏙️ Kathmandu → ✈️ Sharjah</div>
+                <div class="day-date" data-en="Free day in Kathmandu · Flight 23:45" data-ru="Свободный день в Катманду · Рейс в 23:45">Free day in Kathmandu · Flight 23:45</div>
+            </div>
+            <div class="weather-widget" id="weather-oct18"><div class="w-loading">Loading weather...</div></div>
+        </div>
+        <div class="day-body">
+            <div class="section-block">
+                <div class="section-label" data-en="📋 Today's plan" data-ru="📋 План на день">📋 Today's plan</div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="act-label" data-en="Daytime · Free" data-ru="День · Свободно">Daytime · Free</div>
+                        <div class="act-title" data-en="Free time in Kathmandu" data-ru="Свободное время в Катманду">Free time in Kathmandu</div>
+                        <div class="act-desc" data-en="Ideas: <a href='https://www.google.com/maps/search/?api=1&query=Swayambhunath+Kathmandu' class='loc' target='_blank'>Swayambhunath</a> (Monkey Temple), <a href='https://www.google.com/maps/search/?api=1&query=Boudhanath+Stupa' class='loc' target='_blank'>Boudhanath Stupa</a>, <a href='https://www.google.com/maps/search/?api=1&query=Kathmandu+Durbar+Square' class='loc' target='_blank'>Kathmandu Durbar Square</a>, or last-minute souvenirs in Thamel." data-ru="Идеи: <a href='https://www.google.com/maps/search/?api=1&query=Swayambhunath+Kathmandu' class='loc' target='_blank'>Сваямбунатх</a> (Храм обезьян), <a href='https://www.google.com/maps/search/?api=1&query=Boudhanath+Stupa' class='loc' target='_blank'>ступа Боднатх</a>, <a href='https://www.google.com/maps/search/?api=1&query=Kathmandu+Durbar+Square' class='loc' target='_blank'>площадь Дурбар</a> или сувениры в Тамеле.">Ideas: <a href="https://www.google.com/maps/search/?api=1&query=Swayambhunath+Kathmandu" class="loc" target="_blank">Swayambhunath</a> (Monkey Temple), <a href="https://www.google.com/maps/search/?api=1&query=Boudhanath+Stupa" class="loc" target="_blank">Boudhanath Stupa</a>, <a href="https://www.google.com/maps/search/?api=1&query=Kathmandu+Durbar+Square" class="loc" target="_blank">Kathmandu Durbar Square</a>, or last-minute souvenirs in Thamel.</div>
+                    </div>
+                    <div class="activity-item flight">
+                        <div class="act-label" data-en="Night flight" data-ru="Ночной рейс">Night flight</div>
+                        <div class="act-title" data-en="Kathmandu 23:45 → Sharjah 02:25 (Oct 19)" data-ru="Катманду 23:45 → Шарджа 02:25 (19 окт)">Kathmandu 23:45 → Sharjah 02:25 (Oct 19)</div>
+                        <div class="act-desc" data-en="Plan to reach Tribhuvan Airport around 3 hours before departure, so roughly 20:45." data-ru="Планируйте быть в аэропорту Трибхуван примерно за 3 часа до вылета, то есть около 20:45.">Plan to reach Tribhuvan Airport around 3 hours before departure, so roughly 20:45.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-block map-section">
+                <div class="section-label" data-en="🗺️ Thamel → Airport" data-ru="🗺️ Тамель → Аэропорт">🗺️ Thamel → Airport</div>
+                <div class="map-frame">
+                    <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=Thamel+Kathmandu+Nepal&destination=Tribhuvan+International+Airport+Kathmandu&mode=driving" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <a href="https://www.google.com/maps/dir/Thamel+Kathmandu+Nepal/Tribhuvan+International+Airport+Kathmandu" class="btn btn-map" target="_blank" data-en="🗺️ Open in Google Maps" data-ru="🗺️ Открыть в Google Maps">🗺️ Open in Google Maps</a>
+            </div>
+        </div>
+    </div><!-- /oct18 -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         OCT 19 — Sharjah → Yerevan
+    ═══════════════════════════════════════════════════════ -->
+    <div class="day-card" id="oct19">
+        <div class="day-header travel">
+            <div>
+                <div class="day-number" data-en="Oct 19 · Monday" data-ru="19 окт · Понедельник">Oct 19 · Monday</div>
+                <div class="day-title" data-en="✈️ Sharjah → Yerevan 🇦🇲" data-ru="✈️ Шарджа → Ереван 🇦🇲">✈️ Sharjah → Yerevan 🇦🇲</div>
+                <div class="day-date" data-en="Home at 11:15" data-ru="Дома в 11:15">Home at 11:15</div>
+            </div>
+            <div class="weather-widget" id="weather-oct19"><div class="w-loading">Loading weather...</div></div>
+        </div>
+        <div class="day-body">
+            <div class="section-block">
+                <div class="section-label" data-en="✈️ Flights" data-ru="✈️ Перелёты">✈️ Flights</div>
+                <div class="activity-list">
+                    <div class="activity-item flight">
+                        <div class="act-label" data-en="Layover" data-ru="Пересадка">Layover</div>
+                        <div class="act-title" data-en="Sharjah 02:25 → 07:30" data-ru="Шарджа 02:25 → 07:30">Sharjah 02:25 → 07:30</div>
+                        <div class="act-desc" data-en="About 5 hours overnight in Sharjah airport." data-ru="Около 5 часов ночью в аэропорту Шарджи.">About 5 hours overnight in Sharjah airport.</div>
+                    </div>
+                    <div class="activity-item flight">
+                        <div class="act-label" data-en="Final flight" data-ru="Последний рейс">Final flight</div>
+                        <div class="act-title" data-en="Sharjah 07:30 → Yerevan 11:15" data-ru="Шарджа 07:30 → Ереван 11:15">Sharjah 07:30 → Yerevan 11:15</div>
+                    </div>
+                </div>
+                <div class="finish-box">
+                    <p data-en="🎉 Welcome home! You made it to Mardi Himal Base Camp, 4,500 m!" data-ru="🎉 С возвращением! Вы дошли до базового лагеря Марди Химал, 4 500 м!">🎉 Welcome home! You made it to Mardi Himal Base Camp, 4,500 m!</p>
+                </div>
+            </div>
+        </div>
+    </div><!-- /oct19 -->
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<footer>
+    <h3 data-en="📍 Key points of the route" data-ru="📍 Ключевые точки маршрута">📍 Key points of the route</h3>
+    <div class="must-see-list">
+        <span class="must-see-tag" data-en="✓ Kathmandu" data-ru="✓ Катманду">✓ Kathmandu</span>
+        <span class="must-see-tag" data-en="✓ Pokhara" data-ru="✓ Покхара">✓ Pokhara</span>
+        <span class="must-see-tag" data-en="✓ Kande" data-ru="✓ Канде">✓ Kande</span>
+        <span class="must-see-tag" data-en="✓ Deurali" data-ru="✓ Деурали">✓ Deurali</span>
+        <span class="must-see-tag" data-en="✓ Camp 3,050 m" data-ru="✓ Лагерь 3 050 м">✓ Camp 3,050 m</span>
+        <span class="must-see-tag" data-en="✓ Camp 3,600 m" data-ru="✓ Лагерь 3 600 м">✓ Camp 3,600 m</span>
+        <span class="must-see-tag" data-en="✓ Mardi Himal Base Camp 4,500 m" data-ru="✓ БЛ Марди Химал 4 500 м">✓ Mardi Himal Base Camp 4,500 m</span>
+        <span class="must-see-tag" data-en="✓ Badal Danda" data-ru="✓ Бадал Данда">✓ Badal Danda</span>
+        <span class="must-see-tag" data-en="✓ Sidhing" data-ru="✓ Сидхинг">✓ Sidhing</span>
+    </div>
+    <div style="margin-top:20px;">
+        <a href="/dolomites-itinerary/" class="footer-link" data-en="🏔️ Dolomites itinerary" data-ru="🏔️ Маршрут по Доломитам">🏔️ Dolomites itinerary</a>
+    </div>
+    <p style="font-size:0.85em;opacity:0.5;margin-top:16px;" data-en="Created with ❤️ for your Nepal adventure | October 9 – 19, 2026" data-ru="Создано с ❤️ для вашего путешествия в Непал | 9 – 19 октября 2026">Created with ❤️ for your Nepal adventure | October 9 – 19, 2026</p>
+</footer>
+
+<script>
+    // ── WEATHER WIDGET (Open-Meteo API — no key required) ──
+    // Elevation is passed explicitly so mountain camps get altitude-corrected temperatures.
+    const WEATHER_LOCATIONS = [
+        { id: 'weather-oct9',  name: 'Kathmandu',              lat: 27.7154, lon: 85.3123, elev: 1400, date: '2026-10-09' },
+        { id: 'weather-oct10', name: 'Kathmandu',              lat: 27.7154, lon: 85.3123, elev: 1400, date: '2026-10-10' },
+        { id: 'weather-oct11', name: 'Pokhara',                lat: 28.2096, lon: 83.9586, elev: 820,  date: '2026-10-11' },
+        { id: 'weather-oct12', name: 'Deurali',                lat: 28.3017, lon: 83.8269, elev: 2100, date: '2026-10-12' },
+        { id: 'weather-oct13', name: 'Camp 1 · 3,050 m',       lat: 28.3630, lon: 83.8550, elev: 3050, date: '2026-10-13' },
+        { id: 'weather-oct14', name: 'Camp 2 · 3,600 m',       lat: 28.3900, lon: 83.8700, elev: 3600, date: '2026-10-14' },
+        { id: 'weather-oct15', name: 'Mardi Himal BC · 4,500 m', lat: 28.4300, lon: 83.8900, elev: 4500, date: '2026-10-15' },
+        { id: 'weather-oct16', name: 'Pokhara',                lat: 28.2096, lon: 83.9586, elev: 820,  date: '2026-10-16' },
+        { id: 'weather-oct17', name: 'Kathmandu',              lat: 27.7154, lon: 85.3123, elev: 1400, date: '2026-10-17' },
+        { id: 'weather-oct18', name: 'Kathmandu',              lat: 27.7154, lon: 85.3123, elev: 1400, date: '2026-10-18' },
+        { id: 'weather-oct19', name: 'Yerevan',                lat: 40.1792, lon: 44.4991, elev: 990,  date: '2026-10-19' }
+    ];
+
+    const WMO_CODES = {
+        0: ['Clear sky', '☀️'],
+        1: ['Mainly clear', '🌤️'],
+        2: ['Partly cloudy', '⛅'],
+        3: ['Overcast', '☁️'],
+        45: ['Foggy', '🌫️'],
+        48: ['Icy fog', '🌫️'],
+        51: ['Light drizzle', '🌦️'],
+        53: ['Drizzle', '🌦️'],
+        55: ['Heavy drizzle', '🌧️'],
+        61: ['Slight rain', '🌧️'],
+        63: ['Moderate rain', '🌧️'],
+        65: ['Heavy rain', '🌧️'],
+        71: ['Slight snow', '🌨️'],
+        73: ['Moderate snow', '❄️'],
+        75: ['Heavy snow', '❄️'],
+        77: ['Snow grains', '🌨️'],
+        80: ['Showers', '🌦️'],
+        81: ['Rain showers', '🌧️'],
+        82: ['Violent showers', '⛈️'],
+        85: ['Snow showers', '🌨️'],
+        86: ['Heavy snow showers', '❄️'],
+        95: ['Thunderstorm', '⚡'],
+        96: ['Thunderstorm + hail', '⚡'],
+        99: ['Thunderstorm + hail', '⚡']
+    };
+
+    async function fetchWeather(loc) {
+        const el = document.getElementById(loc.id);
+        if (!el) return;
+        try {
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${loc.lat}&longitude=${loc.lon}&elevation=${loc.elev}&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max,windspeed_10m_max&timezone=auto&start_date=${loc.date}&end_date=${loc.date}`;
+            const res = await fetch(url);
+            const data = await res.json();
+            const d = data.daily;
+            const code = d.weathercode[0];
+            const [desc, icon] = WMO_CODES[code] || ['Unknown', '🌡️'];
+            const tmax = Math.round(d.temperature_2m_max[0]);
+            const tmin = Math.round(d.temperature_2m_min[0]);
+            const rain = d.precipitation_probability_max[0];
+            const wind = Math.round(d.windspeed_10m_max[0]);
+            const now = new Date().toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'});
+            el.innerHTML = `
+                <div class="w-location">📍 ${loc.name}</div>
+                <div class="w-main">
+                    <div class="w-icon">${icon}</div>
+                    <div>
+                        <div class="w-temp">${tmax}°C</div>
+                        <div class="w-desc">${desc}</div>
+                    </div>
+                </div>
+                <div class="w-details">
+                    <div class="w-detail">🌡️ ${tmin}°–${tmax}°C</div>
+                    <div class="w-detail">💧 ${rain ?? '–'}% rain</div>
+                    <div class="w-detail">💨 ${wind} km/h</div>
+                </div>
+                <div class="w-updated">Updated ${now}</div>
+            `;
+        } catch(e) {
+            el.innerHTML = '<div class="w-loading">Weather unavailable</div>';
+        }
+    }
+
+    window.addEventListener('load', () => {
+        WEATHER_LOCATIONS.forEach(loc => fetchWeather(loc));
+        setInterval(() => WEATHER_LOCATIONS.forEach(loc => fetchWeather(loc)), 30 * 60 * 1000);
+    });
+
+    // ── SHOPPING CHECKLIST (saved in localStorage) ──
+    const SHOP_KEY = 'nepal-shopping';
+    function initShopping() {
+        const saved = JSON.parse(localStorage.getItem(SHOP_KEY) || '{}');
+        document.querySelectorAll('[data-shop]').forEach(cb => {
+            const item = cb.closest('.shop-item');
+            cb.checked = !!saved[cb.dataset.shop];
+            item.classList.toggle('done', cb.checked);
+            cb.addEventListener('change', () => {
+                saved[cb.dataset.shop] = cb.checked;
+                item.classList.toggle('done', cb.checked);
+                localStorage.setItem(SHOP_KEY, JSON.stringify(saved));
+            });
+        });
+    }
+    initShopping();
+
+    function setLang(lang) {
+        document.querySelectorAll('[data-en]').forEach(el => {
+            const val = el.getAttribute('data-' + lang);
+            if (!val) return;
+            if (el.innerHTML.includes('<') && el.tagName !== 'BUTTON') {
+                el.innerHTML = val;
+            } else {
+                el.textContent = val;
+            }
+        });
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector('.lang-btn[onclick="setLang(\'' + lang + '\')"]').classList.add('active');
+        document.documentElement.lang = lang;
+    }
+
+    function goTo(id, btn) {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.querySelectorAll('.day-nav-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+
+    function jump(id) {
+        const btn = document.querySelector(`.day-nav-btn[onclick*="'${id}'"]`);
+        if (btn) goTo(id, btn);
+        else document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+</script>
+</body>
+</html>

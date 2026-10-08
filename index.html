@@ -14,6 +14,23 @@
             line-height: 1.7;
         }
 
+        /* ── TRIP TABS ── */
+        .trip-tabs {
+            display: flex; justify-content: center; gap: 4px;
+            background: #0b0b16; padding: 8px 12px 0;
+        }
+        .trip-tab {
+            padding: 10px 20px; border-radius: 10px 10px 0 0;
+            color: rgba(255,255,255,0.6); text-decoration: none;
+            font-weight: 600; font-size: 0.9em; white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .trip-tab:hover { color: white; background: rgba(255,255,255,0.08); }
+        .trip-tab.active { background: #1a1a2e; color: white; }
+        @media (max-width: 520px) {
+            .trip-tab { padding: 8px 12px; font-size: 0.78em; white-space: normal; text-align: center; flex: 1; }
+        }
+
         /* ── HEADER ── */
         .site-header {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
@@ -369,6 +386,11 @@
     </style>
 </head>
 <body>
+
+<nav class="trip-tabs">
+    <a href="./" class="trip-tab active">🚐 Dolomites Campervan Adventure</a>
+    <a href="nepal.html" class="trip-tab">🏔️ Nepal · Mardi Himal</a>
+</nav>
 
 <!-- ═══════════════════════════════════════════════════════════
      HEADER

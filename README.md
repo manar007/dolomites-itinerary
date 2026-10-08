@@ -24,6 +24,7 @@ This itinerary covers all your must-see locations:
 ## 📁 Files in This Repository
 
 - **`index.html`** - Interactive web version with embedded Google Maps
+- **`nepal.html`** - Nepal / Mardi Himal trek itinerary, October 9–19 ([open](https://manar007.github.io/dolomites-itinerary/nepal))
 - **`dolomites_must_see_itinerary.md`** - Detailed markdown version with all locations
 - **`dolomites_structured_itinerary.md`** - Structured day-by-day markdown version
 
